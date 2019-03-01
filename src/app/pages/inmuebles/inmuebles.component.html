@@ -1,3 +1,96 @@
-<p>
-  inmuebles works!
-</p>
+<div class="inmuebles-background">
+
+  <!-- Contenido de la página inmuebles -->
+  <div class="page-area">
+
+      <!-- Área del formulario -->
+      <div class="search-module-wrapper">
+          <div class="container-fluid">
+            
+            <!-- Título del formulario -->
+            <div class="row">
+              <div class="col-12">
+                <h2 class="mt-3">Tenemos la opción ideal para tí</h2>
+              </div>
+            </div>
+            <!-- Fin título del formulario -->
+
+            <!-- Formulario -->
+            <form>
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="form-group">
+                    <label for="buscoSelect">Busco</label>
+                    <select class="form-control" id="buscoSelect">
+                      <option>Comprar</option>
+                      <option>Rentar</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="form-group">
+                    <label for="tipoSelect">Tipo</label>
+                    <select class="form-control" id="tipoSelect">
+                      <option>Casa</option>
+                      <option>Departamento</option>
+                      <option>Oficina</option>
+                      <option>Lote</option>
+                      <option>Terreno</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="form-group">
+                    <label for="precioMinimoInput">Precio Mínimo</label>
+                    <input type="number" class="form-control" id="precioMinimoInput">
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="form-group">
+                    <label for="precioMaximoInput">Precio Máximo</label>
+                    <input type="number" class="form-control" id="precioMaximoInput">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="form-group">
+                    <label for="coloniaSelect">Colonia</label>
+                    <select class="form-control" id="coloniaSelect">
+                      <option>Esmeralda</option>
+                      <option>Lomas</option>
+                      <option>Huexotitla</option>
+                      <option>Los Fuertes</option>
+                      <option>La Paz</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="form-group">
+                    <label for="numeroDeCuartosInput">Número de Cuartos</label>
+                    <input type="number" class="form-control" id="numeroDeCuartosInput">
+                  </div>
+                </div>
+              </div>
+    
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn boton-buscar mb-4"> 
+                    Buscar
+                  </button>
+                </div>
+              </div>
+            </form>
+            <!-- Fin formulario -->
+
+          </div>
+      </div>
+      <!-- Fin área del formulario -->
+
+  </div>
+  <!-- Fin contenido de la página inmuebles -->
+
+  <app-footer></app-footer>
+</div>
