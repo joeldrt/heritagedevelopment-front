@@ -1,0 +1,131 @@
+.nosotros-background {
+    background-color: #EBEBEB;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.dg-nosotros-descripcion {
+    padding-right: 10%;
+    padding-left: 10%;
+
+    .dg-title {
+        text-align: center;
+        margin-top: 3em;
+        h2{
+            border-bottom: solid 2px #87b23e;
+            font-size: 1em;
+            font-weight: lighter;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 9px 3em;
+        }
+    }
+
+    .dg-text {
+        color: #8B8B8B;
+        font-weight: lighter;
+        margin-top: 1.2em;
+        padding-right: 20px;
+        padding-left: 20px;
+        p{
+            margin: 0 auto;
+            text-align: center;
+        }
+    }
+}
+
+.dg-nosotros-banner {
+    background: #87b23e;
+    color: #FFFFFF;
+    margin-top: 3em;
+    padding-right: 18%;
+    padding-left: 18%;
+    padding-bottom: 15px;
+
+    @media screen and (max-width: 767px) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .dg-banner-text {
+        color: #FFF;
+        display: inline-block;
+        font-size: 2.1em;
+        line-height: 1em;
+        margin-top: 1.6em;
+        text-align: center;
+        vertical-align: bottom;
+    }
+
+    .dg-imglogo {          
+        img {
+            display: inline-block;
+            max-width: 108px;
+            margin-top: 1.2em;
+        }
+    }
+}
+
+.dg-nosotros-mision-vision {
+    padding-right: 10%;
+    padding-left: 10%;
+
+    .dg-title {
+        margin-top: 3em;
+        text-align: center;
+        span, h5{
+            display: inline-block;
+        }
+        span{
+            background-color: #87b23e;
+            height: 1em;
+            margin-right: 5px;
+            vertical-align: middle;
+            width: 5px;
+        }
+        h5 {
+            font-weight: lighter;
+            font-size: 1em;
+            text-transform: uppercase;
+        }
+    }
+    .dg-text {
+        text-align: center;
+        color: #8b8b8b;
+        font-size: 0.9em;
+        margin-top: 0.9em;
+        p{
+            font-weight: lighter;
+            max-width: 390px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    }
+}
+
+.dg-nosotros-imagenes-inmuebles {
+    padding-right: 10%;
+    padding-left: 10%;
+    margin-bottom: 3em;
+
+    .dg-bloque-imagen {
+        margin-top: 3em;
+        overflow: hidden;
+        text-align: center;
+        img{
+            max-width: 231px;
+            max-height: 190px;
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+        }
+        label{
+            display: block;
+            text-transform: uppercase;
+            font-weight: lighter;
+            text-align: center;
+            margin-top: 1.5em;
+        }
+    }
+}

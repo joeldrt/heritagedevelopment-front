@@ -18,9 +18,18 @@
 
 .navbar-brand {
     margin-right: 20%;
+    @media screen and (min-width: 992px) {
+        margin-left: 10%;
+    }
     img {
         min-width: 180px;
         max-width: 180px;
+    }
+    @media screen and (max-width: 326px){
+        img {
+            min-width: 170px;
+            max-width: 170px;
+        }
     }
 }
 
