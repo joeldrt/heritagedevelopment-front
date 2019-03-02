@@ -1,0 +1,46 @@
+.contacto-background {
+    background-color: #EBEBEB;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.dg-contacto-botones-tipo-de {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-bottom: 3em;
+    
+    .dg-tipo-contacto-exterior {
+        margin-top: 3em;
+        background-color: #87b23e;
+        min-height: 373px;
+        padding: 24px;
+
+        .dg-tipo-contacto-interior {
+            padding: 20px;
+            min-height: inherit;
+            border: solid 2px #FFFFFF;
+            color: #FFFFFF;
+            text-align: center;
+
+            .dg-img {
+                padding-bottom: 0.9em;
+                border-bottom: solid 2px #FFF;
+            }
+            .dg-quiero-label {
+                margin-top: 0.5em;
+                font-size: 1.5em;
+                font-weight: lighter;
+                text-transform: uppercase;
+            }
+
+            .dg-descripcion-tipo-contacto {
+                margin-top: 0.5em;
+                font-size: 2.2em;
+                font-weight: bold;
+                font-style: italic;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

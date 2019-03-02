@@ -7,6 +7,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { InmueblesComponent } from './pages/inmuebles/inmuebles.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NosotrosComponent } from './pages/nosotros/nosotros.component';
     NavbarComponent,
     InmueblesComponent,
     FooterComponent,
-    NosotrosComponent
+    NosotrosComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
