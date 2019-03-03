@@ -16,24 +16,23 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/inmuebles" routerLinkActive="active" onclick="closenavbar()">
           INMUEBLES
-      </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/contacto" routerLinkActive="active" onclick="closenavbar()">
-          CONTACTO
         </a>
       </li>
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle dg-dropdown-wrapper" href="#" id="navbarDropdown" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" routerLink="/contacto" routerLinkActive="active" onclick="closenavbar()">
+            CONTACTO
+          </a>
         </a>
+        
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" routerLink="/contacto/adquirir" routerLinkActive="active"
+            onclick="closenavbar()">Comprar o Rentar</a>
+          <a class="dropdown-item" routerLink="/contacto/ofertar" routerLinkActive="active"
+            onclick="closenavbar()">Vender o Poner en Renta</a>
         </div>
-      </li> -->
+      </li>
     </ul>
   </div>
 </nav>

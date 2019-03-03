@@ -8,6 +8,8 @@ import { InmueblesComponent } from './pages/inmuebles/inmuebles.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { AdquirirComponent } from './pages/contacto/adquirir/adquirir.component';
+import { OfertarComponent } from './pages/contacto/ofertar/ofertar.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
     InmueblesComponent,
     FooterComponent,
     NosotrosComponent,
-    ContactoComponent
+    ContactoComponent,
+    AdquirirComponent,
+    OfertarComponent
   ],
   imports: [
     BrowserModule,
