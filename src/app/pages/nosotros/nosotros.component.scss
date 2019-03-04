@@ -2,7 +2,8 @@
     background-color: #EBEBEB;
     min-height: 100vh;
     max-height: 100vh;
-    overflow-y: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .dg-nosotros-descripcion {
