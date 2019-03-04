@@ -1,0 +1,60 @@
+.contacto-adquirir-background {
+    background: url("../../../../assets/images/img-banner-comprarrentar.jpg"); 
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: auto 306px;
+    @media screen and (min-width: 1024px) {
+        background-size: 100% auto;
+        
+    }
+    @media screen and (min-width: 1200px) {
+        background-position-y: -10%;
+    }
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.page-area {
+    background-color: #EBEBEB;
+    margin-top: 306px;
+    padding-top: 0px;
+    min-height: calc(100vh - 403px);
+}
+
+.dg-adquirir-titulo {
+    padding-right: 10%;
+    padding-left: 10%;
+
+    .dg-title {
+        text-align: center;
+        margin-top: 3em;
+        padding-top: 1em;
+        h2 {
+            border-bottom: solid 2px #87b23e;
+            font-size: 1em;
+            font-weight: lighter;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 9px 3em;
+        }
+    }
+}
+
+.dg-adquirir-formularios {
+    padding-right: 10%;
+    padding-left: 10%;
+
+    .boton-enviar {
+        :focus {
+            outline:0;
+        }
+        background-color: rgb(135, 178, 62);
+        color: white;
+        border-color: rgb(135, 178, 62);
+        :hover {
+            background-color: rgb(135, 178, 62);
+            border-color: green;
+        }
+    }
+}
