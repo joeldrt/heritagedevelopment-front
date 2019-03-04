@@ -1,3 +1,101 @@
-<p>
-  ofertar works!
-</p>
+<div class="contacto-ofertar-background">
+  
+  <!-- Contenido página contacto / adquirir -->
+  <div class="page-area">
+
+    <!-- Adquirir título -->
+    <div class="dg-ofertar-titulo">
+      <div class="dg-title">
+        <h2>Quiero Vender o Poner en Renta</h2>
+      </div>
+    </div>
+    <!-- Fin adquirir título -->
+
+    <!-- Adquirir formularios -->
+    <div class="dg-ofertar-formularios">
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <form>
+              <label for="ofertarTitulo">Quiero:</label>
+              <div class="form-group">
+                <select class="form-control form-control-sm" id="ofertarTipo">
+                  <option>Vender</option>
+                  <option>Poner en Renta</option>
+                </select>
+              </div>
+              <label for="ofertarDatosPersonales">Datos Personales:</label>
+              <div class="form-group">
+                <input type="text" class="form-control form-control-sm" 
+                  id="ofertarNombreCompleto" placeholder="Nombre Completo">
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control form-control-sm" 
+                  id="ofertarCorreoElectronico" placeholder="Email">
+              </div>
+              <div class="form-group">
+                  <input type="number" class="form-control form-control-sm" 
+                  id="ofertarTelefono" placeholder="Teléfono">
+              </div>
+              <label for="ofertarDatosInmueble">Datos del Inmueble:</label>
+              <div class="form-group">
+                <input type="text" class="form-control form-control-sm" 
+                  id="ofertarInmuebleNombre" placeholder="Nombre">
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control form-control-sm" 
+                  id="ofertarInmuebleM2Terreno" placeholder="M2 terreno">
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control form-control-sm" 
+                  id="ofertarInmuebleM2Construccion" placeholder="M2 construcción">
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control form-control-sm" 
+                  id="ofertarInmuebleNiveles" placeholder="Niveles (número de pisos)">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control form-control-sm" 
+                  id="ofertarInmuebleNumRecamaras" placeholder="Num Recámaras">
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control form-control-sm" 
+                  id="ofertarInmuebleNumBanos" placeholder="Num Baños">
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control form-control-sm" 
+                  id="ofertarInmuebleNumMediosBanos" placeholder="Num Medios Baños">
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control form-control-sm" 
+                  id="ofertarInmuebleNumCajonesEstacionamiento" placeholder="Num Cajones de Estacionamiento">
+              </div>
+              <div class="form-group">
+                <textarea type="text" class="form-control form-control-sm" 
+                  id="ofertarInmuebleDescribirAmenidades" placeholder="Describir Amenidades"></textarea>
+              </div>
+              <label for="ofertarDatosInmueble">Fotos del inmueble:</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="ofertaAgregarFoto" accept="image/x-png,image/gif,image/jpeg">
+                  <label class="custom-file-label" for="ofertaAgregarFoto">Escoger archivo</label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">Cargar</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn boton-enviar mb-4 btn-block"> 
+                  Enviar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin adquirir formularios -->
+  
+  </div>
+  <app-footer></app-footer>
+</div>
