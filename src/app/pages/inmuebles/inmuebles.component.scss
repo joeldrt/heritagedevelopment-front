@@ -14,18 +14,18 @@
     background-color: rgba(41, 54, 21, 0.6);
     color: white;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 6em;
     margin-right: 10%;
     margin-left: 10%;
 
     @media screen and (max-width: 992px) {        
-        margin-top: 50px;
+        margin-top: 3em;
         margin-right: 5%;
         margin-left: 5%;
     }
 
     @media screen and (max-width: 767px) {
-        margin-bottom: 20px;
+        margin-bottom: 3em;
     }
 }
 
