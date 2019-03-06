@@ -1,0 +1,28 @@
+.login-background {
+    background-color: #EBEBEB;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.boton-ingresar {
+    margin-top: 3em;
+    :focus {
+        outline:0;
+    }
+    background-color: rgb(135, 178, 62);
+    color: white;
+    border-color: rgb(135, 178, 62);
+    :hover {
+        background-color: rgb(135, 178, 62);
+        border-color: green;
+    }
+}
