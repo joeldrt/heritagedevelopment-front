@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#dg-content {
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+}
+
+#dg-content.active {
+    width: 100%;
+
+    @media screen and (max-width: 768px) {
+        margin-right: -250px;
+    }
+}
+
+.dg-page-container {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 54px;
+}

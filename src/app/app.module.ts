@@ -25,6 +25,8 @@ import { LoginComponent } from './pages/login/login.component';
 
 // admin pages
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { AdminNavbarComponent } from './layout/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     AdquirirComponent,
     OfertarComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    SidebarComponent,
+    AdminNavbarComponent
   ],
   imports: [
     BrowserModule,

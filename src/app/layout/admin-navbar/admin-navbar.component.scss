@@ -1,0 +1,30 @@
+.navbar {
+    background: #fff;
+    width: 100%;
+    position: fixed;
+    margin-top: 0;
+    margin-left: 0;
+    height: 54px;
+    button {
+        display: inline-block;
+    }
+}
+
+.navbar-bg {
+    background-color: rgba(255, 255, 255, 0.90);
+    @media screen and (max-width: 991px){
+        background-color: rgba(255, 255, 255, 1);
+    }
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.navbar-title {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
