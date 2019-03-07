@@ -4,6 +4,16 @@ import { NgModule } from '@angular/core';
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 
+// Forms module
+import { FormsModule } from '@angular/forms';
+
+// Firebase
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 // core view
 import { AppComponent } from './app.component';
 
@@ -53,7 +63,12 @@ import { EstateComponent } from './admin/estate/estate.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
