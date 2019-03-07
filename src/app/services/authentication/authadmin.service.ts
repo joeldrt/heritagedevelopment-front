@@ -9,7 +9,7 @@ export class AuthadminService implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (localStorage.getItem('admin')) {
+    if (localStorage.getItem('admin') && localStorage.getItem('admin') != null) {
       // logged in so return true
       return true;
     }

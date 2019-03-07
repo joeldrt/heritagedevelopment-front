@@ -29,9 +29,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-              "src/digiallappscripts.js"
-            ],
+            "scripts": [],
             "es5BrowserSupport": true
           },
           "configurations": {
