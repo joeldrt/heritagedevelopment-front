@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthadminService } from './services/authentication/authadmin.service';
+import { AdminGuardService } from './services/guard/admin-guard.service';
 
 import { AdminComponent } from './admin/admin.component';
 import { ADMIN_ROUTES } from './admin/admin.routes';
@@ -9,7 +9,7 @@ import { PAGES_ROUTES } from './pages/pages.routes';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/inmuebles', pathMatch: 'full' },
-  { path: '', component: AdminComponent, canActivate: [AuthadminService], children: ADMIN_ROUTES },
+  { path: '', component: AdminComponent, canActivate: [AdminGuardService], children: ADMIN_ROUTES },
   { path: '', component: PagesComponent, children: PAGES_ROUTES},
 ];
 
