@@ -7,7 +7,7 @@
     height: 54px;
     button {
         display: inline-block;
-        @media screen and (min-width: 769px) {
+        @media screen and (min-width: 813px) {
             display: none;
         }
     }
@@ -21,8 +21,10 @@
 
 .navbar-title {
     width: 100%;
+    color: #fff;
+    font-size: 1.5em;
     text-align: center;
-    @media screen and (max-width: 769px) {
+    @media screen and (max-width: 813px) {
         width: calc(100% - 40px);
         display: inline-block;
     }

@@ -23,7 +23,7 @@ a:focus {
     position: fixed;
     top: 0;
     left: 0;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 812px){
         left: -250px;
     }
     height: 100vh;
@@ -36,7 +36,7 @@ a:focus {
 }
 
 #sidebar.active {
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 812px){
         left: 0px;
     }
 }
@@ -127,15 +127,6 @@ a.article:hover {
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
-
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
-}
 
 .navbar-link {
     i {

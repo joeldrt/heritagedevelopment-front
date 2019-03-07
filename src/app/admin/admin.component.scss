@@ -10,21 +10,20 @@
     position: absolute;
     top: 0;
     right: 0;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 812px){
         width: 100%;
         right: -250px;
     }
 }
 
 #dg-content.active {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 812px) {
         right: 0px;
     }
 }
 
 .dg-page-container {
     min-height: 100vh;
-    max-height: 100vh;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     padding-top: 54px;
