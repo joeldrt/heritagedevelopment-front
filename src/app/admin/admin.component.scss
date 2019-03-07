@@ -10,17 +10,15 @@
     position: absolute;
     top: 0;
     right: 0;
-
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 768px){
         width: 100%;
+        right: -250px;
     }
 }
 
 #dg-content.active {
-    width: 100%;
-
     @media screen and (max-width: 768px) {
-        margin-right: -250px;
+        right: 0px;
     }
 }
 

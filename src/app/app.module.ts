@@ -27,6 +27,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { AdminNavbarComponent } from './layout/admin-navbar/admin-navbar.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { PropertyUsersComponent } from './admin/property-users/property-users.component';
+import { EstateComponent } from './admin/estate/estate.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { AdminNavbarComponent } from './layout/admin-navbar/admin-navbar.compone
     LoginComponent,
     DashboardComponent,
     SidebarComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    AdminUsersComponent,
+    PropertyUsersComponent,
+    EstateComponent
   ],
   imports: [
     BrowserModule,

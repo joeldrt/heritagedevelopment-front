@@ -1,19 +1,15 @@
 .navbar {
-    background: #fff;
-    width: 100%;
+    background-color: #87b23e;
     position: fixed;
+    width: auto;
     margin-top: 0;
     margin-left: 0;
     height: 54px;
     button {
         display: inline-block;
-    }
-}
-
-.navbar-bg {
-    background-color: rgba(255, 255, 255, 0.90);
-    @media screen and (max-width: 991px){
-        background-color: rgba(255, 255, 255, 1);
+        @media screen and (min-width: 769px) {
+            display: none;
+        }
     }
 }
 
@@ -24,7 +20,10 @@
 }
 
 .navbar-title {
-    display: inline-block;
     width: 100%;
     text-align: center;
+    @media screen and (max-width: 769px) {
+        width: calc(100% - 40px);
+        display: inline-block;
+    }
 }

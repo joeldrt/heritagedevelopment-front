@@ -18,10 +18,14 @@ a:focus {
 ----------------------------------------------------- */
 
 #sidebar {
+    padding-top: 54px;
     width: 250px;
     position: fixed;
     top: 0;
     left: 0;
+    @media screen and (max-width: 768px){
+        left: -250px;
+    }
     height: 100vh;
     z-index: 999;
     background: #87b23e;
@@ -29,6 +33,12 @@ a:focus {
     transition: all 0.3s;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+}
+
+#sidebar.active {
+    @media screen and (max-width: 768px){
+        left: 0px;
+    }
 }
 
 .sidebar-header {
@@ -40,10 +50,6 @@ a:focus {
             max-width: 170px;
         }
     }
-}
-
-#sidebar.active {
-    margin-left: -250px;
 }
 
 #sidebar .sidebar-header {
