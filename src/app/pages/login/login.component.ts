@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
   private user: User;
 
   constructor(
-    public afAuth: AngularFireAuth,
-    public router: Router,
-    public toastr: ToastrService,
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit() {

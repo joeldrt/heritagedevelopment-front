@@ -6,7 +6,9 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 })
 export class AdminGuardService implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router
+  ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (localStorage.getItem('admin') && localStorage.getItem('admin') != null) {

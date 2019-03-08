@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from  "@angular/router";
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ToastrService } from '../../services/toastr/toastr.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,8 +11,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class SidebarComponent implements OnInit {
 
   constructor(
-    public afAuth: AngularFireAuth,
-    public router: Router,
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class SidebarComponent implements OnInit {
         this.router.navigate(['/inmuebles']);
       },
       (error) => {
-
+        this.toastr.error(error.message, "Error");
       }
     );
   }
