@@ -2,8 +2,8 @@
 <nav id="sidebar">
     <div class="sidebar-header text-center">
         <img src="../../../assets/images/logo_hd_texto.png" />
+        <span *ngIf="user">{{user.email}}</span>
     </div>
-
     <ul class="list-unstyled components">
         <li routerLink="/admin/dashboard" routerLinkActive="active">
             <a class="navbar-link" onclick="toggleSidebar()">
@@ -11,7 +11,7 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li routerLink="/admin/admin-users" routerLinkActive="active"> 
+        <!-- <li routerLink="/admin/admin-users" routerLinkActive="active"> 
             <a class="navbar-link" onclick="toggleSidebar()">
                 <i class="fas fa-user-tie"></i>
                 <span>Usuarios Portal</span>
@@ -22,7 +22,7 @@
                 <i class="fas fa-user"></i>
                 <span>Usuarios Inmuebles</span>
             </a>
-        </li>
+        </li> -->
         <li routerLink="/admin/estate" routerLinkActive="active">
             <a class="navbar-link" onclick="toggleSidebar()">
                 <i class="fas fa-building"></i>

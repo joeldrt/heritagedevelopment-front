@@ -5,12 +5,17 @@
     margin-top: 0;
     margin-left: 0;
     height: 54px;
-    button {
-        display: inline-block;
-        @media screen and (min-width: 813px) {
-            display: none;
-        }
+}
+
+#toggleButton {
+    display: inline-block;
+    @media screen and (min-width: 813px) {
+        display: none;
     }
+}
+
+.row {
+    flex-grow: 1;
 }
 
 .navbar-btn {
@@ -20,12 +25,12 @@
 }
 
 .navbar-title {
-    width: 100%;
     color: #fff;
     font-size: 1.5em;
     text-align: center;
-    @media screen and (max-width: 813px) {
-        width: calc(100% - 40px);
-        display: inline-block;
-    }
+}
+
+.web-page-button {
+    color: #fff;
+    font-size: 1.2em;
 }
