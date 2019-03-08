@@ -28,7 +28,6 @@ export class AuthService {
             return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
           }
           else {
-            // TODO: verificar si este pedazo de código se llama cuando se hace signOut
             return of(null);
           }
         }
@@ -36,17 +35,7 @@ export class AuthService {
     )
   }
 
-  async emailPasswordLogin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((credential: firebase.auth.UserCredential) => {
-        this.updateUserData(credential.user);
-      })
-  }
-
-  signOut() {
-    this.afAuth.auth.signOut()
-  }
-
+  // método que se debe llamar cuando alguien se registre en el portal
   private updateUserData(user: firebase.User) {
     // Sets user dato to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);

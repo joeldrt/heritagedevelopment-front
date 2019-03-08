@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
 
   public email: string;
   public password: string;
-  private user: User;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -30,8 +29,6 @@ export class LoginComponent implements OnInit {
     }
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(
       (credentials) => {
-        this.user = credentials.user;
-        localStorage.setItem('admin', JSON.stringify(this.user));
         this.router.navigate(['/admin']);
       },
       (error) => {
