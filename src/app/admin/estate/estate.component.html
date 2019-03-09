@@ -1,3 +1,69 @@
-<p>
-  estate works!
-</p>
+<!-- Área de búsqueda -->
+<div class="search-area">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 search-row-col">
+        <div class="input-group search-border">
+          <form class="form-row" style="width: 100%;">
+            <div class="col-11">
+              <div class="input-group-prepend">
+                <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{filter.short_name}}</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" *ngFor="let filter of filters" 
+                    (click)="changeFilter(filter)">{{filter.nombre}}</a>
+                </div>
+                <input type="text" id="searchInput" class="form-control" aria-label="Buscar..." placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="col-1">
+              <button class="btn btn-link float-right">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin área de búsqueca-->
+
+<div class="result-area">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div class="card">
+          <img src="../../../assets/images/departamento-img.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Departamento Lomas de angelópolis 1</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div class="card">
+          <img src="../../../assets/images/departamento-img.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Departamento Sonata Towers</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <div class="card">
+          <img src="../../../assets/images/departamento-img.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Loft Adamant 1</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button id="add-property-button" class="btn btn-link">
+  <i class="fas fa-plus"></i>
+</button>
