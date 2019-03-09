@@ -1,0 +1,42 @@
+<div class="wizard-alta-inmueble">
+  <!-- Wizard navigation bar -->
+  <div class="container-fluid wizard-nav-bar">
+    <div class="row">
+      <div class="col">
+        <div class="wizard-nav-item" 
+          [ngClass]="true ? 'item-done':''">
+          <div class="border-circle">
+            <i class="fas fa-home"></i>
+          </div>
+          <span class="title d-none d-md-block">Información básica</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="wizard-nav-item"
+        [ngClass]="true ? 'item-active':''">
+          <div class="border-circle">
+            <i class="fas fa-plus"></i>
+          </div>
+          <span class="title d-none d-md-block">Información avanzada</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="wizard-nav-item">
+          <div class="border-circle">
+            <i class="fas fa-images"></i>
+          </div>
+          <span class="title d-none d-md-block">Fotografías</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="wizard-nav-item">
+          <div class="border-circle">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <span class="title d-none d-md-block">Resumen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End wizard navigation bar -->
+</div>

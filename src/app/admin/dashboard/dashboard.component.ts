@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  mensaje_componente: string;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  actualizarMensaje($event: any) {
+    this.mensaje_componente = $event;
   }
 
 }
