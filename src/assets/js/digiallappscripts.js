@@ -3,7 +3,16 @@ function closenavbar(){
 }
 
 function toggleSidebar() {
-    $('#sidebar, #dg-content').toggleClass('active');
+    $('#sidebar, #working-area').toggleClass('active');
     $('.collapse.in').toggleClass('in');
     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
 };
+
+function linksToggleSidebar() {
+    if ($('#sidebar').width() === 70 && $(window).width() > 769) {
+        return;
+    }
+    if ($('#sidebar').width() !== 70 && $(window).width() <= 768) {
+        toggleSidebar();
+    }
+}

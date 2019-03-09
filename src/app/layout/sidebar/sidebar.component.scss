@@ -18,43 +18,71 @@ a:focus {
 ----------------------------------------------------- */
 
 #sidebar {
-    padding-top: 54px;
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    @media screen and (max-width: 812px){
-        left: -250px;
-    }
+    width: 70px;
     height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
     z-index: 999;
     background: #87b23e;
     color: #fff;
     transition: all 0.3s;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    @media screen and (max-width: 769px) {
+        left: -70px;
+    }
+
+    .sidebar-header {
+        background-image: url('../../../assets/images/logo_hd_sidebar.png');
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        min-height: 150px;
+        max-height: 150px;
+    }
+
+    .navbar-link {
+        text-align: center;
+        i {
+            margin-left: 0;
+        }
+    }
+
+    ul li a span {
+        display: none;
+    }
 }
 
 #sidebar.active {
-    @media screen and (max-width: 812px){
-        left: 0px;
-    }
-}
+    left: 0;
+    width: 220px;
 
-.sidebar-header {
-    img {
-        min-width: 180px;
-        max-width: 180px;
-        @media screen and (max-width: 326px){
-            min-width: 170px;
-            max-width: 170px;
+    .sidebar-header {
+        img {
+            min-width: 180px;
+            max-width: 180px;
+            @media screen and (max-width: 326px){
+                min-width: 170px;
+                max-width: 170px;
+            }
         }
     }
-}
 
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: #7da833;
+    .navbar-link {
+        text-align: left;
+        i {
+            margin-left: 10px;
+        }
+    }
+
+    ul li a span {
+        display: inline-block;
+    }
+
 }
 
 #sidebar ul.components {

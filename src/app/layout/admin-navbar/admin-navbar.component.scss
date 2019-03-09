@@ -1,17 +1,15 @@
 .navbar {
     background-color: #87b23e;
-    position: fixed;
-    width: auto;
+    position: relative;
     margin-top: 0;
     margin-left: 0;
+    margin-right: 0;
     height: 54px;
+    transition: all 0.3s;
 }
 
 #toggleButton {
     display: inline-block;
-    @media screen and (min-width: 813px) {
-        display: none;
-    }
 }
 
 .row {

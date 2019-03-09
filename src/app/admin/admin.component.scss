@@ -3,28 +3,33 @@
     width: 100%;
 }
 
-#dg-content {
-    width: calc(100% - 250px);
+#working-area {
+    width: 100%;
     min-height: 100vh;
+    max-height: 100vh;
+    padding-left: 220px;
     transition: all 0.3s;
-    position: absolute;
-    top: 0;
-    right: 0;
-    @media screen and (max-width: 812px){
-        width: 100%;
-        right: -250px;
+    overflow-y: hidden;
+    @media screen and (max-width: 415px) {
+        padding-left: 0px;
+        margin-left: 220px;
     }
 }
 
-#dg-content.active {
-    @media screen and (max-width: 812px) {
-        right: 0px;
+#working-area.active {
+    padding-left: 70px;
+    @media screen and (max-width: 769px) {
+        padding-left: 0;
+    }
+    @media screen and (max-width: 415px) {
+        margin-left: 0px;
     }
 }
 
-.dg-page-container {
-    min-height: 100vh;
+#page-container {
+    min-height: calc(100vh - 54px);
+    max-height: calc(100vh - 54px);
+    padding: 20px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    padding-top: 54px;
 }
