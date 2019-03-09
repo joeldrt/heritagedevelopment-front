@@ -40,6 +40,7 @@ import { AdminNavbarComponent } from './layout/admin-navbar/admin-navbar.compone
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { PropertyUsersComponent } from './admin/property-users/property-users.component';
 import { EstateComponent } from './admin/estate/estate.component';
+import { ProfileComponent } from './admin/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { EstateComponent } from './admin/estate/estate.component';
     AdminNavbarComponent,
     AdminUsersComponent,
     PropertyUsersComponent,
-    EstateComponent
+    EstateComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
