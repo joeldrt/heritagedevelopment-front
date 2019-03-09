@@ -12,7 +12,7 @@
                   <a class="dropdown-item" *ngFor="let filter of filters" 
                     (click)="changeFilter(filter)">{{filter.nombre}}</a>
                 </div>
-                <input type="text" id="searchInput" class="form-control" aria-label="Buscar..." placeholder="Buscar...">
+                <input type="search" id="searchInput" class="form-control" aria-label="Buscar..." placeholder="Buscar...">
               </div>
             </div>
             <div class="col-1">
@@ -28,6 +28,7 @@
 </div>
 <!-- Fin área de búsqueca-->
 
+<!-- Area de resultados -->
 <div class="result-area">
   <div class="container-fluid">
     <div class="row">
@@ -64,6 +65,29 @@
     </div>
   </div>
 </div>
-<button id="add-property-button" class="btn btn-link">
+<button id="add-property-button" class="btn btn-link" data-toggle="modal" data-target="#agregarInmuebleModal">
   <i class="fas fa-plus"></i>
 </button>
+<!-- Fin area de resultados -->
+
+<!-- Modal agregar inmueble -->
+<div class="modal fade" id="agregarInmuebleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Inmueble</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin modal agregar inmueble -->
