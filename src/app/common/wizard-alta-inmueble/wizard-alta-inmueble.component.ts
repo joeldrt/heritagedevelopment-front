@@ -49,6 +49,11 @@ export class WizardAltaInmuebleComponent implements OnInit {
     this.irIniciodePaginaDe();
   }
 
+  finalizarPaso3() {
+    this.numero_paso = 4;
+    this.irIniciodePaginaDe();
+  }
+
   uploadImage(event: any) {
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;

@@ -133,8 +133,8 @@
     overflow-y: hidden;
     img {
         background-color: #6c757d;
-        object-fit: cover;
-        object-position: center;
+        object-fit: contain;
+        object-position: top;
     }
     .delete-button {
         color: white;
