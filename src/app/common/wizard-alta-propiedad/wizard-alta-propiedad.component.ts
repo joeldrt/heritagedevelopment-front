@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-wizard-alta-inmueble',
-  templateUrl: './wizard-alta-inmueble.component.html',
-  styleUrls: ['./wizard-alta-inmueble.component.scss']
+  selector: 'app-wizard-alta-propiedad',
+  templateUrl: './wizard-alta-propiedad.component.html',
+  styleUrls: ['./wizard-alta-propiedad.component.scss']
 })
-export class WizardAltaInmuebleComponent implements OnInit {
+export class WizardAltaPropiedadComponent implements OnInit {
   @Input() scrollableContanierId: string;
   // @Output() object = new EventEmitter<string>();
 

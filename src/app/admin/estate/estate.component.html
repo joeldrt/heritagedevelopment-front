@@ -65,13 +65,13 @@
     </div>
   </div>
 </div>
-<button id="add-property-button" class="btn btn-link" data-toggle="modal" data-target="#agregarInmuebleModal">
+<button id="add-property-button" class="btn btn-link" data-toggle="modal" data-target="#agregarPropiedadModal">
   <i class="fas fa-plus"></i>
 </button>
 <!-- Fin area de resultados -->
 
 <!-- Modal agregar inmueble -->
-<div class="modal fade" id="agregarInmuebleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarPropiedadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -81,9 +81,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <app-wizard-alta-inmueble
-          scrollableContanierId="agregarInmuebleModal">
-        </app-wizard-alta-inmueble>
+        <app-wizard-alta-propiedad
+          scrollableContanierId="agregarPropiedadModal">
+        </app-wizard-alta-propiedad>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

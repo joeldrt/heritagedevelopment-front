@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WizardAltaInmuebleComponent } from './wizard-alta-inmueble.component';
+import { WizardAltaPropiedadComponent } from './wizard-alta-propiedad.component';
 
 describe('WizardAltaInmuebleComponent', () => {
-  let component: WizardAltaInmuebleComponent;
-  let fixture: ComponentFixture<WizardAltaInmuebleComponent>;
+  let component: WizardAltaPropiedadComponent;
+  let fixture: ComponentFixture<WizardAltaPropiedadComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WizardAltaInmuebleComponent ]
+      declarations: [ WizardAltaPropiedadComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WizardAltaInmuebleComponent);
+    fixture = TestBed.createComponent(WizardAltaPropiedadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
