@@ -186,115 +186,63 @@
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
-          <label for="tipoPropiedad" class="col-sm-12 col-md-3 col-form-label">Tipo de propiedad</label>
+          <label for="m2terrenoPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Terreno</label>
           <div class="col-sm-12 col-md-6">
-            <select class="form-control " id="tipoPropiedad">
-              <option>Terreno</option>
-              <option>Departamento</option>
-              <option>Casa</option>
-            </select>
-            <div class="invalid-feedback">
-                Debes seleccionar un tipo de propiedad.
-            </div>
+            <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno" required>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
-          <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
+          <label for="niveles_plantasPropiedad" class="col-sm-12 col-md-3 col-form-label">Niveles (plantas)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre" required>
-            <div class="invalid-feedback">
-                Debes ingresar un nombre
-            </div>
+            <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles">
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
-          <label for="m2construccionPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Construcción</label>
+          <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción" required>
-            <div class="invalid-feedback">
-                Debes ingresar los m2 de construcción
-            </div>
+            <textarea class="form-control" id="amenidadesPropiedad" rows="4"></textarea>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
-          <label for="recamarasPropiedad" class="col-sm-12 col-md-3 col-form-label">Recamaras</label>
+          <label for="tiempoMinimoRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Tiempo mínimo de renta (meses)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="recamarasPropiedad" placeholder="Recamaras" required>
-            <div class="invalid-feedback">
-                Debes ingresar el número de recámaras
-            </div>
+            <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta">
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
-          <label for="banosPropiedad" class="col-sm-12 col-md-3 col-form-label">Baños</label>
+          <label for="capacidadCisternaPropiedad" class="col-sm-12 col-md-3 col-form-label">Capacidad de cisterna (L)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="banosPropiedad" placeholder="Baños" required>
-            <div class="invalid-feedback">
-                Debes ingresar el número de baños
-            </div>
+            <input type="number" class="form-control" id="capacidadCisternaPropiedad" placeholder="Capacidad de cisterna" required>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
-          <label for="mediosBanosPropiedad" class="col-sm-12 col-md-3 col-form-label">Medios Baños</label>
+          <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Medios Baños">
+            <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad" required>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
-          <label for="cajonesEstacionamientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Cajones Estacionamiento</label>
+          <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento" required>
-            <div class="invalid-feedback">
-                Debes ingresar el número de cajones de estacionamiento
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
-          <div class="col-sm-12 col-md-6">
-            <textarea class="form-control" id="descripcionPropiedad" rows="4" required></textarea>
-            <div class="invalid-feedback">
-                Debes ingresar una breve descripción
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta">
+            <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Medios Baños">
           </div>
         </div>
 
@@ -307,15 +255,47 @@
               <i class="fas fa-chevron-left"></i>
             </button>
             <button class="btn btn-link float-right wizard-nav-button"
-              (click)="finalizarPaso2(target)">
+              (click)="finalizarPaso2()">
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
 
       </div>
-    <!-- Fin segundo paso - información básica -->
+    <!-- Fin segundo paso - información avanzada -->
   
+    <!-- Tercer paso - fotografías -->
+      <div id="fotografiasForm" *ngIf="numero_paso === 3">
+        <div class="form-group row">
+          <div class="col-1">
+          </div>
+          <div class="col-10">
+            <div class="wizard-add-image-button-wrapper float-right">
+              <button class="wizard-add-image-button">
+                <i class="fas fa-plus"></i>
+              </button>
+              <input type="file" name="imageToUpload" accept='image/*' (change)="uploadImage($event)" multiple/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="mapaDeImagenes && mapaDeImagenes.size > 0">
+          <!-- <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let url of urls">
+              <div class="image-preview">
+                  <img [src]="url">
+              </div>
+          </div> -->
+          <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue">
+            <div class="image-preview">
+                <img [src]="objeto_imagen.value">
+                <span>{{objeto_imagen.key}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <!-- Fin tercer paso - información avanzada -->
+
     </form>
   </div>
   <!-- Fin área del formulario -->

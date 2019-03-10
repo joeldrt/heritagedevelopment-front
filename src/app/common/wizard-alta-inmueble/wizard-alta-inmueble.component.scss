@@ -83,3 +83,47 @@
     -moz-box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
     box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
 }
+
+.wizard-add-image-button-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 63px;
+    height: 63px;
+    border-radius: 45px !important;
+    -webkit-box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
+    -moz-box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
+    box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
+
+    .wizard-add-image-button {
+        color: white;
+        font-size: 1.2rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 63px;
+        height: 63px;
+
+        background-color: #1f65e6;
+        border-radius: 45px !important;
+    }
+
+    input[type=file] {
+        font-size: 40px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+}
+
+.image-preview {
+    img {
+        display: block;
+        max-width:230px;
+        max-height:95px;
+        width: auto;
+        height: auto;
+    }
+}

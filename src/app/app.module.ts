@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // core view
@@ -75,7 +75,8 @@ import { WizardAltaInmuebleComponent } from './common/wizard-alta-inmueble/wizar
     AngularFireStorageModule
   ],
   providers: [
-    { provide: FirestoreSettingsToken, useValue: {} }
+    { provide: FirestoreSettingsToken, useValue: {} },
+    { provide: StorageBucket, useValue: 'heritagedevelopment' }
   ],
   bootstrap: [AppComponent]
 })
