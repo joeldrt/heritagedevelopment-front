@@ -16,7 +16,7 @@ export class WizardAltaInmuebleComponent implements OnInit {
 
   imgURL: any;
 
-  numero_paso = 1;
+  numero_paso = 3;
 
   constructor() { }
 
@@ -50,7 +50,6 @@ export class WizardAltaInmuebleComponent implements OnInit {
   }
 
   uploadImage(event: any) {
-    
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
 
@@ -60,14 +59,6 @@ export class WizardAltaInmuebleComponent implements OnInit {
       }
 
       for (let i = 0; i < filesAmount; i++) {
-        // this.listaDeFotos.push(event.target.files[i]);
-        // var reader = new FileReader();
-        // reader.onload = (event) => {
-        //   let target = event.target as FileReader;
-        //   this.urls.push(target.result); 
-        // }
-        // reader.readAsDataURL(event.target.files[i]);
-
         this.mapaDeArchivos.set(event.target.files[i].name, event.target.files[i]);
         var reader = new FileReader();
         reader.onload = (function(theFile: File, mapaDeImagenes: Map<string, string | ArrayBuffer>) {
@@ -82,6 +73,9 @@ export class WizardAltaInmuebleComponent implements OnInit {
     }
   }
 
-
+  borrarImagen(imagen_key: string) {
+    this.mapaDeArchivos.delete(imagen_key);
+    this.mapaDeImagenes.delete(imagen_key);
+  }
 
 }

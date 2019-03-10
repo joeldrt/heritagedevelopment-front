@@ -127,3 +127,32 @@
         height: auto;
     }
 }
+
+.dg-image-card {
+    max-height: 250px;
+    overflow-y: hidden;
+    img {
+        background-color: #6c757d;
+        object-fit: cover;
+        object-position: center;
+    }
+    .delete-button {
+        color: white;
+        font-size: 1rem;
+        background-color: red;
+        border-radius: 45px !important;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+    }
+}
+
+.no-image-message {
+    width: 100%;
+    font-size: 1rem;
+    color: #6c757d;
+    padding-top: 40px;
+    text-align: center;
+    min-height: 120px;
+    max-height: 120px;
+}

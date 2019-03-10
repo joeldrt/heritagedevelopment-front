@@ -279,22 +279,33 @@
           </div>
         </div>
 
-        <div class="form-group row" *ngIf="mapaDeImagenes && mapaDeImagenes.size > 0">
-          <!-- <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let url of urls">
-              <div class="image-preview">
-                  <img [src]="url">
-              </div>
-          </div> -->
+        <!-- <div class="form-group row" *ngIf="mapaDeImagenes && mapaDeImagenes.size > 0">
           <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue">
             <div class="image-preview">
                 <img [src]="objeto_imagen.value">
                 <span>{{objeto_imagen.key}}</span>
             </div>
           </div>
+        </div> -->
+
+        <div class="form-group row" *ngIf="mapaDeImagenes && mapaDeImagenes.size > 0">
+          <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue">
+            <div class="card dg-image-card">
+              <img [src]="objeto_imagen.value">
+              <button class="btn btn-link delete-button" (click)="borrarImagen(objeto_imagen.key)">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!mapaDeImagenes || mapaDeImagenes.size == 0">
+          <div class="no-image-message">
+            <span>No hay imágenes seleccionadas</span>
+          </div>
         </div>
 
       </div>
-    <!-- Fin tercer paso - información avanzada -->
+    <!-- Fin tercer paso - fotografías -->
 
     </form>
   </div>
