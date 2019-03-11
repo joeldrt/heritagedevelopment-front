@@ -5,24 +5,28 @@
 
     <!-- Formulario de ingreso a la sección administrativa -->
     <div class="text-center">
-      <form class="form-signin">
+      <form class="form-signin" (ngSubmit)="flg.form.valid && login()" #flg="ngForm" novalidate>
         <img class="mb-4" src="../../../assets/images/logo_hd_texto.png" alt="" height="100px">
         <h1 class="h3 mb-3 font-weight-normal">Sistema Administrativo</h1>
+
         <label for="loginEmail" class="sr-only">Usuario</label>
-        <input type="email" class="form-control" placeholder="Email" required="" autofocus=""
-          name="loginEmail" [(ngModel)]="email"
-          #loginEmail="ngModel">
+        <input type="email" class="form-control" placeholder="Email" id="loginEmail" autofocus=""
+          name="login_email" [(ngModel)]="email"
+          #login_email="ngModel" [ngClass]="{ 'is-invalid': flg.submitted && login_email.invalid }" required>
+        <div *ngIf="flg.submitted && login_email.invalid" class="invalid-feedback">
+            Debes ingresar un correo electrónico válido
+        </div>
         <label for="loginPassword" class="sr-only">Contraseña</label>
-        <input type="password" class="form-control" placeholder="Contraseña" required=""
-          name="loginPassword" [(ngModel)]="password"
-          #loginPassword="ngModel">
-        <!-- <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Recordarme
-          </label>
-        </div> -->
-        <button class="btn btn-lg boton-ingresar btn-block" type="submit" (click)="login()">Ingresar</button>
+        <input type="password" class="form-control" placeholder="Contraseña" id="loginPassword"
+          name="login_password" [(ngModel)]="password"
+          #login_password="ngModel" [ngClass]="{ 'is-invalid': flg.submitted && login_password.invalid }" required>
+        <div *ngIf="flg.submitted && login_password.invalid" class="invalid-feedback">
+            Debes ingresar una contraseña
+        </div>
+
+        <button class="btn btn-lg boton-ingresar btn-block" type="submit">Ingresar</button>
         <p class="mt-5 mb-3 text-muted">© 2019</p>
+
       </form>
     </div>
     <!-- Fin formulario de ingreso a la sección administrativa -->
@@ -30,4 +34,10 @@
   </div>
   <!-- Fin contenido de la página de login -->
   <app-footer></app-footer>
+</div>
+
+<div class="loading-animation" *ngIf="loading">
+  <app-loading style="min-height: inherit; max-height: inherit;"
+    [mensaje]="mensaje_loading">
+  </app-loading>
 </div>
