@@ -78,7 +78,7 @@ import { LoadingComponent } from './common/loading/loading.component';
   ],
   providers: [
     { provide: FirestoreSettingsToken, useValue: {} },
-    { provide: StorageBucket, useValue: 'heritagedevelopment' }
+    { provide: StorageBucket, useValue: 'heritagedevelopment-18797.appspot.com' }
   ],
   bootstrap: [AppComponent]
 })

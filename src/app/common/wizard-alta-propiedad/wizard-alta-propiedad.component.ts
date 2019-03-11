@@ -1,6 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Propiedad } from '../../models/propiedad';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Propiedad, PropiedadObj } from '../../models/propiedad';
 import { ToastrService } from '../../services/toastr/toastr.service';
+
+import { AuthService } from '../../services/auth/auth.service';
+import { User } from '../../models/user';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-wizard-alta-propiedad',
@@ -12,41 +18,41 @@ export class WizardAltaPropiedadComponent implements OnInit {
   @Output() end_wizard = new EventEmitter<boolean>();
   numero_paso = 1;
 
-  nueva_propiedad: Propiedad;
+  user: User;
+
+  nueva_propiedad: PropiedadObj;
+  propiedad: Propiedad;
   mapaDeArchivos = new Map<string, File>();
   mapaDeImagenes = new Map<string, string | ArrayBuffer>();
 
   loading = false;
+  thisIsTheEnd = false;
   mensaje_loading = "cargando";
+  contador_imagenes_guardadas = 0;
+
+  private itemsCollection: AngularFirestoreCollection<Propiedad>;
 
   constructor(
     private toastr: ToastrService,
+    private storage: AngularFireStorage,
+    private auth: AuthService,
+    private afs: AngularFirestore,
   ) { }
 
   ngOnInit() {
-    this.nueva_propiedad = new Propiedad();
-    this.nueva_propiedad.tipo_propiedad = "Departamento";
-    this.nueva_propiedad.nombre = "Il Depa";
-    this.nueva_propiedad.m2_construccion = 89;
-    this.nueva_propiedad.recamaras = 3;
-    this.nueva_propiedad.banos = 1;
-    this.nueva_propiedad.medios_banos = 1;
-    this.nueva_propiedad.cajones_estacionamiento = 1;
-    this.nueva_propiedad.descripcion = "El mejor depa de la historia... no existe nada como él";
-    this.nueva_propiedad.precio_venta = 2100000;
-    this.nueva_propiedad.precio_renta = 15000;
-    this.nueva_propiedad.m2_terreno = 105;
-    this.nueva_propiedad.niveles = 1;
-    this.nueva_propiedad.amenidades = "Roof Garden, Terraza, Jardines";
-    this.nueva_propiedad.tiempo_minimo_renta = 2;
-    this.nueva_propiedad.capacidad_cisterna = 66000;
-    this.nueva_propiedad.edad_propiedad = 30;
-    this.nueva_propiedad.costo_mantenimiento = 400;
+    this.nueva_propiedad = new PropiedadObj();
+    this.nueva_propiedad.urls_fotografias = new Array<string>();
     this.mapaDeArchivos = new Map<string, File>();
     this.mapaDeImagenes = new Map<string, string | ArrayBuffer>();
+    this.auth.user$.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   sendEndSignal() {
+    this.itemsCollection = null;
+    this.loading = false;
+    this.thisIsTheEnd = true;
     this.end_wizard.emit(true);
   }
 
@@ -82,7 +88,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
       var filesAmount = event.target.files.length;
 
       if (this.mapaDeArchivos.size + filesAmount > 10) {
-        console.error('número máximo de fotos');
+        this.toastr.error('número máximo de fotos (10)');
         return;
       }
 
@@ -110,8 +116,58 @@ export class WizardAltaPropiedadComponent implements OnInit {
     this.irIniciodePaginaDe();
     this.loading = true;
     this.mensaje_loading = "guardando imagenes";
-    
+    this.mapaDeArchivos.forEach((value: File, key: string) => {
+        const file = value;
+        const filePath = `propiedades/${this.user.uid}/${file.name}`;
+        const fileRef = this.storage.ref(filePath);
+        const task = this.storage.upload(filePath, file);
+        task.snapshotChanges().pipe(
+          finalize(() => {
+            this.contador_imagenes_guardadas += 1;
+            fileRef.getDownloadURL().subscribe(url => {
+              if (url) {
+                this.nueva_propiedad.urls_fotografias.push(url);
+                this.seDebeGuardarElDocumento();
+              }
+            })
+          }),
+        ).subscribe();
+    });
+  }
 
+  seDebeGuardarElDocumento() {
+    this.mensaje_loading = `${this.contador_imagenes_guardadas} / ${this.mapaDeArchivos.size} imagenes guardadas`;
+    if (this.nueva_propiedad.urls_fotografias.length >= this.mapaDeArchivos.size) {
+      this.guardarDocumento();
+    }
+  }
+
+  guardarDocumento() {
+    this.nueva_propiedad.user_uid = this.user.uid;
+    this.nueva_propiedad.verificarValoresIndefinidos();
+    this.propiedad = {
+      user_uid: this.nueva_propiedad.user_uid,
+      tipo_propiedad: this.nueva_propiedad.tipo_propiedad,
+      nombre: this.nueva_propiedad.nombre,
+      m2_construccion: this.nueva_propiedad.m2_construccion,
+      recamaras: this.nueva_propiedad.recamaras,
+      banos: this.nueva_propiedad.banos,
+      medios_banos: this.nueva_propiedad.medios_banos,
+      cajones_estacionamiento: this.nueva_propiedad.cajones_estacionamiento,
+      descripcion: this.nueva_propiedad.descripcion,
+      precio_venta: this.nueva_propiedad.precio_venta,
+      precio_renta: this.nueva_propiedad.precio_renta,
+      m2_terreno: this.nueva_propiedad.m2_terreno,
+      niveles: this.nueva_propiedad.niveles,
+      amenidades: this.nueva_propiedad.amenidades,
+      tiempo_minimo_renta: this.nueva_propiedad.tiempo_minimo_renta,
+      capacidad_cisterna: this.nueva_propiedad.capacidad_cisterna,
+      edad_propiedad: this.nueva_propiedad.edad_propiedad,
+      costo_mantenimiento: this.nueva_propiedad.costo_mantenimiento,
+      urls_fotografias: this.nueva_propiedad.urls_fotografias
+    }
+    this.itemsCollection = this.afs.collection<Propiedad>('propiedades');
+    this.itemsCollection.add(this.propiedad);
     this.sendEndSignal();
   }
 
