@@ -1,7 +1,4 @@
 <div class="wizard-alta-propiedad" id="wrapper-wizard">
-
-  <div id="anchor_inicio_pagina"></div>
-
   <!-- Wizard navigation bar -->
   <div class="container-fluid wizard-nav-bar">
     <div class="row">
@@ -45,24 +42,26 @@
   </div>
   <!-- End wizard navigation bar -->
 
-  <!-- Área del formulario -->
+  <!-- Área del wizard -->
   <div class="form-area">
-    <form>
 
     <!-- Primer paso - información básica -->
-    
-      <div id="informacionBasicaForm" *ngIf="numero_paso === 1">
+    <div id="informacionBasicaForm" *ngIf="numero_paso === 1">
+      <form (ngSubmit)="fIB.form.valid && finalizarPaso1()" #fIB="ngForm" novalidate>
+      
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
           <label for="tipoPropiedad" class="col-sm-12 col-md-3 col-form-label">Tipo de propiedad</label>
           <div class="col-sm-12 col-md-6">
-            <select class="form-control " id="tipoPropiedad">
-              <option>Terreno</option>
-              <option>Departamento</option>
-              <option>Casa</option>
+            <select class="form-control " id="tipoPropiedad"
+              name="tipo_propiedad" [(ngModel)]="nueva_propiedad.tipo_propiedad"
+              #tipo_propiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && tipo_propiedad.invalid }" required>
+              <option value="Terreno">Terreno</option>
+              <option value="Departamento">Departamento</option>
+              <option value="Casa">Casa</option>
             </select>
-            <div class="invalid-feedback">
+            <div *ngIf="fIB.submitted && tipo_propiedad.invalid" class="invalid-feedback">
                 Debes seleccionar un tipo de propiedad.
             </div>
           </div>
@@ -73,8 +72,10 @@
           </div>
           <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
           <div class="col-sm-12 col-md-6">
-            <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre" required>
-            <div class="invalid-feedback">
+            <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre"
+              name="nombre" [(ngModel)]="nueva_propiedad.nombre"
+              #nombre="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && nombre.invalid }" required>
+            <div *ngIf="fIB.submitted && nombre.invalid" class="invalid-feedback">
                 Debes ingresar un nombre
             </div>
           </div>
@@ -85,8 +86,10 @@
           </div>
           <label for="m2construccionPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Construcción</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción" required>
-            <div class="invalid-feedback">
+            <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción"
+              name="m2_construccion" [(ngModel)]="nueva_propiedad.m2_construccion"
+              #m2_construccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && m2_construccion.invalid }" required>
+            <div *ngIf="fIB.submitted && m2_construccion.invalid" class="invalid-feedback">
                 Debes ingresar los m2 de construcción
             </div>
           </div>
@@ -97,8 +100,10 @@
           </div>
           <label for="recamarasPropiedad" class="col-sm-12 col-md-3 col-form-label">Recamaras</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="recamarasPropiedad" placeholder="Recamaras" required>
-            <div class="invalid-feedback">
+            <input type="number" class="form-control" id="recamarasPropiedad" placeholder="Recamaras"
+              name="recamaras" [(ngModel)]="nueva_propiedad.recamaras"
+              #recamaras="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && recamaras.invalid }" required>
+            <div *ngIf="fIB.submitted && recamaras.invalid" class="invalid-feedback">
                 Debes ingresar el número de recámaras
             </div>
           </div>
@@ -109,8 +114,10 @@
           </div>
           <label for="banosPropiedad" class="col-sm-12 col-md-3 col-form-label">Baños</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="banosPropiedad" placeholder="Baños" required>
-            <div class="invalid-feedback">
+            <input type="number" class="form-control" id="banosPropiedad" placeholder="Baños"
+              name="banos" [(ngModel)]="nueva_propiedad.banos"
+              #banos="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && banos.invalid }" required>
+            <div *ngIf="fIB.submitted && banos.invalid" class="invalid-feedback">
                 Debes ingresar el número de baños
             </div>
           </div>
@@ -121,7 +128,9 @@
           </div>
           <label for="mediosBanosPropiedad" class="col-sm-12 col-md-3 col-form-label">Medios Baños</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Medios Baños">
+            <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Medios Baños"
+              name="medios_banos" [(ngModel)]="nueva_propiedad.medios_banos"
+              #medios_banos="ngModel">
           </div>
         </div>
 
@@ -130,8 +139,10 @@
           </div>
           <label for="cajonesEstacionamientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Cajones Estacionamiento</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento" required>
-            <div class="invalid-feedback">
+            <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento"
+              name="cajones_estacionamiento" [(ngModel)]="nueva_propiedad.cajones_estacionamiento"
+              #cajones_estacionamiento="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && cajones_estacionamiento.invalid }" required>
+            <div *ngIf="fIB.submitted && cajones_estacionamiento.invalid" class="invalid-feedback">
                 Debes ingresar el número de cajones de estacionamiento
             </div>
           </div>
@@ -142,8 +153,10 @@
           </div>
           <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
           <div class="col-sm-12 col-md-6">
-            <textarea class="form-control" id="descripcionPropiedad" rows="4" required></textarea>
-            <div class="invalid-feedback">
+            <textarea class="form-control" id="descripcionPropiedad" rows="4"
+              name="descripcion" [(ngModel)]="nueva_propiedad.descripcion"
+              #descripcion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && descripcion.invalid }" required></textarea>
+            <div *ngIf="fIB.submitted && descripcion.invalid" class="invalid-feedback">
                 Debes ingresar una breve descripción
             </div>
           </div>
@@ -154,7 +167,9 @@
           </div>
           <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta">
+            <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta"
+              name="precio_venta" [(ngModel)]="nueva_propiedad.precio_venta"
+              #precio_venta="ngModel" >
           </div>
         </div>
 
@@ -163,7 +178,9 @@
           </div>
           <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta">
+            <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta"
+              name="precio_renta" [(ngModel)]="nueva_propiedad.precio_renta"
+              #precio_renta="ngModel" >
           </div>
         </div>
 
@@ -171,24 +188,27 @@
           <div class="col-sm-0 col-md-1">
           </div>
           <div class="col-sm-12 col-md-10">
-            <button class="btn btn-link float-right wizard-nav-button"
-              (click)="finalizarPaso1()">
+            <button type="submit" class="btn btn-link float-right wizard-nav-button">
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
 
-      </div>
+      </form>
+    </div>
     <!-- Fin primer paso - información básica -->
   
     <!-- Segundo paso - información avanzada -->
-      <div id="informacionAvanzadaForm" *ngIf="numero_paso === 2">
+    <div id="informacionAvanzadaForm" *ngIf="numero_paso === 2">
+      <form (ngSubmit)="fIA.form.valid && finalizarPaso2()" #fIA="ngForm" novalidate>
         <div class="form-group row">
           <div class="col-sm-0 col-md-1">
           </div>
           <label for="m2terrenoPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Terreno</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno" required>
+            <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno"
+              name="m2_terreno" [(ngModel)]="nueva_propiedad.m2_terreno"
+              #m2_terreno="ngModel">
           </div>
         </div>
 
@@ -197,7 +217,9 @@
           </div>
           <label for="niveles_plantasPropiedad" class="col-sm-12 col-md-3 col-form-label">Niveles (plantas)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles">
+            <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles"
+              name="niveles" [(ngModel)]="nueva_propiedad.niveles"
+              #niveles="ngModel">
           </div>
         </div>
 
@@ -206,7 +228,9 @@
           </div>
           <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
           <div class="col-sm-12 col-md-6">
-            <textarea class="form-control" id="amenidadesPropiedad" rows="4"></textarea>
+            <textarea class="form-control" id="amenidadesPropiedad" rows="4"
+              name="amenidades" [(ngModel)]="nueva_propiedad.amenidades"
+              #amenidades="ngModel"></textarea>
           </div>
         </div>
 
@@ -215,7 +239,9 @@
           </div>
           <label for="tiempoMinimoRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Tiempo mínimo de renta (meses)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta">
+            <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta"
+              name="tiempo_minimo_renta" [(ngModel)]="nueva_propiedad.tiempo_minimo_renta"
+              #tiempo_minimo_renta="ngModel">
           </div>
         </div>
 
@@ -224,7 +250,9 @@
           </div>
           <label for="capacidadCisternaPropiedad" class="col-sm-12 col-md-3 col-form-label">Capacidad de cisterna (L)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="capacidadCisternaPropiedad" placeholder="Capacidad de cisterna" required>
+            <input type="number" class="form-control" id="capacidadCisternaPropiedad" placeholder="Capacidad de cisterna"
+              name="capacidad_cisterna" [(ngModel)]="nueva_propiedad.capacidad_cisterna"
+              #capacidad_cisterna>
           </div>
         </div>
 
@@ -233,7 +261,9 @@
           </div>
           <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad" required>
+            <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad"
+              name="edad_propiedad" [(ngModel)]="nueva_propiedad.edad_propiedad"
+              #edad_propiedad>
           </div>
         </div>
 
@@ -242,7 +272,9 @@
           </div>
           <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
           <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Medios Baños">
+            <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Costo mantenimiento"
+              name="costo_mantenimiento" [(ngModel)]="nueva_propiedad.costo_mantenimiento"
+              #costo_mantenimiento="ngModel">
           </div>
         </div>
 
@@ -254,18 +286,19 @@
               (click)="pasoAnterior()">
               <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="btn btn-link float-right wizard-nav-button"
-              (click)="finalizarPaso2()">
+            <button type="submit" class="btn btn-link float-right wizard-nav-button">
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
 
-      </div>
+      </form>
+    </div>
     <!-- Fin segundo paso - información avanzada -->
   
     <!-- Tercer paso - fotografías -->
-      <div id="fotografiasForm" *ngIf="numero_paso === 3">
+    <div id="fotografiasForm" *ngIf="numero_paso === 3">
+      <form (ngSubmit)="finalizarPaso3()">
         
         <div class="form-group row">
           <div class="col-1">
@@ -304,18 +337,320 @@
               (click)="pasoAnterior()">
               <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="btn btn-link float-right wizard-nav-button"
-              (click)="finalizarPaso3()">
+            <button type="submit" class="btn btn-link float-right wizard-nav-button">
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
 
-      </div>
+      </form>
+    </div>
     <!-- Fin tercer paso - fotografías -->
 
-    </form>
+    <!-- Cuarto paso - resumen y guardado -->
+    <div id="resumenForm" *ngIf="numero_paso === 4">
+      <form (ngSubmit)="finalizarPaso4()">
+
+        <!-- Titulo resumen -->
+        <div class="row">
+          <div class="col-12">
+            <div class="resumen-nombre-propiedad">
+              <div class="barra-verde"></div>
+              <span>{{nueva_propiedad.nombre}}</span>
+            </div>
+          </div>
+        </div>
+        <!-- Fin titulo resumen -->
+
+        <!-- Carousel de fotos -->
+        <div class="row carousel-row-container mt-3">
+          <div class="col-sm-0 col-md-3 col-xl-4">
+          </div>
+          <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="resumen-carousel-container">
+                <div id="carouselComponent" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue; let i=index;"
+                      [ngClass]="{ 'active': i === 0 }">
+                      <img [src]="objeto_imagen.value" class="d-block w-100 imagen-carousel" alt="...">
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselComponent" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselComponent" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+            </div>
+          </div>
+          <div class="col-sm-0 col-md-3 col-xl-4">
+          </div>
+        </div>
+        <!-- Fin carousel de fotos -->
+
+        <!-- Área de precios -->
+        <div class="row mt-3">
+          <div class="col" *ngIf="nueva_propiedad.precio_venta">
+            <div class="resumen-display-de-precio text-center">
+              <div class="titulo">
+                <span>Precio en venta</span>
+              </div>
+              <div class="precio">
+                <span>{{nueva_propiedad.precio_venta | currency:'MXN'}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col" *ngIf="nueva_propiedad.precio_renta">
+            <div class="resumen-display-de-precio text-center">
+              <div class="titulo">
+                <span>Precio en renta</span>
+              </div>
+              <div class="precio">
+                <span>{{nueva_propiedad.precio_renta | currency:'MXN'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Fin área de precios -->
+
+        <!-- Área de detalles -->
+        <div class="row mt-5">
+          <div class="col">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="far fa-question-circle"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Tipo de propiedad</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.tipo_propiedad}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-signature"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Nombre</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.nombre}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-hammer"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>M2 Construcción</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.m2_construccion}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-bed"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Recámaras</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.recamaras}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-shower"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Baños</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.banos}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="nueva_propiedad.medios_banos">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-toilet"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Medios Baños</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.medios_banos}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-car"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Cajones de estacionamiento</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.cajones_estacionamiento}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="nueva_propiedad.m2_terreno">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="far fa-square"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>M2 Terreno</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.m2_terreno}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="nueva_propiedad.niveles">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-align-justify"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Niveles (pisos)</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.niveles}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="nueva_propiedad.tiempo_minimo_renta">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="far fa-calendar-alt"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Tiempo mínimo renta (meses)</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.tiempo_minimo_renta}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="nueva_propiedad.capacidad_cisterna">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-tint"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Capacidad de cisterna (L)</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.capacidad_cisterna}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="nueva_propiedad.edad_propiedad">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Edad de la propiedad (años)</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.edad_propiedad}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="nueva_propiedad.costo_mantenimiento">
+            <div class="resumen-display-detalle">
+              <div class="icono">
+                <i class="fas fa-tools"></i>
+              </div>
+              <div class="nombre-detalle">
+                <span>Costo del mantenimiento</span>
+              </div>
+              <div class="valor-detalle">
+                <span>{{nueva_propiedad.costo_mantenimiento | currency:'MXN'}}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Fin área de detalles -->
+
+        <!-- Área de descripcion y amenidades -->
+        <div class="row">
+          <div class="col" *ngIf="nueva_propiedad.descripcion">
+            <div class="resumen-display-descripcion-amenidades text-center">
+              <div class="titulo">
+                <span>Descripción de la propiedad</span>
+              </div>
+              <div class="text">
+                <span>{{nueva_propiedad.descripcion}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col" *ngIf="nueva_propiedad.amenidades">
+            <div class="resumen-display-descripcion-amenidades text-center">
+              <div class="titulo">
+                <span>Amenidades</span>
+              </div>
+              <div class="text">
+                <span>{{nueva_propiedad.amenidades}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Fin área de descripcion y amenidades -->
+
+        <!-- Botones wizard -->
+        <div class="form-group row mt-5">
+          <div class="col-sm-0 col-md-1">
+          </div>
+          <div class="col-sm-12 col-md-10">
+            <button class="btn btn-link float-left wizard-nav-button"
+              (click)="pasoAnterior()">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button type="submit" class="btn btn-link float-right wizard-nav-button">
+              <i class="far fa-save"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Fin botones wizard -->
+      </form>
+    </div>
+    <!-- Fin cuarto paso - resumen y guardado -->
+
   </div>
-  <!-- Fin área del formulario -->
+  <!-- Fin área del wizard -->
+</div>
+
+<div class="loading-animation">
 
 </div>

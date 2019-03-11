@@ -84,6 +84,7 @@
     box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
 }
 
+// fomulario agregar fotos
 .wizard-add-image-button-wrapper {
     position: relative;
     overflow: hidden;
@@ -155,4 +156,96 @@
     text-align: center;
     min-height: 120px;
     max-height: 120px;
+}
+
+// formulario resumen
+.resumen-nombre-propiedad {
+    font-size: 2rem;
+    .barra-verde {
+        background-color: #87b23e;
+        min-width: 5px;
+        max-width: 5px;
+        display: inline-block;
+        min-height: 1.5rem;
+    }
+    span {
+        font-size: 2rem;
+        margin-left: 10px;
+        display: inline-block;
+    }
+}
+
+.carousel-row-container {
+    background-color: #6c757d;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .imagen-carousel {
+        min-height: 270px;
+        max-height: 270px;
+        overflow: hidden;
+        @media screen and (min-width: 720px) {
+            min-height: 330px;
+            max-height: 330px;
+        }
+        @media screen and (min-width: 960px) {
+            min-height: 390px;
+            max-height: 390px;
+        }
+    }
+}
+
+.resumen-display-de-precio {
+    margin-top: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
+    .titulo span {
+        font-size: 1rem;
+    }
+    .precio {
+        color: white;
+        font-size: 1.5rem;
+        background-color: #87b23e;
+    }
+}
+
+.resumen-display-detalle {
+    text-align: center;
+    min-width: 120px;
+    max-width: 120px;
+    margin-top: 40px;
+    .icono i {
+        font-size: 2rem;
+        color: #6c757d;
+    }
+    .nombre-detalle {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+    .valor-detalle {
+        font-size: 1rem;
+    }
+}
+
+.resumen-display-descripcion-amenidades {
+    margin-top: 30px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-left: 5px solid #87b23e;
+    .titulo span {
+        color: #87b23e;
+        font-size: 1rem;
+    }
+    .text {
+        font-size: 1rem;
+    }
+}
+
+.loading-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(200,200,200,0.75)
 }

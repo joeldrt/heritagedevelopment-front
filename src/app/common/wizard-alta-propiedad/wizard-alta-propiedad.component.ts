@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Propiedad } from '../../models/propiedad';
+import { ToastrService } from '../../services/toastr/toastr.service';
 
 @Component({
   selector: 'app-wizard-alta-propiedad',
@@ -7,25 +9,45 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class WizardAltaPropiedadComponent implements OnInit {
   @Input() scrollableContanierId: string;
-  // @Output() object = new EventEmitter<string>();
+  @Output() end_wizard = new EventEmitter<boolean>();
+  numero_paso = 1;
 
-  // listaDeFotos = [];
-  // urls = [];
+  nueva_propiedad: Propiedad;
   mapaDeArchivos = new Map<string, File>();
   mapaDeImagenes = new Map<string, string | ArrayBuffer>();
 
-  imgURL: any;
+  loading = false;
 
-  numero_paso = 3;
-
-  constructor() { }
+  constructor(
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit() {
+    this.nueva_propiedad = new Propiedad();
+    this.nueva_propiedad.tipo_propiedad = "Departamento";
+    this.nueva_propiedad.nombre = "Il Depa";
+    this.nueva_propiedad.m2_construccion = 89;
+    this.nueva_propiedad.recamaras = 3;
+    this.nueva_propiedad.banos = 1;
+    this.nueva_propiedad.medios_banos = 1;
+    this.nueva_propiedad.cajones_estacionamiento = 1;
+    this.nueva_propiedad.descripcion = "El mejor depa de la historia... no existe nada como él";
+    this.nueva_propiedad.precio_venta = 2100000;
+    this.nueva_propiedad.precio_renta = 15000;
+    this.nueva_propiedad.m2_terreno = 105;
+    this.nueva_propiedad.niveles = 1;
+    this.nueva_propiedad.amenidades = "Roof Garden, Terraza, Jardines";
+    this.nueva_propiedad.tiempo_minimo_renta = 2;
+    this.nueva_propiedad.capacidad_cisterna = 66000;
+    this.nueva_propiedad.edad_propiedad = 30;
+    this.nueva_propiedad.costo_mantenimiento = 400;
+    this.mapaDeArchivos = new Map<string, File>();
+    this.mapaDeImagenes = new Map<string, string | ArrayBuffer>();
   }
 
-  // sendMessage() {
-  //   this.object.emit('Este es el nuevo mensaje');
-  // }
+  sendEndSignal() {
+    this.end_wizard.emit(true);
+  }
 
   irIniciodePaginaDe() {
     var aTag = document.getElementById(this.scrollableContanierId);
@@ -81,6 +103,13 @@ export class WizardAltaPropiedadComponent implements OnInit {
   borrarImagen(imagen_key: string) {
     this.mapaDeArchivos.delete(imagen_key);
     this.mapaDeImagenes.delete(imagen_key);
+  }
+
+  finalizarPaso4() {
+    this.irIniciodePaginaDe();
+    this.loading = true;
+    
+    this.sendEndSignal();
   }
 
 }
