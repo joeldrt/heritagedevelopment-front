@@ -16,6 +16,7 @@ import { finalize } from 'rxjs/operators';
 export class WizardAltaPropiedadComponent implements OnInit {
   @Input() scrollableContanierId: string;
   @Output() end_wizard = new EventEmitter<boolean>();
+  @Input() thisIsTheEnd: boolean;
   numero_paso = 1;
 
   user: User;
@@ -26,7 +27,6 @@ export class WizardAltaPropiedadComponent implements OnInit {
   mapaDeImagenes = new Map<string, string | ArrayBuffer>();
 
   loading = false;
-  thisIsTheEnd = false;
   mensaje_loading = "cargando";
   contador_imagenes_guardadas = 0;
 
@@ -37,22 +37,30 @@ export class WizardAltaPropiedadComponent implements OnInit {
     private storage: AngularFireStorage,
     private auth: AuthService,
     private afs: AngularFirestore,
-  ) { }
+  ) { 
+    this.thisIsTheEnd = false;
+  }
 
   ngOnInit() {
+    this.initWizard();
+    this.auth.user$.subscribe((user) => {
+      this.user = user;
+    });
+  }
+
+  initWizard() {
     this.nueva_propiedad = new PropiedadObj();
     this.nueva_propiedad.urls_fotografias = new Array<string>();
     this.mapaDeArchivos = new Map<string, File>();
     this.mapaDeImagenes = new Map<string, string | ArrayBuffer>();
-    this.auth.user$.subscribe((user) => {
-      this.user = user;
-    });
+    this.numero_paso = 1;
   }
 
   sendEndSignal() {
     this.itemsCollection = null;
     this.loading = false;
     this.thisIsTheEnd = true;
+    this.initWizard();
     this.end_wizard.emit(true);
   }
 

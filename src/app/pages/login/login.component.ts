@@ -24,9 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (!this.email || !this.password) {
-      return;
-    }
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(
       (credentials) => {
         this.router.navigate(['/admin']);

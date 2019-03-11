@@ -16,6 +16,7 @@ export class EstateComponent implements OnInit {
   filter: PropertyFilter;
 
   end_wizard = false;
+  wizardIniciado = false;
 
   constructor() { 
     this.filter = new PropertyFilter('', '');
@@ -30,6 +31,15 @@ export class EstateComponent implements OnInit {
 
   haFinalizadoElWizard($event: any) {
     this.end_wizard = $event;
+  }
+
+  iniciarWizardAgregarPropiedad() {
+    this.wizardIniciado = true;
+    this.end_wizard = false;
+  }
+
+  finalizarWizardAgregarPropiedad() {
+    this.wizardIniciado = false;
   }
 
 }
