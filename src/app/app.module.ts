@@ -41,7 +41,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { PropertyUsersComponent } from './admin/property-users/property-users.component';
 import { EstateComponent } from './admin/estate/estate.component';
 import { ProfileComponent } from './admin/profile/profile.component';
-import { WizardAltaPropiedadComponent } from './common/wizard-alta-inmueble/wizard-alta-propiedad.component';
+import { WizardAltaPropiedadComponent } from './common/wizard-alta-propiedad/wizard-alta-propiedad.component';
 
 @NgModule({
   declarations: [
