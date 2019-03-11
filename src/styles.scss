@@ -4,6 +4,17 @@
     min-height: calc(100vh - 97px);
 }
 
+.loading-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // background-color: rgba(88, 129, 49, 0.562)
+    background-color: #87b23e;
+    z-index: 9999;
+}
+
 /*
 #toast-container > div {
     opacity:1;
