@@ -1,4 +1,4 @@
-<div class="wizard-alta-propiedad" id="wrapper-wizard">
+<div class="wizard-alta-propiedad" id="wrapper-wizard" *ngIf="!loading">
   <!-- Wizard navigation bar -->
   <div class="container-fluid wizard-nav-bar">
     <div class="row">
@@ -651,6 +651,8 @@
   <!-- Fin área del wizard -->
 </div>
 
-<div class="loading-animation">
-
+<div class="loading-animation" *ngIf="loading">
+  <app-loading style="min-height: inherit; max-height: inherit;"
+    [mensaje]="mensaje_loading">
+  </app-loading>
 </div>

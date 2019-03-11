@@ -17,6 +17,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   mapaDeImagenes = new Map<string, string | ArrayBuffer>();
 
   loading = false;
+  mensaje_loading = "cargando";
 
   constructor(
     private toastr: ToastrService,
@@ -108,7 +109,9 @@ export class WizardAltaPropiedadComponent implements OnInit {
   finalizarPaso4() {
     this.irIniciodePaginaDe();
     this.loading = true;
+    this.mensaje_loading = "guardando imagenes";
     
+
     this.sendEndSignal();
   }
 
