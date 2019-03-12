@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Propiedad, PropiedadObj } from '../../models/propiedad';
 import { ToastrService } from '../../services/toastr/toastr.service';
+import { PropiedadService } from '../../services/propiedad/propiedad.service';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/user';
@@ -30,13 +30,11 @@ export class WizardAltaPropiedadComponent implements OnInit {
   mensaje_loading = "cargando";
   contador_imagenes_guardadas = 0;
 
-  private itemsCollection: AngularFirestoreCollection<Propiedad>;
-
   constructor(
     private toastr: ToastrService,
     private storage: AngularFireStorage,
     private auth: AuthService,
-    private afs: AngularFirestore,
+    private propiedadService: PropiedadService,
   ) { 
     this.thisIsTheEnd = false;
   }
@@ -57,7 +55,6 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   sendEndSignal() {
-    this.itemsCollection = null;
     this.loading = false;
     this.thisIsTheEnd = true;
     this.initWizard();
@@ -174,9 +171,14 @@ export class WizardAltaPropiedadComponent implements OnInit {
       costo_mantenimiento: this.nueva_propiedad.costo_mantenimiento,
       urls_fotografias: this.nueva_propiedad.urls_fotografias
     }
-    this.itemsCollection = this.afs.collection<Propiedad>('propiedades');
-    this.itemsCollection.add(this.propiedad);
-    this.sendEndSignal();
+    this.propiedadService.agregarPropiedad(this.propiedad).then(
+      (value) => {
+        this.sendEndSignal();
+      },
+      (error) => {
+        this.loading = false;
+        this.toastr.error(`Error al guardar la propiedad: ${error}`);
+      });
   }
 
 }

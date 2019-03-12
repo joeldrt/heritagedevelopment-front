@@ -1,4 +1,5 @@
 export class PropiedadObj implements Propiedad {
+    public id: string;
     public user_uid: string;
     public tipo_propiedad: string;
     public nombre: string;
@@ -64,6 +65,7 @@ export class PropiedadObj implements Propiedad {
 }
 
 export interface Propiedad {
+    id?: string;
     user_uid: string;
     tipo_propiedad: string;
     nombre: string;

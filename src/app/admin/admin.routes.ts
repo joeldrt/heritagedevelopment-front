@@ -7,7 +7,7 @@ import { EstateComponent } from './estate/estate.component';
 import { ProfileComponent } from './profile/profile.component';
 
 export const ADMIN_ROUTES: Routes = [
-  { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
+  { path: 'admin', redirectTo: '/admin/estate', pathMatch: 'full' },
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'admin/admin-users', component: AdminUsersComponent },
   { path: 'admin/property-users', component: PropertyUsersComponent },
