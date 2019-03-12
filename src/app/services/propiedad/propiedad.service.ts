@@ -16,9 +16,8 @@ export class PropiedadService {
   }
 
   agregarPropiedad(propiedad: Propiedad) {
-    const doc_id = this.firestore.createId();
-    propiedad.id = doc_id;
-    return this.firestore.collection<Propiedad>('propiedades').doc(doc_id).set(propiedad);
+    delete propiedad.id;
+    return this.firestore.collection<Propiedad>('propiedades').add(propiedad);
   }
 
   actualizarPropiedad(propiedad: Propiedad) {

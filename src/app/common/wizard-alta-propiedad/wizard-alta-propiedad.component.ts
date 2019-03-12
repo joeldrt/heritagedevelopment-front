@@ -151,6 +151,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     this.nueva_propiedad.user_uid = this.user.uid;
     this.nueva_propiedad.verificarValoresIndefinidos();
     this.propiedad = {
+      id: "",
       user_uid: this.nueva_propiedad.user_uid,
       tipo_propiedad: this.nueva_propiedad.tipo_propiedad,
       nombre: this.nueva_propiedad.nombre,

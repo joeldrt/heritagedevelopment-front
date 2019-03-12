@@ -8,9 +8,9 @@ import { ProfileComponent } from './profile/profile.component';
 
 export const ADMIN_ROUTES: Routes = [
   { path: 'admin', redirectTo: '/admin/estate', pathMatch: 'full' },
-  { path: 'admin/dashboard', component: DashboardComponent },
-  { path: 'admin/admin-users', component: AdminUsersComponent },
-  { path: 'admin/property-users', component: PropertyUsersComponent },
-  { path: 'admin/estate', component: EstateComponent },
-  { path: 'admin/profile', component: ProfileComponent },
+  { path: 'admin/dashboard', component: DashboardComponent, data: { title: 'Dashboard' }},
+  { path: 'admin/admin-users', component: AdminUsersComponent, data: { title: '' }},
+  { path: 'admin/property-users', component: PropertyUsersComponent, data: { title: '' }},
+  { path: 'admin/estate', component: EstateComponent, data: { title: 'Propiedades' }},
+  { path: 'admin/profile', component: ProfileComponent, data: { title: 'Perfil' }},
 ];

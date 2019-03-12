@@ -29,36 +29,26 @@
 <!-- Fin área de búsqueca-->
 
 <!-- Area de resultados -->
-<div class="result-area">
+<div class="result-area" *ngIf="propiedades">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="let propiedad of propiedades">
         <div class="card">
-          <img src="../../../assets/images/departamento-img.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Departamento Lomas de angelópolis 1</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="image-viewport">
+            <!-- Imagen por default -->
+            <img *ngIf="!propiedad.urls_fotografias || propiedad.urls_fotografias.length === 0"
+              src="../../../assets/images/departamento-img.jpg" alt="..."> 
+            <!-- end Imagen por default -->
+            <!-- Primera imagen de la propiedad -->
+            <img *ngIf="propiedad.urls_fotografias && propiedad.urls_fotografias.length >= 0"
+              [src]="propiedad.urls_fotografias[0]" alt="..."> 
+            <!-- Fin primera imagen de la propiedad -->
           </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-        <div class="card">
-          <img src="../../../assets/images/departamento-img.jpg" class="card-img-top" alt="...">
+
           <div class="card-body">
-            <h5 class="card-title">Departamento Sonata Towers</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-        <div class="card">
-          <img src="../../../assets/images/departamento-img.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Loft Adamant 1</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title">{{propiedad.nombre}}</h5>
+            <p class="card-text">{{propiedad.descripcion}}</p>
+            <a href="#" class="btn btn-primary">Detalle</a>
           </div>
         </div>
       </div>

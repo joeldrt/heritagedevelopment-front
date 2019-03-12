@@ -134,8 +134,10 @@
     overflow-y: hidden;
     img {
         background-color: #6c757d;
-        object-fit: contain;
-        object-position: top;
+        min-height: 252px;
+        max-width: 100%;
+        object-fit: cover;
+        vertical-align: middle;
     }
     .delete-button {
         color: white;
@@ -175,23 +177,23 @@
     }
 }
 
-.carousel-row-container {
-    background-color: #6c757d;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    .imagen-carousel {
-        min-height: 270px;
-        max-height: 270px;
-        overflow: hidden;
-        @media screen and (min-width: 720px) {
-            min-height: 330px;
-            max-height: 330px;
+.carousel {
+    .carousel-inner {
+        text-align: center;
+        .carousel-item {
+            img {
+                background-color: #6c757d;
+                min-height: 252px;
+                max-height: 252px;
+                max-width: 100%;
+                object-fit: cover;
+                vertical-align: middle;
+            }
         }
-        @media screen and (min-width: 960px) {
-            min-height: 390px;
-            max-height: 390px;
-        }
+    }
+    a {
+      color: #87b23e;
+      font-size: 2.5rem;
     }
 }
 

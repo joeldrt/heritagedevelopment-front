@@ -363,30 +363,24 @@
         <!-- Fin titulo resumen -->
 
         <!-- Carousel de fotos -->
-        <div class="row carousel-row-container mt-3">
-          <div class="col-sm-0 col-md-3 col-xl-4">
-          </div>
-          <div class="col-sm-12 col-md-6 col-xl-4">
-            <div class="resumen-carousel-container">
-                <div id="carouselComponent" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue; let i=index;"
-                      [ngClass]="{ 'active': i === 0 }">
-                      <img [src]="objeto_imagen.value" class="d-block w-100 imagen-carousel" alt="...">
-                    </div>
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselComponent" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselComponent" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
+        <div class="row mt-3">
+          <div class="col-12">
+            <div id="carouselComponent" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue; let i=index;"
+                  [ngClass]="{ 'active': i === 0 }">
+                  <img [src]="objeto_imagen.value" alt="...">
                 </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselComponent" role="button" data-slide="prev">
+                <i class="fas fa-chevron-left"></i>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselComponent" role="button" data-slide="next">
+                <i class="fas fa-chevron-right"></i>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
-          </div>
-          <div class="col-sm-0 col-md-3 col-xl-4">
           </div>
         </div>
         <!-- Fin carousel de fotos -->
@@ -418,7 +412,7 @@
 
         <!-- Área de detalles -->
         <div class="row mt-5">
-          <div class="col">
+          <div class="col" *ngIf="nueva_propiedad.tipo_propiedad && nueva_propiedad.tipo_propiedad != ''">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="far fa-question-circle"></i>
@@ -432,7 +426,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col" *ngIf="nueva_propiedad.nombre && nueva_propiedad.nombre != ''">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-signature"></i>
@@ -446,7 +440,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col" *ngIf="nueva_propiedad.m2_construccion && nueva_propiedad.m2_construccion > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-hammer"></i>
@@ -460,7 +454,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col" *ngIf="nueva_propiedad.recamaras && nueva_propiedad.recamaras > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-bed"></i>
@@ -474,7 +468,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col" *ngIf="nueva_propiedad.banos && nueva_propiedad.banos > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-shower"></i>
@@ -488,7 +482,7 @@
             </div>
           </div>
 
-          <div class="col" *ngIf="nueva_propiedad.medios_banos">
+          <div class="col" *ngIf="nueva_propiedad.medios_banos && nueva_propiedad.medios_banos > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-toilet"></i>
@@ -502,7 +496,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col" *ngIf="nueva_propiedad.cajones_estacionamiento && nueva_propiedad.cajones_estacionamiento > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-car"></i>
@@ -516,7 +510,7 @@
             </div>
           </div>
 
-          <div class="col" *ngIf="nueva_propiedad.m2_terreno">
+          <div class="col" *ngIf="nueva_propiedad.m2_terreno && nueva_propiedad.m2_terreno > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="far fa-square"></i>
@@ -530,7 +524,7 @@
             </div>
           </div>
 
-          <div class="col" *ngIf="nueva_propiedad.niveles">
+          <div class="col" *ngIf="nueva_propiedad.niveles && nueva_propiedad.niveles > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-align-justify"></i>
@@ -544,7 +538,7 @@
             </div>
           </div>
 
-          <div class="col" *ngIf="nueva_propiedad.tiempo_minimo_renta">
+          <div class="col" *ngIf="nueva_propiedad.tiempo_minimo_renta && nueva_propiedad.tiempo_minimo_renta > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="far fa-calendar-alt"></i>
@@ -558,7 +552,7 @@
             </div>
           </div>
 
-          <div class="col" *ngIf="nueva_propiedad.capacidad_cisterna">
+          <div class="col" *ngIf="nueva_propiedad.capacidad_cisterna && nueva_propiedad.capacidad_cisterna > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-tint"></i>
@@ -572,7 +566,7 @@
             </div>
           </div>
 
-          <div class="col" *ngIf="nueva_propiedad.edad_propiedad">
+          <div class="col" *ngIf="nueva_propiedad.edad_propiedad && nueva_propiedad.edad_propiedad > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-clock"></i>
@@ -586,7 +580,7 @@
             </div>
           </div>
 
-          <div class="col" *ngIf="nueva_propiedad.costo_mantenimiento">
+          <div class="col" *ngIf="nueva_propiedad.costo_mantenimiento && nueva_propiedad.costo_mantenimiento > 0">
             <div class="resumen-display-detalle">
               <div class="icono">
                 <i class="fas fa-tools"></i>
@@ -605,7 +599,7 @@
 
         <!-- Área de descripcion y amenidades -->
         <div class="row">
-          <div class="col" *ngIf="nueva_propiedad.descripcion">
+          <div class="col" *ngIf="nueva_propiedad.descripcion && nueva_propiedad.descripcion != ''">
             <div class="resumen-display-descripcion-amenidades text-center">
               <div class="titulo">
                 <span>Descripción de la propiedad</span>
@@ -615,7 +609,7 @@
               </div>
             </div>
           </div>
-          <div class="col" *ngIf="nueva_propiedad.amenidades">
+          <div class="col" *ngIf="nueva_propiedad.amenidades && nueva_propiedad.amenidades != ''">
             <div class="resumen-display-descripcion-amenidades text-center">
               <div class="titulo">
                 <span>Amenidades</span>

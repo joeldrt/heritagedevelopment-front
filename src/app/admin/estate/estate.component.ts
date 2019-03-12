@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PropiedadService } from '../../services/propiedad/propiedad.service';
+import { Propiedad } from '../../models/propiedad';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-estate',
@@ -6,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./estate.component.scss']
 })
 export class EstateComponent implements OnInit {
+
+  propiedades: Propiedad[];
 
   filters = [
     new PropertyFilter('nombre', 'nombre'),
@@ -18,11 +24,25 @@ export class EstateComponent implements OnInit {
   end_wizard = false;
   wizardIniciado = false;
 
-  constructor() { 
+  constructor(
+    private propiedadService: PropiedadService,
+  ) { 
     this.filter = new PropertyFilter('', '');
   }
 
   ngOnInit() {
+    this.propiedadService.obtenerPropiedades().subscribe(
+      actionArray => {
+        this.propiedades = actionArray.map(
+          item => {
+            return {
+              id: item.payload.doc.id,
+              ...item.payload.doc.data()
+            } as Propiedad;
+          }
+        )
+      }
+    );
   }
 
   changeFilter(new_filter: PropertyFilter) {
