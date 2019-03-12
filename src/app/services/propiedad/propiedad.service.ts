@@ -30,4 +30,8 @@ export class PropiedadService {
     this.firestore.doc('propiedades/' + propiedad_id).delete();
   }
 
+  obtenerPropiedad(propiedad_id: string) {
+    return this.firestore.doc<Propiedad>('propiedades/' + propiedad_id);
+  }
+
 }

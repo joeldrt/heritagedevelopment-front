@@ -3,8 +3,11 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { PropertyUsersComponent } from './property-users/property-users.component';
-import { EstateComponent } from './estate/estate.component';
 import { ProfileComponent } from './profile/profile.component';
+
+// seccion inmuebles
+import { EstateComponent } from './estate/estate.component';
+import { PropertyDetailComponent } from './property-detail/property-detail.component';
 
 export const ADMIN_ROUTES: Routes = [
   { path: 'admin', redirectTo: '/admin/estate', pathMatch: 'full' },
@@ -12,5 +15,6 @@ export const ADMIN_ROUTES: Routes = [
   { path: 'admin/admin-users', component: AdminUsersComponent, data: { title: '' }},
   { path: 'admin/property-users', component: PropertyUsersComponent, data: { title: '' }},
   { path: 'admin/estate', component: EstateComponent, data: { title: 'Propiedades' }},
+  { path: 'admin/estate/:property_id', component: PropertyDetailComponent, data: { title: 'Propiedad - Detalle'}},
   { path: 'admin/profile', component: ProfileComponent, data: { title: 'Perfil' }},
 ];

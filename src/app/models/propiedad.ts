@@ -9,6 +9,7 @@ export class PropiedadObj implements Propiedad {
     public medios_banos: number;
     public cajones_estacionamiento: number;
     public descripcion: string;
+    public direccion: string;
     public precio_venta: number;
     public precio_renta: number;
     public m2_terreno: number;
@@ -51,6 +52,7 @@ export class PropiedadObj implements Propiedad {
         if (this.medios_banos === undefined) this.medios_banos = 0;
         if (this.cajones_estacionamiento === undefined) this.cajones_estacionamiento = 0;
         if (this.descripcion === undefined) this.descripcion = "";
+        if (this.direccion === undefined) this.direccion = "";
         if (this.precio_venta === undefined) this.precio_venta = 0;
         if (this.precio_renta === undefined) this.precio_renta = 0;
         if (this.m2_terreno === undefined) this.m2_terreno = 0;
@@ -75,6 +77,7 @@ export interface Propiedad {
     medios_banos?: number;
     cajones_estacionamiento: number;
     descripcion: string;
+    direccion: string;
     precio_venta?: number;
     precio_renta?: number;
 

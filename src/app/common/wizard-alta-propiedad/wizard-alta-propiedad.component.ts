@@ -161,6 +161,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
       medios_banos: this.nueva_propiedad.medios_banos,
       cajones_estacionamiento: this.nueva_propiedad.cajones_estacionamiento,
       descripcion: this.nueva_propiedad.descripcion,
+      direccion: this.nueva_propiedad.direccion,
       precio_venta: this.nueva_propiedad.precio_venta,
       precio_renta: this.nueva_propiedad.precio_renta,
       m2_terreno: this.nueva_propiedad.m2_terreno,

@@ -32,6 +32,8 @@
 <div class="result-area" *ngIf="propiedades">
   <div class="container-fluid">
     <div class="row">
+
+      <!-- Tarjeta de inmueble -->
       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="let propiedad of propiedades">
         <div class="card">
           <div class="image-viewport">
@@ -48,10 +50,12 @@
           <div class="card-body">
             <h5 class="card-title">{{propiedad.nombre}}</h5>
             <p class="card-text">{{propiedad.descripcion}}</p>
-            <a href="#" class="btn btn-primary">Detalle</a>
+            <a href="#" class="btn btn-link" [routerLink]="['/admin/estate', propiedad.id]" >Detalle</a>
           </div>
         </div>
       </div>
+      <!-- Fin tarjeta de inmueble -->
+
     </div>
   </div>
 </div>
