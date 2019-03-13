@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
+import { Location } from '@angular/common';
 
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from 'src/app/models/propiedad';
@@ -20,6 +21,7 @@ export class PropertyDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private _location: Location,
     private propiedadService: PropiedadService,
     private toastr: ToastrService
   ) { }
@@ -27,6 +29,10 @@ export class PropertyDetailComponent implements OnInit {
   ngOnInit() {
     this.property_id = this.route.snapshot.paramMap.get("property_id");
     this.cargarPropiedad(this.property_id);
+  }
+
+  navigatePrevious() {
+    this._location.back();
   }
 
   cargarPropiedad(property_id: string) {

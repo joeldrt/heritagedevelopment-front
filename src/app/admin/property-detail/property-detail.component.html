@@ -1,7 +1,18 @@
 <div class="propiedad-detalle-area">
 
-  <app-property-display
-    [propiedad]="(propiedad | async)">
-  </app-property-display>
+  <div class="top-navigation">
+    <button class="btn btn-link  float-left" (click)="navigatePrevious()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="btn btn-link  float-right">
+      <span>editar</span>
+    </button>
+  </div>
+
+  <div class="working-area">
+    <app-property-display
+      [propiedad]="(propiedad | async)">
+    </app-property-display>
+  </div>
 
 </div>

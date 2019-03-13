@@ -34,9 +34,17 @@
     <div class="row">
 
       <!-- Tarjeta de inmueble -->
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="let propiedad of propiedades">
+      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngFor="let propiedad of propiedades">
         <div class="card">
           <div class="image-viewport">
+            <div class="propiedad-precio-renta" *ngIf="propiedad.precio_renta && propiedad.precio_renta > 0">
+              <span class="titulo">{{propiedad.tipo_propiedad}} en renta</span>
+              <span>{{propiedad.precio_renta | currency}} / mes</span>
+            </div>
+            <div class="propiedad-precio-venta" *ngIf="propiedad.precio_venta && propiedad.precio_venta > 0">
+              <span class="titulo">{{propiedad.nombre}}</span>
+              <span>{{propiedad.precio_venta | currency}}</span>
+            </div>
             <!-- Imagen por default -->
             <img *ngIf="!propiedad.urls_fotografias || propiedad.urls_fotografias.length === 0"
               src="../../../assets/images/departamento-img.jpg" alt="..."> 
@@ -50,7 +58,7 @@
           <div class="card-body">
             <h5 class="card-title">{{propiedad.nombre}}</h5>
             <p class="card-text">{{propiedad.descripcion}}</p>
-            <a href="#" class="btn btn-link" [routerLink]="['/admin/estate', propiedad.id]" >Detalle</a>
+            <a href="#" class="btn btn-link" [routerLink]="['.', propiedad.id]" >Detalle</a>
           </div>
         </div>
       </div>
