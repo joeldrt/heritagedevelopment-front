@@ -85,6 +85,9 @@ export class WizardAltaPropiedadComponent implements OnInit {
 
   finalizarPaso3() {
     this.numero_paso = 4;
+    this.mapaDeImagenes.forEach((value: string | ArrayBuffer, key: string) => {
+      this.nueva_propiedad.urls_fotografias.push(value.toString());
+    }); 
     this.irIniciodePaginaDe();
   }
 
@@ -119,6 +122,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
 
   finalizarPaso4() {
     this.irIniciodePaginaDe();
+    this.nueva_propiedad.urls_fotografias = [];
     this.loading = true;
     this.mensaje_loading = "guardando imagenes";
     this.mapaDeArchivos.forEach((value: File, key: string) => {
