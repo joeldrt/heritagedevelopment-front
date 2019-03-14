@@ -1,3 +1,8 @@
+.property-display-hack {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
 // formulario resumen
 .resumen-nombre-propiedad {
     font-size: 2rem;
@@ -23,7 +28,7 @@
             img {
                 background-color: gray;
                 position: relative;
-                min-height: 252px;
+                min-height: 300px;
                 max-height: 300px;
                 min-width: 100%;
                 max-width: 130%;

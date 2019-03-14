@@ -3,6 +3,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Propiedad, PropiedadObj } from '../../models/propiedad';
 import { ToastrService } from '../../services/toastr/toastr.service';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
+import { ViewChild, ElementRef } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/user';
@@ -14,10 +16,10 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./wizard-alta-propiedad.component.scss']
 })
 export class WizardAltaPropiedadComponent implements OnInit {
-  @Input() scrollableContanierId: string;
-  @Output() end_wizard = new EventEmitter<boolean>();
-  @Input() thisIsTheEnd: boolean;
-  numero_paso = 1;
+  @ViewChild('wizardWorkingArea') areaToScroll: ElementRef;
+
+  thisIsTheEnd: boolean;
+  numero_paso: number;
 
   user: User;
 
@@ -35,6 +37,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     private storage: AngularFireStorage,
     private auth: AuthService,
     private propiedadService: PropiedadService,
+    private _location: Location,
   ) { 
     this.thisIsTheEnd = false;
   }
@@ -44,6 +47,10 @@ export class WizardAltaPropiedadComponent implements OnInit {
     this.auth.user$.subscribe((user) => {
       this.user = user;
     });
+  }
+
+  navigatePrevious() {
+    this._location.back();
   }
 
   initWizard() {
@@ -57,15 +64,10 @@ export class WizardAltaPropiedadComponent implements OnInit {
   sendEndSignal() {
     this.loading = false;
     this.thisIsTheEnd = true;
-    this.initWizard();
-    this.end_wizard.emit(true);
   }
 
   irIniciodePaginaDe() {
-    var aTag = document.getElementById(this.scrollableContanierId);
-    if (aTag) {
-        aTag.scrollTo({top: 0, behavior: 'smooth'});
-    }
+    this.areaToScroll.nativeElement.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   pasoAnterior() {

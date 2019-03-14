@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from '../../models/propiedad';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -26,6 +27,7 @@ export class EstateComponent implements OnInit {
 
   constructor(
     private propiedadService: PropiedadService,
+    private _location: Location,
   ) { 
     this.filter = new PropertyFilter('', '');
   }
@@ -59,6 +61,14 @@ export class EstateComponent implements OnInit {
   }
 
   finalizarWizardAgregarPropiedad() {
+    this.wizardIniciado = false;
+  }
+
+  navigatePrevious() {
+    this._location.back();
+  }
+
+  cerrarWizardAgregarPropiedad() {
     this.wizardIniciado = false;
   }
 

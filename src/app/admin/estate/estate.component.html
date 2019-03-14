@@ -67,34 +67,7 @@
     </div>
   </div>
 </div>
-<button id="add-property-button" class="btn btn-link" data-toggle="modal" data-target="#agregarPropiedadModal" (click)="iniciarWizardAgregarPropiedad()">
+<button id="add-property-button" class="btn btn-link" routerLink="/admin/agregar/propiedad">
   <i class="fas fa-plus"></i>
 </button>
 <!-- Fin area de resultados -->
-
-<!-- Modal agregar inmueble -->
-<div class="modal fade" id="agregarPropiedadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar Propiedad</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" *ngIf="wizardIniciado">
-        <app-wizard-alta-propiedad
-          scrollableContanierId="agregarPropiedadModal"
-          (end_wizard)="haFinalizadoElWizard($event)"
-          [thisIsTheEnd]="!wizardIniciado">
-        </app-wizard-alta-propiedad>
-      </div>
-      <div class="modal-footer" *ngIf="end_wizard">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="finalizarWizardAgregarPropiedad()">
-          Cerrar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Fin modal agregar inmueble -->

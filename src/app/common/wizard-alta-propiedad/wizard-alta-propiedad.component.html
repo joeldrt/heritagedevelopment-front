@@ -1,397 +1,447 @@
-<div class="wizard-alta-propiedad" id="wrapper-wizard" *ngIf="!loading && !thisIsTheEnd">
-  <!-- Wizard navigation bar -->
-  <div class="container-fluid wizard-nav-bar">
-    <div class="row">
-      <div class="col">
-        <div class="wizard-nav-item" id="informacionBasicaNavItem"
-          [class.item-active]="numero_paso === 1">
-          <div class="border-circle">
-            <i class="fas fa-home"></i>
-          </div>
-          <span class="title d-none d-md-block">Información básica</span>
+<div class="wizard-alta-propiedad">
+
+  <div class="top-navigation">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2">
+          <button class="btn btn-link float-left" (click)="navigatePrevious()">
+            <i class="fas fa-chevron-left"></i>
+          </button>
         </div>
-      </div>
-      <div class="col">
-        <div class="wizard-nav-item" id="informacionAvanzadaNavItem"
-          [class.item-active]="numero_paso === 2">
-          <div class="border-circle">
-            <i class="fas fa-plus"></i>
+        <div class="col-8">
+          <div class="title">
+            <span>Alta de propiedad</span>
           </div>
-          <span class="title d-none d-md-block">Información avanzada</span>
         </div>
-      </div>
-      <div class="col">
-        <div class="wizard-nav-item" id="fotografiasNavItem"
-          [class.item-active]="numero_paso === 3">
-          <div class="border-circle">
-            <i class="fas fa-images"></i>
-          </div>
-          <span class="title d-none d-md-block">Fotografías</span>
-        </div>
-      </div>
-      <div class="col">
-        <div class="wizard-nav-item" id="resumenNavItem"
-          [class.item-active]="numero_paso === 4">
-          <div class="border-circle">
-            <i class="fas fa-file-alt"></i>
-          </div>
-          <span class="title d-none d-md-block">Resumen</span>
+        <div class="col-2">
+          <!-- <button class="btn btn-link float-right">
+            <span>editar</span>
+          </button> -->
         </div>
       </div>
     </div>
   </div>
-  <!-- End wizard navigation bar -->
 
-  <!-- Área del wizard -->
-  <div class="form-area">
+  <div class="working-area" *ngIf="!thisIsTheEnd">
 
-    <!-- Primer paso - información básica -->
-    <div id="informacionBasicaForm" *ngIf="numero_paso === 1">
-      <form (ngSubmit)="fIB.form.valid && finalizarPaso1()" #fIB="ngForm" novalidate>
-      
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="tipoPropiedad" class="col-sm-12 col-md-3 col-form-label">Tipo de propiedad</label>
-          <div class="col-sm-12 col-md-6">
-            <select class="form-control " id="tipoPropiedad"
-              name="tipo_propiedad" [(ngModel)]="nueva_propiedad.tipo_propiedad"
-              #tipo_propiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && tipo_propiedad.invalid }" required>
-              <option value="Terreno">Terreno</option>
-              <option value="Departamento">Departamento</option>
-              <option value="Casa">Casa</option>
-            </select>
-            <div *ngIf="fIB.submitted && tipo_propiedad.invalid" class="invalid-feedback">
-                Debes seleccionar un tipo de propiedad.
+    <!-- Wizard navigation bar -->
+    <div class="container-fluid wizard-nav-bar">
+      <div class="row">
+        <div class="col">
+          <div class="wizard-nav-item" id="informacionBasicaNavItem"
+            [class.item-active]="numero_paso === 1">
+            <div class="border-circle">
+              <i class="fas fa-home"></i>
             </div>
+            <span class="title d-none d-md-block">Información básica</span>
           </div>
         </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre"
-              name="nombre" [(ngModel)]="nueva_propiedad.nombre"
-              #nombre="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && nombre.invalid }" required>
-            <div *ngIf="fIB.submitted && nombre.invalid" class="invalid-feedback">
-                Debes ingresar un nombre
+        <div class="col">
+          <div class="wizard-nav-item" id="informacionAvanzadaNavItem"
+            [class.item-active]="numero_paso === 2">
+            <div class="border-circle">
+              <i class="fas fa-plus"></i>
             </div>
+            <span class="title d-none d-md-block">Información avanzada</span>
           </div>
         </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="m2construccionPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Construcción</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción"
-              name="m2_construccion" [(ngModel)]="nueva_propiedad.m2_construccion"
-              #m2_construccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && m2_construccion.invalid }" required>
-            <div *ngIf="fIB.submitted && m2_construccion.invalid" class="invalid-feedback">
-                Debes ingresar los m2 de construcción
+        <div class="col">
+          <div class="wizard-nav-item" id="fotografiasNavItem"
+            [class.item-active]="numero_paso === 3">
+            <div class="border-circle">
+              <i class="fas fa-images"></i>
             </div>
+            <span class="title d-none d-md-block">Fotografías</span>
           </div>
         </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="recamarasPropiedad" class="col-sm-12 col-md-3 col-form-label">Recamaras</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="recamarasPropiedad" placeholder="Recamaras"
-              name="recamaras" [(ngModel)]="nueva_propiedad.recamaras"
-              #recamaras="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && recamaras.invalid }" required>
-            <div *ngIf="fIB.submitted && recamaras.invalid" class="invalid-feedback">
-                Debes ingresar el número de recámaras
+        <div class="col">
+          <div class="wizard-nav-item" id="resumenNavItem"
+            [class.item-active]="numero_paso === 4">
+            <div class="border-circle">
+              <i class="fas fa-file-alt"></i>
             </div>
+            <span class="title d-none d-md-block">Resumen</span>
           </div>
         </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="banosPropiedad" class="col-sm-12 col-md-3 col-form-label">Baños</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="banosPropiedad" placeholder="Baños"
-              name="banos" [(ngModel)]="nueva_propiedad.banos"
-              #banos="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && banos.invalid }" required>
-            <div *ngIf="fIB.submitted && banos.invalid" class="invalid-feedback">
-                Debes ingresar el número de baños
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="mediosBanosPropiedad" class="col-sm-12 col-md-3 col-form-label">Medios Baños</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Medios Baños"
-              name="medios_banos" [(ngModel)]="nueva_propiedad.medios_banos"
-              #medios_banos="ngModel">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="cajonesEstacionamientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Cajones Estacionamiento</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento"
-              name="cajones_estacionamiento" [(ngModel)]="nueva_propiedad.cajones_estacionamiento"
-              #cajones_estacionamiento="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && cajones_estacionamiento.invalid }" required>
-            <div *ngIf="fIB.submitted && cajones_estacionamiento.invalid" class="invalid-feedback">
-                Debes ingresar el número de cajones de estacionamiento
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
-          <div class="col-sm-12 col-md-6">
-            <textarea class="form-control" id="descripcionPropiedad" rows="4"
-              name="descripcion" [(ngModel)]="nueva_propiedad.descripcion"
-              #descripcion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && descripcion.invalid }" required></textarea>
-            <div *ngIf="fIB.submitted && descripcion.invalid" class="invalid-feedback">
-                Debes ingresar una breve descripción
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
-          <div class="col-sm-12 col-md-6">
-            <textarea class="form-control" id="direccionPropiedad" rows="4"
-              name="direccion" [(ngModel)]="nueva_propiedad.direccion"
-              #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
-            <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
-                Debes ingresar una direccion
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta"
-              name="precio_venta" [(ngModel)]="nueva_propiedad.precio_venta"
-              #precio_venta="ngModel">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta"
-              name="precio_renta" [(ngModel)]="nueva_propiedad.precio_renta"
-              #precio_renta="ngModel" >
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <div class="col-sm-12 col-md-10">
-            <button type="submit" class="btn btn-link float-right wizard-nav-button">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-
-      </form>
+      </div>
     </div>
-    <!-- Fin primer paso - información básica -->
-  
-    <!-- Segundo paso - información avanzada -->
-    <div id="informacionAvanzadaForm" *ngIf="numero_paso === 2">
-      <form (ngSubmit)="fIA.form.valid && finalizarPaso2()" #fIA="ngForm" novalidate>
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="m2terrenoPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Terreno</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno"
-              name="m2_terreno" [(ngModel)]="nueva_propiedad.m2_terreno"
-              #m2_terreno="ngModel">
-          </div>
-        </div>
+    <!-- End wizard navigation bar -->
 
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="niveles_plantasPropiedad" class="col-sm-12 col-md-3 col-form-label">Niveles (plantas)</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles"
-              name="niveles" [(ngModel)]="nueva_propiedad.niveles"
-              #niveles="ngModel">
-          </div>
-        </div>
+    <!-- Área del wizard -->
+    <div class="wizard-working-area" id="wizardWorkingArea" #wizardWorkingArea>
 
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
-          <div class="col-sm-12 col-md-6">
-            <textarea class="form-control" id="amenidadesPropiedad" rows="4"
-              name="amenidades" [(ngModel)]="nueva_propiedad.amenidades"
-              #amenidades="ngModel"></textarea>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="tiempoMinimoRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Tiempo mínimo de renta (meses)</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta"
-              name="tiempo_minimo_renta" [(ngModel)]="nueva_propiedad.tiempo_minimo_renta"
-              #tiempo_minimo_renta="ngModel">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="capacidadCisternaPropiedad" class="col-sm-12 col-md-3 col-form-label">Capacidad de cisterna (L)</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="capacidadCisternaPropiedad" placeholder="Capacidad de cisterna"
-              name="capacidad_cisterna" [(ngModel)]="nueva_propiedad.capacidad_cisterna"
-              #capacidad_cisterna>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad"
-              name="edad_propiedad" [(ngModel)]="nueva_propiedad.edad_propiedad"
-              #edad_propiedad>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
-          <div class="col-sm-12 col-md-6">
-            <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Costo mantenimiento"
-              name="costo_mantenimiento" [(ngModel)]="nueva_propiedad.costo_mantenimiento"
-              #costo_mantenimiento="ngModel">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <div class="col-sm-12 col-md-10">
-            <button class="btn btn-link float-left wizard-nav-button"
-              (click)="pasoAnterior()">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button type="submit" class="btn btn-link float-right wizard-nav-button">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-
-      </form>
-    </div>
-    <!-- Fin segundo paso - información avanzada -->
-  
-    <!-- Tercer paso - fotografías -->
-    <div id="fotografiasForm" *ngIf="numero_paso === 3">
-      <form (ngSubmit)="finalizarPaso3()">
+      <!-- Primer paso - información básica -->
+      <div id="informacionBasicaForm" *ngIf="numero_paso === 1">
+        <form class="contanier-fluid" (ngSubmit)="fIB.form.valid && finalizarPaso1()" #fIB="ngForm" novalidate>
         
-        <div class="form-group row">
-          <div class="col-1">
-          </div>
-          <div class="col-10">
-            <div class="wizard-add-image-button-wrapper float-right">
-              <button class="wizard-add-image-button">
-                <i class="fas fa-plus"></i>
-              </button>
-              <input type="file" name="imageToUpload" accept='image/*' (change)="uploadImage($event)" multiple/>
+          <div class="dg-form">
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="tipoPropiedad" class="col-sm-12 col-md-3 col-form-label">Tipo de propiedad</label>
+              <div class="col-sm-12 col-md-6">
+                <select class="form-control " id="tipoPropiedad"
+                  name="tipo_propiedad" [(ngModel)]="nueva_propiedad.tipo_propiedad"
+                  #tipo_propiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && tipo_propiedad.invalid }" required>
+                  <option value="Terreno">Terreno</option>
+                  <option value="Departamento">Departamento</option>
+                  <option value="Casa">Casa</option>
+                </select>
+                <div *ngIf="fIB.submitted && tipo_propiedad.invalid" class="invalid-feedback">
+                    Debes seleccionar un tipo de propiedad.
+                </div>
+              </div>
+            </div>
+            
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre"
+                  name="nombre" [(ngModel)]="nueva_propiedad.nombre"
+                  #nombre="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && nombre.invalid }" required>
+                <div *ngIf="fIB.submitted && nombre.invalid" class="invalid-feedback">
+                    Debes ingresar un nombre
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="m2construccionPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Construcción</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción"
+                  name="m2_construccion" [(ngModel)]="nueva_propiedad.m2_construccion"
+                  #m2_construccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && m2_construccion.invalid }" required>
+                <div *ngIf="fIB.submitted && m2_construccion.invalid" class="invalid-feedback">
+                    Debes ingresar los m2 de construcción
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="recamarasPropiedad" class="col-sm-12 col-md-3 col-form-label">Recamaras</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="recamarasPropiedad" placeholder="Recamaras"
+                  name="recamaras" [(ngModel)]="nueva_propiedad.recamaras"
+                  #recamaras="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && recamaras.invalid }" required>
+                <div *ngIf="fIB.submitted && recamaras.invalid" class="invalid-feedback">
+                    Debes ingresar el número de recámaras
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="banosPropiedad" class="col-sm-12 col-md-3 col-form-label">Baños</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="banosPropiedad" placeholder="Baños"
+                  name="banos" [(ngModel)]="nueva_propiedad.banos"
+                  #banos="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && banos.invalid }" required>
+                <div *ngIf="fIB.submitted && banos.invalid" class="invalid-feedback">
+                    Debes ingresar el número de baños
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="mediosBanosPropiedad" class="col-sm-12 col-md-3 col-form-label">Medios Baños</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Medios Baños"
+                  name="medios_banos" [(ngModel)]="nueva_propiedad.medios_banos"
+                  #medios_banos="ngModel">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="cajonesEstacionamientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Cajones Estacionamiento</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento"
+                  name="cajones_estacionamiento" [(ngModel)]="nueva_propiedad.cajones_estacionamiento"
+                  #cajones_estacionamiento="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && cajones_estacionamiento.invalid }" required>
+                <div *ngIf="fIB.submitted && cajones_estacionamiento.invalid" class="invalid-feedback">
+                    Debes ingresar el número de cajones de estacionamiento
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="descripcionPropiedad" rows="4"
+                  name="descripcion" [(ngModel)]="nueva_propiedad.descripcion"
+                  #descripcion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && descripcion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && descripcion.invalid" class="invalid-feedback">
+                    Debes ingresar una breve descripción
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="direccionPropiedad" rows="4"
+                  name="direccion" [(ngModel)]="nueva_propiedad.direccion"
+                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
+                    Debes ingresar una direccion
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta"
+                  name="precio_venta" [(ngModel)]="nueva_propiedad.precio_venta"
+                  #precio_venta="ngModel">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta"
+                  name="precio_renta" [(ngModel)]="nueva_propiedad.precio_renta"
+                  #precio_renta="ngModel" >
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="form-group row" *ngIf="mapaDeImagenes && mapaDeImagenes.size > 0">
-          <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue">
-            <div class="card dg-image-card">
-              <img [src]="objeto_imagen.value">
-              <button class="btn btn-link delete-button" (click)="borrarImagen(objeto_imagen.key)">
-                <i class="fas fa-times"></i>
+          <div class="form-group row bottom-navigation-bar">
+            <div class="col-sm-0 col-md-1">
+            </div>
+            <div class="col-sm-12 col-md-10">
+              <button type="submit" class="btn btn-link float-right wizard-nav-button">
+                <i class="fas fa-chevron-right"></i>
               </button>
             </div>
           </div>
-        </div>
-        <div class="row" *ngIf="!mapaDeImagenes || mapaDeImagenes.size == 0">
-          <div class="no-image-message">
-            <span>No hay imágenes cargadas</span>
-          </div>
-        </div>
 
-        <div class="form-group row">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <div class="col-sm-12 col-md-10">
-            <button class="btn btn-link float-left wizard-nav-button"
-              (click)="pasoAnterior()">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button type="submit" class="btn btn-link float-right wizard-nav-button">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
+        </form>
+      </div>
+      <!-- Fin primer paso - información básica -->
+    
+      <!-- Segundo paso - información avanzada -->
+      <div id="informacionAvanzadaForm" *ngIf="numero_paso === 2">
+        <form (ngSubmit)="fIA.form.valid && finalizarPaso2()" #fIA="ngForm" novalidate>
+          
+          <div class="dg-form">
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="m2terrenoPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Terreno</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno"
+                  name="m2_terreno" [(ngModel)]="nueva_propiedad.m2_terreno"
+                  #m2_terreno="ngModel">
+              </div>
+            </div>
 
-      </form>
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="niveles_plantasPropiedad" class="col-sm-12 col-md-3 col-form-label">Niveles (plantas)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles"
+                  name="niveles" [(ngModel)]="nueva_propiedad.niveles"
+                  #niveles="ngModel">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="amenidadesPropiedad" rows="4"
+                  name="amenidades" [(ngModel)]="nueva_propiedad.amenidades"
+                  #amenidades="ngModel"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="tiempoMinimoRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Tiempo mínimo de renta (meses)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta"
+                  name="tiempo_minimo_renta" [(ngModel)]="nueva_propiedad.tiempo_minimo_renta"
+                  #tiempo_minimo_renta="ngModel">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="capacidadCisternaPropiedad" class="col-sm-12 col-md-3 col-form-label">Capacidad de cisterna (L)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="capacidadCisternaPropiedad" placeholder="Capacidad de cisterna"
+                  name="capacidad_cisterna" [(ngModel)]="nueva_propiedad.capacidad_cisterna"
+                  #capacidad_cisterna>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad"
+                  name="edad_propiedad" [(ngModel)]="nueva_propiedad.edad_propiedad"
+                  #edad_propiedad>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Costo mantenimiento"
+                  name="costo_mantenimiento" [(ngModel)]="nueva_propiedad.costo_mantenimiento"
+                  #costo_mantenimiento="ngModel">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row bottom-navigation-bar">
+            <div class="col-sm-0 col-md-1">
+            </div>
+            <div class="col-sm-12 col-md-10">
+              <button class="btn btn-link float-left wizard-nav-button"
+                (click)="pasoAnterior()">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button type="submit" class="btn btn-link float-right wizard-nav-button">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <!-- Fin segundo paso - información avanzada -->
+    
+      <!-- Tercer paso - fotografías -->
+      <div id="fotografiasForm" *ngIf="numero_paso === 3">
+        <form (ngSubmit)="finalizarPaso3()">
+          
+          <div class="dg-form">
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <div class="col-sm-12 col-md-10">
+                <div class="wizard-add-image-button-wrapper float-right">
+                  <button class="wizard-add-image-button">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <input type="file" name="imageToUpload" accept='image/*' (change)="uploadImage($event)" multiple/>
+                </div>
+              </div>
+              <div class="col-sm-0 col-md-1">
+              </div>
+            </div>
+
+            <div class="form-group row" *ngIf="mapaDeImagenes && mapaDeImagenes.size > 0">
+              <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue">
+                <div class="card dg-image-card">
+                  <img [src]="objeto_imagen.value">
+                  <button class="btn btn-link delete-button" (click)="borrarImagen(objeto_imagen.key)">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="!mapaDeImagenes || mapaDeImagenes.size == 0">
+              <div class="no-image-message">
+                <span>No hay imágenes cargadas</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row bottom-navigation-bar">
+            <div class="col-sm-0 col-md-1">
+            </div>
+            <div class="col-sm-12 col-md-10">
+              <button class="btn btn-link float-left wizard-nav-button"
+                (click)="pasoAnterior()">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button type="submit" class="btn btn-link float-right wizard-nav-button">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="col-sm-0 col-md-1">
+              </div>
+          </div>
+
+        </form>
+      </div>
+      <!-- Fin tercer paso - fotografías -->
+
+      <!-- Cuarto paso - resumen y guardado -->
+      <div id="resumenForm" *ngIf="numero_paso === 4">
+        <form (ngSubmit)="finalizarPaso4()">
+
+          <div class="dg-form">
+            <!-- Display de la propiedad -->
+            <div class="container-fluid">
+              <div class="row property-display-wizard-hack">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                <div class="col-xl-8 col-lg-10 col-md-12">
+                  <app-property-display
+                    [propiedad]="nueva_propiedad">
+                  </app-property-display>
+                </div>
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+              </div>
+            </div>
+            <!-- Display de la propiedad -->
+          </div>
+
+          <!-- Botones wizard -->
+          <div class="form-group row bottom-navigation-bar">
+            <div class="col-sm-0 col-md-1">
+            </div>
+            <div class="col-sm-12 col-md-10">
+              <button class="btn btn-link float-left wizard-nav-button"
+                (click)="pasoAnterior()">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button type="submit" class="btn btn-link float-right wizard-nav-button">
+                <i class="far fa-save"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Fin botones wizard -->
+        </form>
+      </div>
+      <!-- Fin cuarto paso - resumen y guardado -->
+
     </div>
-    <!-- Fin tercer paso - fotografías -->
-
-    <!-- Cuarto paso - resumen y guardado -->
-    <div id="resumenForm" *ngIf="numero_paso === 4">
-      <form (ngSubmit)="finalizarPaso4()">
-
-        <!-- Display de la propiedad -->
-        <app-property-display
-          [propiedad]="nueva_propiedad">
-        </app-property-display>
-        <!-- Display de la propiedad -->
-
-        <!-- Botones wizard -->
-        <div class="form-group row mt-5">
-          <div class="col-sm-0 col-md-1">
-          </div>
-          <div class="col-sm-12 col-md-10">
-            <button class="btn btn-link float-left wizard-nav-button"
-              (click)="pasoAnterior()">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button type="submit" class="btn btn-link float-right wizard-nav-button">
-              <i class="far fa-save"></i>
-            </button>
-          </div>
-        </div>
-        <!-- Fin botones wizard -->
-      </form>
-    </div>
-    <!-- Fin cuarto paso - resumen y guardado -->
+    <!-- Fin área del wizard -->
 
   </div>
-  <!-- Fin área del wizard -->
+
 </div>
 
 <div class="loading-animation" *ngIf="loading">
@@ -401,9 +451,9 @@
 </div>
 
 <div class="pagina-finalizado" *ngIf="thisIsTheEnd">
-  <div class="icono">
+  <button class="btn btn-link icono" (click)="navigatePrevious()">
     <i class="fas fa-check-circle"></i>
-  </div>
+  </button>
   <div class="mensaje">
     <span>Propiedad guardada!</span>
   </div>

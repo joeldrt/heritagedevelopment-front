@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="propiedad">
+<div class="container-fluid property-display-hack" *ngIf="propiedad">
 
     <!-- Titulo resumen -->
     <div class="row">
@@ -264,7 +264,7 @@
     <!-- Fin área de detalles -->
 
     <!-- Área de descripcion y amenidades -->
-    <div class="row">
+    <div class="row mb-5">
       <div class="col" *ngIf="(propiedad.descripcion) as descripcion">
         <div class="resumen-display-descripcion-amenidades text-center" *ngIf="descripcion != ''">
           <div class="titulo">
