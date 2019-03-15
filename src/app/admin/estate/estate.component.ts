@@ -51,7 +51,9 @@ export class EstateComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    localStorage.setItem('lastAdminPropertyResultAreaScrollPosition', this.lastResultAreaScrollPosition.toString());
+    if (this.lastResultAreaScrollPosition) {
+      localStorage.setItem('lastAdminPropertyResultAreaScrollPosition', this.lastResultAreaScrollPosition.toString());
+    }
   }
 
   setLastScrollPosition() {
