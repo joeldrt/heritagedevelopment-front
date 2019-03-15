@@ -136,14 +136,18 @@
 
             .dg-form {
                 position: absolute;
-                top: 0;
+                // top: 0;
+                top: 195px;
                 left: 0;
                 right: 0;
-                min-height: 100vh;
-                max-height: 100vh;
-                padding-top: 195px;
+                min-height: calc(100vh - 195px - 70px);
+                max-height: calc(100vh - 195px - 70px);
+                // padding-top: 195px;
                 @media screen and (max-width: 767px){
-                    padding-top: 165px;
+                    // padding-top: 165px;
+                    top: 165px;
+                    min-height: calc(100vh - 165px - 70px);
+                    max-height: calc(100vh - 165px - 70px);
                 }
 
                 overflow-x: hidden;
@@ -151,7 +155,7 @@
                 -webkit-overflow-scrolling: touch;
 
                 padding-bottom: 73px; // espacio para los botones de navegación inferiores
-                z-index: inherit; // entre la barra inferior y la parte superior (superior en 999)
+                z-index: 900; // entre la barra inferior y la parte superior (superior en 999)
 
                 .col-form-label {
                     @media screen and (min-width: 720px) {
@@ -168,13 +172,14 @@
                 left: 0;
                 right: 0;
                 margin-bottom: 0;
-                background-color: rgba(255,255,255,0.75);
-                z-index: 1;
+                background-color: rgba(255,255,255,0.9);
+                z-index: 901;
 
 
                 .wizard-nav-button {
                     color: white;
                     font-size: 1.2rem;
+                    z-index: 999;
     
                     width: 63px;
                     height: 63px;
