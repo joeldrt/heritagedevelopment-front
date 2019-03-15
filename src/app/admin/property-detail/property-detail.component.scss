@@ -8,6 +8,7 @@
     z-index: 999;
 
     .top-navigation {
+        color: white;
         background-color: #87b23e;
         position: absolute;
         top: 0;
@@ -20,8 +21,19 @@
         -webkit-box-shadow: 0px 10px 39px -17px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 10px 39px -17px rgba(0,0,0,0.75);
         box-shadow: 0px 10px 39px -17px rgba(0,0,0,0.75);
+        
+        .container-fluid {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
         button {
             color: white;
+        }
+
+        .title {
+            text-align: center;
+            padding: 6px 12px;
         }
     }
 

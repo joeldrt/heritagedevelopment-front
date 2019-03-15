@@ -11,7 +11,7 @@ import { User } from '../../models/user';
 import { finalize, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-wizard-alta-propiedad',
@@ -46,6 +46,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     private propiedadService: PropiedadService,
     private _location: Location,
     private route: ActivatedRoute,
+    private router: Router,
   ) { 
     this.thisIsTheEnd = false;
   }
@@ -269,6 +270,18 @@ export class WizardAltaPropiedadComponent implements OnInit {
           this.toastr.error(`Error al editar la propiedad: ${error}`);
         });
     }
+  }
+
+  borrarPropiedad() {
+    this.propiedadService.borrarPropiedad(this.property_id).then(
+      () => {
+        this.router.navigate(['/admin/estate'])
+        this.toastr.success(`Propiedad borrada!`);
+      },
+      (reason: any) => {
+        this.toastr.error(`Error al borrar la propiedad: ${reason}`);
+      }
+    );
   }
 
 }

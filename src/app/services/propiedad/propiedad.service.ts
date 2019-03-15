@@ -27,7 +27,7 @@ export class PropiedadService {
   }
 
   borrarPropiedad(propiedad_id: string) {
-    this.firestore.doc('propiedades/' + propiedad_id).delete();
+    return this.firestore.doc('propiedades/' + propiedad_id).delete();
   }
 
   obtenerPropiedad(propiedad_id: string) {

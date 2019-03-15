@@ -3,16 +3,21 @@
   <div class="top-navigation">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xl-2 col-lg-1 col-md-0"></div>
-        <div class="col-xl-8 col-lg-10 col-md-12">
+        <div class="col-2">
           <button class="btn btn-link  float-left" (click)="navigatePrevious()">
             <i class="fas fa-chevron-left"></i>
           </button>
+        </div>
+        <div class="col-8">
+          <div class="title">
+            <span>Detalle</span>
+          </div>
+        </div>
+        <div class="col-2">
           <button class="btn btn-link  float-right" [routerLink]="['/admin/estate/', property_id, 'edit']">
             <i class="far fa-edit"></i>
           </button>
         </div>
-        <div class="col-xl-2 col-lg-1 col-md-0"></div>
       </div>
     </div>
   </div>

@@ -14,8 +14,8 @@
           </div>
         </div>
         <div class="col-2">
-          <button class="btn btn-link float-right">
-            <span>borrar</span>
+          <button class="btn btn-link float-right" *ngIf="esEdicion" data-toggle="modal" data-target="#confirmarBorrarModal">
+            <i class="far fa-trash-alt"></i>
           </button>
         </div>
       </div>
@@ -479,5 +479,25 @@
   </button>
   <div class="mensaje">
     <span>{{(esEdicion ? 'Propiedad editada!':'Propiedad guardada!')}}</span>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmarBorrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Borrado de propiedad</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Estas a punto de borrar la propiedad "{{nueva_propiedad.nombre}}", esta acción no puede ser revertida. ¿Deseas Continuar?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="borrarPropiedad()" data-dismiss="modal">Borrar</button>
+      </div>
+    </div>
   </div>
 </div>
