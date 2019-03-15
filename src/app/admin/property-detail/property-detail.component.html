@@ -1,12 +1,20 @@
 <div class="propiedad-detalle-area">
 
   <div class="top-navigation">
-    <button class="btn btn-link  float-left" (click)="navigatePrevious()">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-    <button class="btn btn-link  float-right">
-      <span>editar</span>
-    </button>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-2 col-lg-1 col-md-0"></div>
+        <div class="col-xl-8 col-lg-10 col-md-12">
+          <button class="btn btn-link  float-left" (click)="navigatePrevious()">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="btn btn-link  float-right">
+            <i class="far fa-edit"></i>
+          </button>
+        </div>
+        <div class="col-xl-2 col-lg-1 col-md-0"></div>
+      </div>
+    </div>
   </div>
 
   <div class="working-area">
