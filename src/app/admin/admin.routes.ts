@@ -18,5 +18,6 @@ export const ADMIN_ROUTES: Routes = [
   { path: 'admin/estate', component: EstateComponent, data: { title: 'Propiedades' }},
   { path: 'admin/estate/:property_id', component: PropertyDetailComponent, data: { title: 'Propiedad - Detalle'}},
   { path: 'admin/profile', component: ProfileComponent, data: { title: 'Perfil' }},
-  { path: 'admin/agregar/propiedad', component: WizardAltaPropiedadComponent, data: { title: 'Alta de Propiedad'}}
+  { path: 'admin/agregar/propiedad', component: WizardAltaPropiedadComponent, data: { title: 'Alta de Propiedad'}},
+  { path: 'admin/estate/:property_id/edit', component: WizardAltaPropiedadComponent, data: { title: 'Edición de Propiedad'}}
 ];

@@ -10,7 +10,7 @@
         </div>
         <div class="col-8">
           <div class="title">
-            <span>Alta de propiedad</span>
+            <span>{{(esEdicion ? 'Edición de propiedad':'Alta de propiedad')}}</span>
           </div>
         </div>
         <div class="col-2">
@@ -354,13 +354,34 @@
                   <button class="wizard-add-image-button">
                     <i class="fas fa-plus"></i>
                   </button>
-                  <input type="file" name="imageToUpload" accept='image/*' (change)="uploadImage($event)" multiple/>
+                  <input id="imagesInput" #imagesInput type="file" name="imageToUpload" accept='image/*' (change)="uploadImage($event)" multiple/>
                 </div>
               </div>
               <div class="col-sm-0 col-md-1">
               </div>
             </div>
 
+            <div class="row" *ngIf="esEdicion && nueva_propiedad.urls_fotografias && nueva_propiedad.urls_fotografias.length !== 0">
+              <div class="col-12">
+                <span>Imágenes en la nube</span>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="nueva_propiedad.urls_fotografias">
+              <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let url of nueva_propiedad.urls_fotografias; let i=index;">
+                <div class="card dg-image-card">
+                  <img [src]="url">
+                  <button class="btn btn-link delete-button" (click)="borrarImagenEdicion(i)">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="(mapaDeImagenes && mapaDeImagenes.size > 0) && (nueva_propiedad.urls_fotografias && nueva_propiedad.urls_fotografias.length !== 0)">
+              <div class="col-12">
+                <span>Imagenes nuevas</span>
+              </div>
+            </div>
             <div class="form-group row" *ngIf="mapaDeImagenes && mapaDeImagenes.size > 0">
               <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue">
                 <div class="card dg-image-card">
@@ -371,11 +392,13 @@
                 </div>
               </div>
             </div>
-            <div class="row" *ngIf="!mapaDeImagenes || mapaDeImagenes.size == 0">
+
+            <div class="row" *ngIf="(!mapaDeImagenes || mapaDeImagenes.size == 0) && (!nueva_propiedad.urls_fotografias || nueva_propiedad.urls_fotografias.length === 0)">
               <div class="no-image-message">
                 <span>No hay imágenes cargadas</span>
               </div>
             </div>
+
           </div>
 
           <div class="form-group row bottom-navigation-bar">
@@ -455,6 +478,6 @@
     <i class="fas fa-check-circle"></i>
   </button>
   <div class="mensaje">
-    <span>Propiedad guardada!</span>
+    <span>{{(esEdicion ? 'Propiedad editada!':'Propiedad guardada!')}}</span>
   </div>
 </div>

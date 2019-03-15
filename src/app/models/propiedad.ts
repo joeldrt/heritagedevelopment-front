@@ -1,68 +1,50 @@
 export class PropiedadObj implements Propiedad {
-    public id: string;
+    public id?: string;
     public user_uid: string;
     public tipo_propiedad: string;
     public nombre: string;
     public m2_construccion: number;
     public recamaras: number;
     public banos: number;
-    public medios_banos: number;
+    public medios_banos?: number;
     public cajones_estacionamiento: number;
     public descripcion: string;
     public direccion: string;
-    public precio_venta: number;
-    public precio_renta: number;
-    public m2_terreno: number;
-    public niveles: number;
-    public amenidades: string;
-    public tiempo_minimo_renta: number;
-    public capacidad_cisterna: number;
-    public edad_propiedad: number;
-    public costo_mantenimiento: number;
-    public urls_fotografias: string[];
+    public precio_venta?: number;
+    public precio_renta?: number;
+    public m2_terreno?: number;
+    public niveles?: number;
+    public amenidades?: string;
+    public tiempo_minimo_renta?: number;
+    public capacidad_cisterna?: number;
+    public edad_propiedad?: number;
+    public costo_mantenimiento?: number;
+    public urls_fotografias?: string[];
+    public mapaDeImagenes?: Map<string, string | ArrayBuffer>;
     constructor(){
-        // this.user_uid = "";
-        // this.tipo_propiedad = "";
-        // this.nombre = "";
-        // this.m2_construccion = 0;
-        // this.recamaras = 0;
-        // this.banos = 0;
-        // this.medios_banos = 0;
-        // this.cajones_estacionamiento = 0;
-        // this.descripcion = "";
-        // this.precio_venta = 0;
-        // this.precio_renta = 0;
-        // this.m2_terreno = 0;
-        // this.niveles = 0;
-        // this.amenidades = "";
-        // this.tiempo_minimo_renta = 0;
-        // this.capacidad_cisterna = 0;
-        // this.edad_propiedad = 0;
-        // this.costo_mantenimiento = 0;
-        // this.urls_fotografias = [];
     }
 
-    verificarValoresIndefinidos() {
-        if (this.user_uid === undefined) this.user_uid = "";
-        if (this.tipo_propiedad === undefined) this.tipo_propiedad = "";
-        if (this.nombre === undefined) this.nombre = "";
-        if (this.m2_construccion === undefined) this.m2_construccion = 0;
-        if (this.recamaras === undefined) this.recamaras = 0;
-        if (this.banos === undefined) this.banos = 0;
-        if (this.medios_banos === undefined) this.medios_banos = 0;
-        if (this.cajones_estacionamiento === undefined) this.cajones_estacionamiento = 0;
-        if (this.descripcion === undefined) this.descripcion = "";
-        if (this.direccion === undefined) this.direccion = "";
-        if (this.precio_venta === undefined) this.precio_venta = 0;
-        if (this.precio_renta === undefined) this.precio_renta = 0;
-        if (this.m2_terreno === undefined) this.m2_terreno = 0;
-        if (this.niveles === undefined) this.niveles = 0;
-        if (this.amenidades === undefined) this.amenidades = "";
-        if (this.tiempo_minimo_renta === undefined) this.tiempo_minimo_renta = 0;
-        if (this.capacidad_cisterna === undefined) this.capacidad_cisterna = 0;
-        if (this.edad_propiedad === undefined) this.edad_propiedad = 0;
-        if (this.costo_mantenimiento === undefined) this.costo_mantenimiento = 0;
-        if (this.urls_fotografias === undefined) this.urls_fotografias = [];
+    static verificarValoresIndefinidos(obj: PropiedadObj) {
+        if (obj.user_uid === undefined) obj.user_uid = "";
+        if (obj.tipo_propiedad === undefined) obj.tipo_propiedad = "";
+        if (obj.nombre === undefined) obj.nombre = "";
+        if (obj.m2_construccion === undefined) obj.m2_construccion = 0;
+        if (obj.recamaras === undefined) obj.recamaras = 0;
+        if (obj.banos === undefined) obj.banos = 0;
+        if (obj.medios_banos === undefined) obj.medios_banos = 0;
+        if (obj.cajones_estacionamiento === undefined) obj.cajones_estacionamiento = 0;
+        if (obj.descripcion === undefined) obj.descripcion = "";
+        if (obj.direccion === undefined) obj.direccion = "";
+        if (obj.precio_venta === undefined) obj.precio_venta = 0;
+        if (obj.precio_renta === undefined) obj.precio_renta = 0;
+        if (obj.m2_terreno === undefined) obj.m2_terreno = 0;
+        if (obj.niveles === undefined) obj.niveles = 0;
+        if (obj.amenidades === undefined) obj.amenidades = "";
+        if (obj.tiempo_minimo_renta === undefined) obj.tiempo_minimo_renta = 0;
+        if (obj.capacidad_cisterna === undefined) obj.capacidad_cisterna = 0;
+        if (obj.edad_propiedad === undefined) obj.edad_propiedad = 0;
+        if (obj.costo_mantenimiento === undefined) obj.costo_mantenimiento = 0;
+        if (obj.urls_fotografias === undefined) obj.urls_fotografias = [];
     }
 }
 
@@ -91,4 +73,5 @@ export interface Propiedad {
     costo_mantenimiento?: number;
 
     urls_fotografias?: string[];
+    mapaDeImagenes?: Map<string, string | ArrayBuffer>;
 }

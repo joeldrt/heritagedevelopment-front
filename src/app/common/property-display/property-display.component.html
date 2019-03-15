@@ -17,8 +17,12 @@
         <div id="carouselComponent" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" *ngFor="let url of propiedad.urls_fotografias; let i=index;"
-              [ngClass]="{ 'active': i === 0 }">
+              [ngClass]="{ 'active': (i === 0 && !propiedad.mapaDeImagenes) || (i === 0 && propiedad.mapaDeImagenes.size === 0) }">
               <img [src]="url" alt="...">
+            </div>
+            <div class="carousel-item active" *ngFor="let objeto_imagen of propiedad.mapaDeImagenes | keyvalue; let i=index;"
+              [ngClass]="{ 'active': i === 0 }">
+              <img [src]="objeto_imagen.value">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselComponent" role="button" data-slide="prev">

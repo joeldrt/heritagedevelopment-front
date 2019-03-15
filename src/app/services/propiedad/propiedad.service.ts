@@ -23,7 +23,7 @@ export class PropiedadService {
   actualizarPropiedad(propiedad: Propiedad) {
     const propiedad_id = propiedad.id;
     delete propiedad.id;
-    this.firestore.doc('propiedades/' + propiedad_id).update(propiedad);
+    return this.firestore.doc<Propiedad>('propiedades/' + propiedad_id).update(propiedad);
   }
 
   borrarPropiedad(propiedad_id: string) {
