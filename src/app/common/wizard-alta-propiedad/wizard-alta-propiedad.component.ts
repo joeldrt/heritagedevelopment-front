@@ -173,10 +173,10 @@ export class WizardAltaPropiedadComponent implements OnInit {
           const task = this.storage.upload(filePath, file);
           task.snapshotChanges().pipe(
             finalize(() => {
-              this.contador_imagenes_guardadas += 1;
               fileRef.getDownloadURL().subscribe(url => {
                 if (url) {
                   this.nueva_propiedad.urls_fotografias.push(url);
+                  this.contador_imagenes_guardadas += 1;
                   this.seDebeGuardarElDocumento();
                 }
               })

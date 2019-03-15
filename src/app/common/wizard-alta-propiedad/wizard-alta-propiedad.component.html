@@ -83,6 +83,7 @@
                 <select class="form-control " id="tipoPropiedad"
                   name="tipo_propiedad" [(ngModel)]="nueva_propiedad.tipo_propiedad"
                   #tipo_propiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && tipo_propiedad.invalid }" required>
+                  <option value=""></option>
                   <option value="Terreno">Terreno</option>
                   <option value="Departamento">Departamento</option>
                   <option value="Casa">Casa</option>
