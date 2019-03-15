@@ -29,8 +29,8 @@
 <!-- Fin área de búsqueca-->
 
 <!-- Area de resultados -->
-<div class="result-area" *ngIf="propiedades">
-  <div class="container-fluid">
+<div class="result-area" (scroll)="scrollHandler($event)" id="propertyResultArea" #propertyResultArea>
+  <div class="container-fluid" *ngIf="propiedades">
     <div class="row">
 
       <!-- Tarjeta de inmueble -->

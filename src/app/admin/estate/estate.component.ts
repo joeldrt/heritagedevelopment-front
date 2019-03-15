@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from '../../models/propiedad';
 import { Location } from '@angular/common';
@@ -10,7 +10,9 @@ import { map } from 'rxjs/operators';
   templateUrl: './estate.component.html',
   styleUrls: ['./estate.component.scss']
 })
-export class EstateComponent implements OnInit {
+export class EstateComponent implements OnInit, OnDestroy {
+  @ViewChild('propertyResultArea') propertyResultArea: ElementRef;
+  lastResultAreaScrollPosition: number;
 
   propiedades: Propiedad[];
 
@@ -43,8 +45,22 @@ export class EstateComponent implements OnInit {
             } as Propiedad;
           }
         )
+        setTimeout(this.setLastScrollPosition, 1);
       }
     );
+  }
+
+  ngOnDestroy() {
+    localStorage.setItem('lastAdminPropertyResultAreaScrollPosition', this.lastResultAreaScrollPosition.toString());
+  }
+
+  setLastScrollPosition() {
+    const scrollTo = +localStorage.getItem('lastAdminPropertyResultAreaScrollPosition');
+    if (scrollTo > 0 && document.getElementById('propertyResultArea')) {
+      // this.propertyResultArea.nativeElement.innerHTML.scrollTop = scrollTo;
+      document.getElementById('propertyResultArea').scrollTop = scrollTo;
+      localStorage.removeItem('lastAdminPropertyResultAreaScrollPosition');
+    }
   }
 
   changeFilter(new_filter: PropertyFilter) {
@@ -70,6 +86,11 @@ export class EstateComponent implements OnInit {
 
   cerrarWizardAgregarPropiedad() {
     this.wizardIniciado = false;
+  }
+
+  @HostListener('scroll', ['$event']) scrollHandler(event: any) {
+    this.lastResultAreaScrollPosition = event.target.scrollTop;
+    // console.debug(event.target.scrollTop);
   }
 
 }
