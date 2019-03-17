@@ -126,75 +126,56 @@
             min-height: 100vh;
             max-height: 100vh;
             position: absolute;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
             top: 0;
             left: 0;
             right: 0;
+            padding-bottom: 42px;
+
             padding-top: 195px; // 21 de espacio y 174 de las barras superiores
             @media screen and (max-width: 767px){
                 padding-top: 165px; // 21 de espacio y 144 de las barras superiores
             }
 
-            .dg-form {
-                position: absolute;
-                // top: 0;
-                top: 195px;
-                left: 0;
-                right: 0;
-                min-height: calc(100vh - 195px - 70px);
-                max-height: calc(100vh - 195px - 70px);
-                // padding-top: 195px;
-                @media screen and (max-width: 767px){
-                    // padding-top: 165px;
-                    top: 165px;
-                    min-height: calc(100vh - 165px - 70px);
-                    max-height: calc(100vh - 165px - 70px);
-                }
-
-                overflow-x: hidden;
-                overflow-y: scroll;
-                -webkit-overflow-scrolling: touch;
-
-                padding-bottom: 73px; // espacio para los botones de navegación inferiores
-                z-index: 900; // entre la barra inferior y la parte superior (superior en 999)
-
-                .col-form-label {
-                    @media screen and (min-width: 720px) {
-                        text-align: right;
-                    }
-                }
-            }
-
-            .bottom-navigation-bar {
-                min-height: 83px;
-                max-height: 83px;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                margin-bottom: 0;
-                background-color: rgba(255,255,255,0.9);
-                z-index: 901;
-
-
-                .wizard-nav-button {
-                    color: white;
-                    font-size: 1.2rem;
-                    z-index: 999;
-    
-                    width: 63px;
-                    height: 63px;
-    
-                    background-color: #87b23e;
-                    border-radius: 45px !important;
-    
-                    -webkit-box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
-                    -moz-box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
-                    box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
+            .col-form-label {
+                @media screen and (min-width: 720px) {
+                    text-align: right;
                 }
             }
         }
     }
 }
+
+.wizard-nav-button2 {
+    color: white;
+    font-size: 1.2rem;
+    z-index: 999;
+
+    position: fixed;
+    bottom: 3%;
+
+    width: 63px;
+    height: 63px;
+
+    background-color: #87b23e;
+    border-radius: 45px !important;
+
+    -webkit-box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
+    -moz-box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
+    box-shadow: 9px 11px 56px -16px rgba(0,0,0,0.83);
+}
+
+.forward {
+    right: 3%;
+}
+
+.back {
+    left: 3%;
+}
+
+
 
 // fomulario agregar fotos
 .wizard-add-image-button-wrapper {
@@ -244,6 +225,7 @@
 }
 
 .dg-image-card {
+    margin-top: 12px;
     max-height: 250px;
     overflow-y: hidden;
     img {
