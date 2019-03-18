@@ -16,11 +16,11 @@
       <div class="col-12">
         <div id="carouselComponent" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item active" *ngFor="let url of propiedad.urls_fotografias; let i=index;"
-              [ngClass]="{ 'active': (i === 0 && !propiedad.mapaDeImagenes) || (i === 0 && propiedad.mapaDeImagenes.size === 0) }">
+            <div class="carousel-item active" *ngFor="let url of propiedad.urlsFotografias; let i=index;"
+              [ngClass]="{ 'active': (i === 0 && !mapaDeImagenes) || (i === 0 && mapaDeImagenes.size === 0) }">
               <img [src]="url" alt="...">
             </div>
-            <div class="carousel-item active" *ngFor="let objeto_imagen of propiedad.mapaDeImagenes | keyvalue; let i=index;"
+            <div class="carousel-item active" *ngFor="let objeto_imagen of mapaDeImagenes | keyvalue; let i=index;"
               [ngClass]="{ 'active': i === 0 }">
               <img [src]="objeto_imagen.value">
             </div>
@@ -40,23 +40,23 @@
 
     <!-- Área de precios -->
     <div class="row">
-      <div class="col" *ngIf="(propiedad.precio_venta) as precio_venta">
+      <div class="col" *ngIf="(propiedad.precioVenta) as precioVenta">
         <div class="resumen-display-de-precio text-center">
           <div class="titulo">
             <span>Precio en venta</span>
           </div>
           <div class="precio">
-              <span>{{precio_venta | currency:'MXN'}}</span>
+              <span>{{precioVenta | currency:'MXN'}}</span>
           </div>
         </div>
       </div>
-      <div class="col" *ngIf="(propiedad.precio_renta) as precio_renta">
+      <div class="col" *ngIf="(propiedad.precioRenta) as precioRenta">
         <div class="resumen-display-de-precio text-center">
           <div class="titulo">
             <span>Precio en renta</span>
           </div>
           <div class="precio">
-            <span>{{precio_renta | currency:'MXN'}}</span>
+            <span>{{precioRenta | currency:'MXN'}}</span>
           </div>
         </div>
       </div>
@@ -82,8 +82,8 @@
 
     <!-- Área de detalles -->
     <div class="row">
-      <div class="col" *ngIf="(propiedad.tipo_propiedad) as tipo_propiedad">
-        <div class="resumen-display-detalle" *ngIf="tipo_propiedad != ''">
+      <div class="col" *ngIf="(propiedad.tipoPropiedad) as tipoPropiedad">
+        <div class="resumen-display-detalle" *ngIf="tipoPropiedad != ''">
           <div class="icono">
             <i class="far fa-question-circle"></i>
           </div>
@@ -91,7 +91,7 @@
             <span>Tipo de propiedad</span>
           </div>
           <div class="valor-detalle">
-            <span>{{tipo_propiedad}}</span>
+            <span>{{tipoPropiedad}}</span>
           </div>
         </div>
       </div>
@@ -110,8 +110,8 @@
         </div>
       </div>
 
-      <div class="col" *ngIf="(propiedad.m2_construccion) as m2_construccion">
-        <div class="resumen-display-detalle" *ngIf="m2_construccion && m2_construccion > 0">
+      <div class="col" *ngIf="(propiedad.m2Construccion) as m2Construccion">
+        <div class="resumen-display-detalle" *ngIf="m2Construccion && m2Construccion > 0">
           <div class="icono">
             <i class="fas fa-hammer"></i>
           </div>
@@ -119,7 +119,7 @@
             <span>M2 Construcción</span>
           </div>
           <div class="valor-detalle">
-            <span>{{m2_construccion}}</span>
+            <span>{{m2Construccion}}</span>
           </div>
         </div>
       </div>
@@ -152,8 +152,8 @@
         </div>
       </div>
 
-      <div class="col" *ngIf="(propiedad.medios_banos) as medios_banos">
-        <div class="resumen-display-detalle" *ngIf="medios_banos && medios_banos > 0">
+      <div class="col" *ngIf="(propiedad.mediosBanos) as mediosBanos">
+        <div class="resumen-display-detalle" *ngIf="mediosBanos && mediosBanos > 0">
           <div class="icono">
             <i class="fas fa-toilet"></i>
           </div>
@@ -161,13 +161,13 @@
             <span>Medios Baños</span>
           </div>
           <div class="valor-detalle">
-            <span>{{medios_banos}}</span>
+            <span>{{mediosBanos}}</span>
           </div>
         </div>
       </div>
 
-      <div class="col" *ngIf="(propiedad.cajones_estacionamiento) as cajones_estacionamiento">
-        <div class="resumen-display-detalle" *ngIf="cajones_estacionamiento && cajones_estacionamiento > 0">
+      <div class="col" *ngIf="(propiedad.cajonesEstacionamiento) as cajonesEstacionamiento">
+        <div class="resumen-display-detalle" *ngIf="cajonesEstacionamiento && cajonesEstacionamiento > 0">
           <div class="icono">
             <i class="fas fa-car"></i>
           </div>
@@ -175,13 +175,13 @@
             <span>Cajones de estacionamiento</span>
           </div>
           <div class="valor-detalle">
-            <span>{{cajones_estacionamiento}}</span>
+            <span>{{cajonesEstacionamiento}}</span>
           </div>
         </div>
       </div>
 
-      <div class="col" *ngIf="(propiedad.m2_terreno) as m2_terreno">
-        <div class="resumen-display-detalle" *ngIf="m2_terreno && m2_terreno > 0">
+      <div class="col" *ngIf="(propiedad.m2Terreno) as m2Terreno">
+        <div class="resumen-display-detalle" *ngIf="m2Terreno && m2Terreno > 0">
           <div class="icono">
             <i class="far fa-square"></i>
           </div>
@@ -189,7 +189,7 @@
             <span>M2 Terreno</span>
           </div>
           <div class="valor-detalle">
-            <span>{{m2_terreno}}</span>
+            <span>{{m2Terreno}}</span>
           </div>
         </div>
       </div>
@@ -208,8 +208,8 @@
         </div>
       </div>
 
-      <div class="col" *ngIf="(propiedad.tiempo_minimo_renta) as tiempo_minimo_renta">
-        <div class="resumen-display-detalle" *ngIf="tiempo_minimo_renta && tiempo_minimo_renta > 0">
+      <div class="col" *ngIf="(propiedad.tiempoMinimoRenta) as tiempoMinimoRenta">
+        <div class="resumen-display-detalle" *ngIf="tiempoMinimoRenta && tiempoMinimoRenta > 0">
           <div class="icono">
             <i class="far fa-calendar-alt"></i>
           </div>
@@ -217,13 +217,13 @@
             <span>Tiempo mínimo renta (meses)</span>
           </div>
           <div class="valor-detalle">
-            <span>{{tiempo_minimo_renta}}</span>
+            <span>{{tiempoMinimoRenta}}</span>
           </div>
         </div>
       </div>
 
-      <div class="col" *ngIf="(propiedad.capacidad_cisterna) as capacidad_cisterna">
-        <div class="resumen-display-detalle" *ngIf="capacidad_cisterna && capacidad_cisterna > 0">
+      <div class="col" *ngIf="(propiedad.capacidadCisterna) as capacidadCisterna">
+        <div class="resumen-display-detalle" *ngIf="capacidadCisterna && capacidadCisterna > 0">
           <div class="icono">
             <i class="fas fa-tint"></i>
           </div>
@@ -231,13 +231,13 @@
             <span>Capacidad de cisterna (L)</span>
           </div>
           <div class="valor-detalle">
-            <span>{{capacidad_cisterna}}</span>
+            <span>{{capacidadCisterna}}</span>
           </div>
         </div>
       </div>
 
-      <div class="col" *ngIf="(propiedad.edad_propiedad) as edad_propiedad">
-        <div class="resumen-display-detalle" *ngIf="nueva_propiedad && nueva_propiedad.edad_propiedad > 0">
+      <div class="col" *ngIf="(propiedad.edadPropiedad) as edadPropiedad">
+        <div class="resumen-display-detalle" *ngIf="edadPropiedad && edadPropiedad > 0">
           <div class="icono">
             <i class="fas fa-clock"></i>
           </div>
@@ -245,13 +245,13 @@
             <span>Edad de la propiedad (años)</span>
           </div>
           <div class="valor-detalle">
-            <span>{{edad_propiedad}}</span>
+            <span>{{edadPropiedad}}</span>
           </div>
         </div>
       </div>
 
-      <div class="col" *ngIf="(propiedad.costo_mantenimiento) as costo_mantenimiento">
-        <div class="resumen-display-detalle" *ngIf="nueva_propiedad && nueva_propiedad.costo_mantenimiento > 0">
+      <div class="col" *ngIf="(propiedad.costoMantenimiento) as costoMantenimiento">
+        <div class="resumen-display-detalle" *ngIf="costoMantenimiento && costoMantenimiento > 0">
           <div class="icono">
             <i class="fas fa-tools"></i>
           </div>
@@ -259,7 +259,7 @@
             <span>Costo del mantenimiento</span>
           </div>
           <div class="valor-detalle">
-            <span>{{costo_mantenimiento | currency:'MXN'}}</span>
+            <span>{{costoMantenimiento | currency:'MXN'}}</span>
           </div>
         </div>
       </div>

@@ -21,17 +21,17 @@ export class PropiedadService {
   }
 
   actualizarPropiedad(propiedad: Propiedad) {
-    const propiedad_id = propiedad.id;
+    const propiedadId = propiedad.id;
     delete propiedad.id;
-    return this.firestore.doc<Propiedad>('propiedades/' + propiedad_id).update(propiedad);
+    return this.firestore.doc<Propiedad>('propiedades/' + propiedadId).update(propiedad);
   }
 
-  borrarPropiedad(propiedad_id: string) {
-    return this.firestore.doc('propiedades/' + propiedad_id).delete();
+  borrarPropiedad(propiedadId: string) {
+    return this.firestore.doc('propiedades/' + propiedadId).delete();
   }
 
-  obtenerPropiedad(propiedad_id: string) {
-    return this.firestore.doc<Propiedad>('propiedades/' + propiedad_id);
+  obtenerPropiedad(propiedadId: string) {
+    return this.firestore.doc<Propiedad>('propiedades/' + propiedadId);
   }
 
 }

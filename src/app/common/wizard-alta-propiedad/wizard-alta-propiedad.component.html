@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="col-2">
-          <button class="btn btn-link float-right" *ngIf="esEdicion" data-toggle="modal" data-target="#confirmarBorrarModal">
+          <button class="btn btn-link float-right" *ngIf="esEdicion && !thisIsTheEnd" data-toggle="modal" data-target="#confirmarBorrarModal">
             <i class="far fa-trash-alt"></i>
           </button>
         </div>
@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col">
           <div class="wizard-nav-item" id="informacionBasicaNavItem"
-            [class.item-active]="numero_paso === 1">
+            [class.item-active]="numeroPaso === 1">
             <div class="border-circle">
               <i class="fas fa-home"></i>
             </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="col">
           <div class="wizard-nav-item" id="informacionAvanzadaNavItem"
-            [class.item-active]="numero_paso === 2">
+            [class.item-active]="numeroPaso === 2">
             <div class="border-circle">
               <i class="fas fa-plus"></i>
             </div>
@@ -47,7 +47,7 @@
         </div>
         <div class="col">
           <div class="wizard-nav-item" id="fotografiasNavItem"
-            [class.item-active]="numero_paso === 3">
+            [class.item-active]="numeroPaso === 3">
             <div class="border-circle">
               <i class="fas fa-images"></i>
             </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="col">
           <div class="wizard-nav-item" id="resumenNavItem"
-            [class.item-active]="numero_paso === 4">
+            [class.item-active]="numeroPaso === 4">
             <div class="border-circle">
               <i class="fas fa-file-alt"></i>
             </div>
@@ -71,157 +71,552 @@
     <div class="wizard-working-area" id="wizardWorkingArea" #wizardWorkingArea>
 
       <!-- Primer paso - información básica -->
-      <div id="informacionBasicaForm" *ngIf="numero_paso === 1">
+      <div id="informacionBasicaForm" *ngIf="numeroPaso === 1">
         <form class="contanier-fluid" (ngSubmit)="fIB.form.valid && finalizarPaso1()" #fIB="ngForm" novalidate>
 
+          <!-- tipoPropiedad -->
           <div class="form-group row">
             <div class="col-sm-0 col-md-1">
             </div>
             <label for="tipoPropiedad" class="col-sm-12 col-md-3 col-form-label">Tipo de propiedad</label>
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6" *ngIf="!esEdicion">
               <select class="form-control " id="tipoPropiedad"
-                name="tipo_propiedad" [(ngModel)]="nueva_propiedad.tipo_propiedad"
-                #tipo_propiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && tipo_propiedad.invalid }" required>
+                name="tipoPropiedad" [(ngModel)]="nuevaPropiedad.tipoPropiedad"
+                #tipoPropiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && tipoPropiedad.invalid }" required>
                 <option value=""></option>
-                <option value="Terreno">Terreno</option>
-                <option value="Departamento">Departamento</option>
                 <option value="Casa">Casa</option>
+                <option value="Departamento">Departamento</option>
+                <option value="Oficina">Oficina</option>
+                <option value="Terreno">Terreno</option>
               </select>
-              <div *ngIf="fIB.submitted && tipo_propiedad.invalid" class="invalid-feedback">
+              <div *ngIf="fIB.submitted && tipoPropiedad.invalid" class="invalid-feedback">
                   Debes seleccionar un tipo de propiedad.
               </div>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
+            <div class="col-sm-12 col-md-6" *ngIf="esEdicion">
+              <label class="col-form-label">{{nuevaPropiedad.tipoPropiedad}}</label>
             </div>
-            <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre"
-                name="nombre" [(ngModel)]="nueva_propiedad.nombre"
-                #nombre="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && nombre.invalid }" required>
-              <div *ngIf="fIB.submitted && nombre.invalid" class="invalid-feedback">
-                  Debes ingresar un nombre
+          </div>
+          <!-- fin tipoPropiedad -->
+
+          <div id="informacionBasicaCasa" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Casa'">
+
+            <!-- nombre -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre"
+                  name="nombre" [(ngModel)]="nuevaPropiedad.nombre"
+                  #nombre="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && nombre.invalid }" required>
+                <div *ngIf="fIB.submitted && nombre.invalid" class="invalid-feedback">
+                    Debes ingresar un nombre
+                </div>
               </div>
             </div>
-          </div>
+            <!-- fin nombre-->
 
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="m2construccionPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Construcción</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción"
-                name="m2_construccion" [(ngModel)]="nueva_propiedad.m2_construccion"
-                #m2_construccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && m2_construccion.invalid }" required>
-              <div *ngIf="fIB.submitted && m2_construccion.invalid" class="invalid-feedback">
-                  Debes ingresar los m2 de construcción
+            <!-- m2Construccion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="m2construccionPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Construcción</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción"
+                  name="m2Construccion" [(ngModel)]="nuevaPropiedad.m2Construccion"
+                  #m2Construccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && m2Construccion.invalid }" required>
+                <div *ngIf="fIB.submitted && m2Construccion.invalid" class="invalid-feedback">
+                    Debes ingresar los m2 de construcción
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="recamarasPropiedad" class="col-sm-12 col-md-3 col-form-label">Recamaras</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="recamarasPropiedad" placeholder="Recamaras"
-                name="recamaras" [(ngModel)]="nueva_propiedad.recamaras"
-                #recamaras="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && recamaras.invalid }" required>
-              <div *ngIf="fIB.submitted && recamaras.invalid" class="invalid-feedback">
-                  Debes ingresar el número de recámaras
+            <!-- fin m2Construccion -->
+  
+            <!-- recamaras -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="recamarasPropiedad" class="col-sm-12 col-md-3 col-form-label">Recamaras</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="recamarasPropiedad" placeholder="Recamaras"
+                  name="recamaras" [(ngModel)]="nuevaPropiedad.recamaras"
+                  #recamaras="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && recamaras.invalid }" required>
+                <div *ngIf="fIB.submitted && recamaras.invalid" class="invalid-feedback">
+                    Debes ingresar el número de recámaras
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="banosPropiedad" class="col-sm-12 col-md-3 col-form-label">Baños</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="banosPropiedad" placeholder="Baños"
-                name="banos" [(ngModel)]="nueva_propiedad.banos"
-                #banos="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && banos.invalid }" required>
-              <div *ngIf="fIB.submitted && banos.invalid" class="invalid-feedback">
-                  Debes ingresar el número de baños
+            <!-- fin recamaras -->
+  
+            <!-- banos -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="banosPropiedad" class="col-sm-12 col-md-3 col-form-label">Baños</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="banosPropiedad" placeholder="Baños"
+                  name="banos" [(ngModel)]="nuevaPropiedad.banos"
+                  #banos="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && banos.invalid }" required>
+                <div *ngIf="fIB.submitted && banos.invalid" class="invalid-feedback">
+                    Debes ingresar el número de baños
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="mediosBanosPropiedad" class="col-sm-12 col-md-3 col-form-label">Medios Baños</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Medios Baños"
-                name="medios_banos" [(ngModel)]="nueva_propiedad.medios_banos"
-                #medios_banos="ngModel">
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="cajonesEstacionamientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Cajones Estacionamiento</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento"
-                name="cajones_estacionamiento" [(ngModel)]="nueva_propiedad.cajones_estacionamiento"
-                #cajones_estacionamiento="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && cajones_estacionamiento.invalid }" required>
-              <div *ngIf="fIB.submitted && cajones_estacionamiento.invalid" class="invalid-feedback">
-                  Debes ingresar el número de cajones de estacionamiento
+            <!-- fin banos -->
+  
+            <!-- mediosBanos -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="mediosBanosPropiedad" class="col-sm-12 col-md-3 col-form-label">Medios Baños</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Medios Baños"
+                  name="mediosBanos" [(ngModel)]="nuevaPropiedad.mediosBanos"
+                  #mediosBanos="ngModel">
               </div>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
-            <div class="col-sm-12 col-md-6">
-              <textarea class="form-control" id="descripcionPropiedad" rows="4"
-                name="descripcion" [(ngModel)]="nueva_propiedad.descripcion"
-                #descripcion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && descripcion.invalid }" required></textarea>
-              <div *ngIf="fIB.submitted && descripcion.invalid" class="invalid-feedback">
-                  Debes ingresar una breve descripción
+            <!-- fin mediosBanos -->
+  
+            <!-- cajonesEstacionamiento -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="cajonesEstacionamientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Cajones Estacionamiento</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento"
+                  name="cajonesEstacionamiento" [(ngModel)]="nuevaPropiedad.cajonesEstacionamiento"
+                  #cajonesEstacionamiento="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && cajonesEstacionamiento.invalid }" required>
+                <div *ngIf="fIB.submitted && cajonesEstacionamiento.invalid" class="invalid-feedback">
+                    Debes ingresar el número de cajones de estacionamiento
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
-            <div class="col-sm-12 col-md-6">
-              <textarea class="form-control" id="direccionPropiedad" rows="4"
-                name="direccion" [(ngModel)]="nueva_propiedad.direccion"
-                #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
-              <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
-                  Debes ingresar una direccion
+            <!-- fin cajonesEstacionamiento -->
+  
+            <!-- descripcion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="descripcionPropiedad" rows="4"
+                  name="descripcion" [(ngModel)]="nuevaPropiedad.descripcion"
+                  #descripcion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && descripcion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && descripcion.invalid" class="invalid-feedback">
+                    Debes ingresar una breve descripción
+                </div>
               </div>
             </div>
+            <!-- fin descripcion -->
+  
+            <!-- direccion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="direccionPropiedad" rows="4"
+                  name="direccion" [(ngModel)]="nuevaPropiedad.direccion"
+                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
+                    Debes ingresar una direccion
+                </div>
+              </div>
+            </div>
+            <!-- fin direccion -->
+  
+            <!-- precioVenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta"
+                  name="precioVenta" [(ngModel)]="nuevaPropiedad.precioVenta"
+                  #precioVenta="ngModel">
+              </div>
+            </div>
+            <!-- fin precioVenta -->
+  
+            <!-- precioRenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta"
+                  name="precioRenta" [(ngModel)]="nuevaPropiedad.precioRenta"
+                  #precioRenta="ngModel" >
+              </div>
+            </div>
+            <!-- fin precioRenta -->
           </div>
 
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
+          <div id="informacionBasicaDepartamento" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Departamento'">
+            <!-- nombre -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre"
+                  name="nombre" [(ngModel)]="nuevaPropiedad.nombre"
+                  #nombre="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && nombre.invalid }" required>
+                <div *ngIf="fIB.submitted && nombre.invalid" class="invalid-feedback">
+                    Debes ingresar un nombre
+                </div>
+              </div>
             </div>
-            <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta"
-                name="precio_venta" [(ngModel)]="nueva_propiedad.precio_venta"
-                #precio_venta="ngModel">
+            <!-- fin nombre-->
+  
+            <!-- m2Construccion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="m2construccionPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Construcción</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción"
+                  name="m2Construccion" [(ngModel)]="nuevaPropiedad.m2Construccion"
+                  #m2Construccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && m2Construccion.invalid }" required>
+                <div *ngIf="fIB.submitted && m2Construccion.invalid" class="invalid-feedback">
+                    Debes ingresar los m2 de construcción
+                </div>
+              </div>
             </div>
+            <!-- fin m2Construccion -->
+  
+            <!-- recamaras -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="recamarasPropiedad" class="col-sm-12 col-md-3 col-form-label">Recamaras</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="recamarasPropiedad" placeholder="Recamaras"
+                  name="recamaras" [(ngModel)]="nuevaPropiedad.recamaras"
+                  #recamaras="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && recamaras.invalid }" required>
+                <div *ngIf="fIB.submitted && recamaras.invalid" class="invalid-feedback">
+                    Debes ingresar el número de recámaras
+                </div>
+              </div>
+            </div>
+            <!-- fin recamaras -->
+  
+            <!-- banos -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="banosPropiedad" class="col-sm-12 col-md-3 col-form-label">Baños</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="banosPropiedad" placeholder="Baños"
+                  name="banos" [(ngModel)]="nuevaPropiedad.banos"
+                  #banos="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && banos.invalid }" required>
+                <div *ngIf="fIB.submitted && banos.invalid" class="invalid-feedback">
+                    Debes ingresar el número de baños
+                </div>
+              </div>
+            </div>
+            <!-- fin banos -->
+  
+            <!-- mediosBanos -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="mediosBanosPropiedad" class="col-sm-12 col-md-3 col-form-label">Medios Baños</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Medios Baños"
+                  name="mediosBanos" [(ngModel)]="nuevaPropiedad.mediosBanos"
+                  #mediosBanos="ngModel">
+              </div>
+            </div>
+            <!-- fin mediosBanos -->
+  
+            <!-- cajonesEstacionamiento -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="cajonesEstacionamientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Cajones Estacionamiento</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento"
+                  name="cajonesEstacionamiento" [(ngModel)]="nuevaPropiedad.cajonesEstacionamiento"
+                  #cajonesEstacionamiento="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && cajonesEstacionamiento.invalid }" required>
+                <div *ngIf="fIB.submitted && cajonesEstacionamiento.invalid" class="invalid-feedback">
+                    Debes ingresar el número de cajones de estacionamiento
+                </div>
+              </div>
+            </div>
+            <!-- fin cajonesEstacionamiento -->
+  
+            <!-- descripcion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="descripcionPropiedad" rows="4"
+                  name="descripcion" [(ngModel)]="nuevaPropiedad.descripcion"
+                  #descripcion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && descripcion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && descripcion.invalid" class="invalid-feedback">
+                    Debes ingresar una breve descripción
+                </div>
+              </div>
+            </div>
+            <!-- fin descripcion -->
+  
+            <!-- direccion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="direccionPropiedad" rows="4"
+                  name="direccion" [(ngModel)]="nuevaPropiedad.direccion"
+                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
+                    Debes ingresar una direccion
+                </div>
+              </div>
+            </div>
+            <!-- fin direccion -->
+  
+            <!-- precioVenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta"
+                  name="precioVenta" [(ngModel)]="nuevaPropiedad.precioVenta"
+                  #precioVenta="ngModel">
+              </div>
+            </div>
+            <!-- fin precioVenta -->
+  
+            <!-- precioRenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta"
+                  name="precioRenta" [(ngModel)]="nuevaPropiedad.precioRenta"
+                  #precioRenta="ngModel" >
+              </div>
+            </div>
+            <!-- fin precioRenta -->
           </div>
 
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
+          <div id="informacionBasicaOficina" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Oficina'">
+            <!-- nombre -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre"
+                  name="nombre" [(ngModel)]="nuevaPropiedad.nombre"
+                  #nombre="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && nombre.invalid }" required>
+                <div *ngIf="fIB.submitted && nombre.invalid" class="invalid-feedback">
+                    Debes ingresar un nombre
+                </div>
+              </div>
             </div>
-            <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta"
-                name="precio_renta" [(ngModel)]="nueva_propiedad.precio_renta"
-                #precio_renta="ngModel" >
+            <!-- fin nombre-->
+  
+            <!-- m2Construccion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="m2construccionPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Construcción</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="m2construccionPropiedad" placeholder="M2 Construcción"
+                  name="m2Construccion" [(ngModel)]="nuevaPropiedad.m2Construccion"
+                  #m2Construccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && m2Construccion.invalid }" required>
+                <div *ngIf="fIB.submitted && m2Construccion.invalid" class="invalid-feedback">
+                    Debes ingresar los m2 de construcción
+                </div>
+              </div>
             </div>
+            <!-- fin m2Construccion -->
+  
+            <!-- mediosBanos -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="mediosBanosPropiedad" class="col-sm-12 col-md-3 col-form-label">Baños</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="mediosBanosPropiedad" placeholder="Baños"
+                  name="mediosBanos" [(ngModel)]="nuevaPropiedad.mediosBanos"
+                  #mediosBanos="ngModel">
+              </div>
+            </div>
+            <!-- fin mediosBanos -->
+  
+            <!-- cajonesEstacionamiento -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="cajonesEstacionamientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Cajones Estacionamiento</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="cajonesEstacionamientoPropiedad" placeholder="Cajones Estacionamiento"
+                  name="cajonesEstacionamiento" [(ngModel)]="nuevaPropiedad.cajonesEstacionamiento"
+                  #cajonesEstacionamiento="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && cajonesEstacionamiento.invalid }" required>
+                <div *ngIf="fIB.submitted && cajonesEstacionamiento.invalid" class="invalid-feedback">
+                    Debes ingresar el número de cajones de estacionamiento
+                </div>
+              </div>
+            </div>
+            <!-- fin cajonesEstacionamiento -->
+  
+            <!-- descripcion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="descripcionPropiedad" rows="4"
+                  name="descripcion" [(ngModel)]="nuevaPropiedad.descripcion"
+                  #descripcion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && descripcion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && descripcion.invalid" class="invalid-feedback">
+                    Debes ingresar una breve descripción
+                </div>
+              </div>
+            </div>
+            <!-- fin descripcion -->
+  
+            <!-- direccion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="direccionPropiedad" rows="4"
+                  name="direccion" [(ngModel)]="nuevaPropiedad.direccion"
+                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
+                    Debes ingresar una direccion
+                </div>
+              </div>
+            </div>
+            <!-- fin direccion -->
+  
+            <!-- precioVenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta"
+                  name="precioVenta" [(ngModel)]="nuevaPropiedad.precioVenta"
+                  #precioVenta="ngModel">
+              </div>
+            </div>
+            <!-- fin precioVenta -->
+  
+            <!-- precioRenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta"
+                  name="precioRenta" [(ngModel)]="nuevaPropiedad.precioRenta"
+                  #precioRenta="ngModel" >
+              </div>
+            </div>
+            <!-- fin precioRenta -->
+          </div>
+
+          <div id="informacionBasicaTerreno" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Terreno'">
+            <!-- nombre -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="nombrePropiedad" class="col-sm-12 col-md-3 col-form-label">Nombre</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="text" class="form-control" id="nombrePropiedad" placeholder="Nombre"
+                  name="nombre" [(ngModel)]="nuevaPropiedad.nombre"
+                  #nombre="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && nombre.invalid }" required>
+                <div *ngIf="fIB.submitted && nombre.invalid" class="invalid-feedback">
+                    Debes ingresar un nombre
+                </div>
+              </div>
+            </div>
+            <!-- fin nombre-->
+  
+            <!-- m2Terreno -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="m2terrenoPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Terreno</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno"
+                  name="m2Terreno" [(ngModel)]="nuevaPropiedad.m2Terreno"
+                  #m2Terreno="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && m2Terreno.invalid }" required>
+                  <div *ngIf="fIB.submitted && m2Terreno.invalid" class="invalid-feedback">
+                      Debes ingresar los m2 del terreno
+                  </div>
+              </div>
+            </div>
+            <!-- fin m2Terreno -->
+  
+            <!-- descripcion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="descripcionPropiedad" class="col-sm-12 col-md-3 col-form-label">Descripción</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="descripcionPropiedad" rows="4"
+                  name="descripcion" [(ngModel)]="nuevaPropiedad.descripcion"
+                  #descripcion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && descripcion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && descripcion.invalid" class="invalid-feedback">
+                    Debes ingresar una breve descripción
+                </div>
+              </div>
+            </div>
+            <!-- fin descripcion -->
+  
+            <!-- direccion -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="direccionPropiedad" rows="4"
+                  name="direccion" [(ngModel)]="nuevaPropiedad.direccion"
+                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
+                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
+                    Debes ingresar una direccion
+                </div>
+              </div>
+            </div>
+            <!-- fin direccion -->
+  
+            <!-- precioVenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioVentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Venta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioVentaPropiedad" placeholder="Precio de Venta"
+                  name="precioVenta" [(ngModel)]="nuevaPropiedad.precioVenta"
+                  #precioVenta="ngModel">
+              </div>
+            </div>
+            <!-- fin precioVenta -->
+  
+            <!-- precioRenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="precioRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Precio de Renta</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="precioRentaPropiedad" placeholder="Precio de Renta"
+                  name="precioRenta" [(ngModel)]="nuevaPropiedad.precioRenta"
+                  #precioRenta="ngModel" >
+              </div>
+            </div>
+            <!-- fin precioRenta -->  
           </div>
 
           <button type="submit" class="btn btn-link wizard-nav-button2 forward">
@@ -233,84 +628,291 @@
       <!-- Fin primer paso - información básica -->
     
       <!-- Segundo paso - información avanzada -->
-      <div id="informacionAvanzadaForm" *ngIf="numero_paso === 2">
+      <div id="informacionAvanzadaForm" *ngIf="numeroPaso === 2">
         <form (ngSubmit)="fIA.form.valid && finalizarPaso2()" #fIA="ngForm" novalidate>
-          
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
+
+          <div id="informacionAvanzadaCasa" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Casa'">
+            <!-- m2Terreno -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="m2terrenoPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Terreno</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno"
+                  name="m2Terreno" [(ngModel)]="nuevaPropiedad.m2Terreno"
+                  #m2Terreno="ngModel">
+              </div>
             </div>
-            <label for="m2terrenoPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Terreno</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno"
-                name="m2_terreno" [(ngModel)]="nueva_propiedad.m2_terreno"
-                #m2_terreno="ngModel">
+            <!-- fin m2Terreno -->
+  
+            <!-- niveles -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="niveles_plantasPropiedad" class="col-sm-12 col-md-3 col-form-label">Niveles (plantas)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles"
+                  name="niveles" [(ngModel)]="nuevaPropiedad.niveles"
+                  #niveles="ngModel">
+              </div>
             </div>
+            <!-- fin niveles -->
+  
+            <!-- amenidades -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="amenidadesPropiedad" rows="4"
+                  name="amenidades" [(ngModel)]="nuevaPropiedad.amenidades"
+                  #amenidades="ngModel"></textarea>
+              </div>
+            </div>
+            <!-- fin amenidades -->
+  
+            <!-- tiempoMinimoRenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="tiempoMinimoRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Tiempo mínimo de renta (meses)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta"
+                  name="tiempoMinimoRenta" [(ngModel)]="nuevaPropiedad.tiempoMinimoRenta"
+                  #tiempoMinimoRenta="ngModel">
+              </div>
+            </div>
+            <!-- fin tiempoMinimoRenta -->
+  
+            <!-- capacidadCisterna -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="capacidadCisternaPropiedad" class="col-sm-12 col-md-3 col-form-label">Capacidad de cisterna (L)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="capacidadCisternaPropiedad" placeholder="Capacidad de cisterna"
+                  name="capacidadCisterna" [(ngModel)]="nuevaPropiedad.capacidadCisterna"
+                  #capacidadCisterna>
+              </div>
+            </div>
+            <!-- fin capacidadCisterna -->
+  
+            <!-- edadPropiedad -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad"
+                  name="edadPropiedad" [(ngModel)]="nuevaPropiedad.edadPropiedad"
+                  #edadPropiedad>
+              </div>
+            </div>
+            <!-- fin edadPropiedad-->
+  
+            <!-- costoMantenimiento -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Costo mantenimiento"
+                  name="costoMantenimiento" [(ngModel)]="nuevaPropiedad.costoMantenimiento"
+                  #costoMantenimiento="ngModel">
+              </div>
+            </div>
+            <!-- fin costoMantenimiento -->
           </div>
 
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
+          <div id="informacionAvanzadaDepartamento" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Departamento'">
+            <!-- niveles -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="niveles_plantasPropiedad" class="col-sm-12 col-md-3 col-form-label">Niveles (plantas)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles"
+                  name="niveles" [(ngModel)]="nuevaPropiedad.niveles"
+                  #niveles="ngModel">
+              </div>
             </div>
-            <label for="niveles_plantasPropiedad" class="col-sm-12 col-md-3 col-form-label">Niveles (plantas)</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles"
-                name="niveles" [(ngModel)]="nueva_propiedad.niveles"
-                #niveles="ngModel">
+            <!-- fin niveles -->
+
+            <!-- amenidades -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="amenidadesPropiedad" rows="4"
+                  name="amenidades" [(ngModel)]="nuevaPropiedad.amenidades"
+                  #amenidades="ngModel"></textarea>
+              </div>
             </div>
+            <!-- fin amenidades -->
+  
+            <!-- tiempoMinimoRenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="tiempoMinimoRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Tiempo mínimo de renta (meses)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta"
+                  name="tiempoMinimoRenta" [(ngModel)]="nuevaPropiedad.tiempoMinimoRenta"
+                  #tiempoMinimoRenta="ngModel">
+              </div>
+            </div>
+            <!-- fin tiempoMinimoRenta -->
+  
+            <!-- edadPropiedad -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad"
+                  name="edadPropiedad" [(ngModel)]="nuevaPropiedad.edadPropiedad"
+                  #edadPropiedad>
+              </div>
+            </div>
+            <!-- fin edadPropiedad-->
+  
+            <!-- costoMantenimiento -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Costo mantenimiento"
+                  name="costoMantenimiento" [(ngModel)]="nuevaPropiedad.costoMantenimiento"
+                  #costoMantenimiento="ngModel">
+              </div>
+            </div>
+            <!-- fin costoMantenimiento -->
+
+            
           </div>
 
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
+          <div id="informacionAvanzadaOficina" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Oficina'">
+            <!-- m2Terreno -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="m2terrenoPropiedad" class="col-sm-12 col-md-3 col-form-label">M2 Terreno</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="m2terrenoPropiedad" placeholder="M2 Terreno"
+                  name="m2Terreno" [(ngModel)]="nuevaPropiedad.m2Terreno"
+                  #m2Terreno="ngModel">
+              </div>
             </div>
-            <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
-            <div class="col-sm-12 col-md-6">
-              <textarea class="form-control" id="amenidadesPropiedad" rows="4"
-                name="amenidades" [(ngModel)]="nueva_propiedad.amenidades"
-                #amenidades="ngModel"></textarea>
+            <!-- fin m2Terreno -->
+  
+            <!-- niveles -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="niveles_plantasPropiedad" class="col-sm-12 col-md-3 col-form-label">Niveles (plantas)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="niveles_plantasPropiedad" placeholder="Niveles"
+                  name="niveles" [(ngModel)]="nuevaPropiedad.niveles"
+                  #niveles="ngModel">
+              </div>
             </div>
+            <!-- fin niveles -->
+  
+            <!-- amenidades -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
+              <div class="col-sm-12 col-md-6">
+                <textarea class="form-control" id="amenidadesPropiedad" rows="4"
+                  name="amenidades" [(ngModel)]="nuevaPropiedad.amenidades"
+                  #amenidades="ngModel"></textarea>
+              </div>
+            </div>
+            <!-- fin amenidades -->
+  
+            <!-- tiempoMinimoRenta -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="tiempoMinimoRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Tiempo mínimo de renta (meses)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta"
+                  name="tiempoMinimoRenta" [(ngModel)]="nuevaPropiedad.tiempoMinimoRenta"
+                  #tiempoMinimoRenta="ngModel">
+              </div>
+            </div>
+            <!-- fin tiempoMinimoRenta -->
+  
+            <!-- capacidadCisterna -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="capacidadCisternaPropiedad" class="col-sm-12 col-md-3 col-form-label">Capacidad de cisterna (L)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="capacidadCisternaPropiedad" placeholder="Capacidad de cisterna"
+                  name="capacidadCisterna" [(ngModel)]="nuevaPropiedad.capacidadCisterna"
+                  #capacidadCisterna>
+              </div>
+            </div>
+            <!-- fin capacidadCisterna -->
+  
+            <!-- edadPropiedad -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad"
+                  name="edadPropiedad" [(ngModel)]="nuevaPropiedad.edadPropiedad"
+                  #edadPropiedad>
+              </div>
+            </div>
+            <!-- fin edadPropiedad-->
+  
+            <!-- costoMantenimiento -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Costo mantenimiento"
+                  name="costoMantenimiento" [(ngModel)]="nuevaPropiedad.costoMantenimiento"
+                  #costoMantenimiento="ngModel">
+              </div>
+            </div>
+            <!-- fin costoMantenimiento -->
           </div>
 
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
+          <div id="informacionAvanzadaTerreno" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Terreno'">
+            <!-- edadPropiedad -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad"
+                  name="edadPropiedad" [(ngModel)]="nuevaPropiedad.edadPropiedad"
+                  #edadPropiedad>
+              </div>
             </div>
-            <label for="tiempoMinimoRentaPropiedad" class="col-sm-12 col-md-3 col-form-label">Tiempo mínimo de renta (meses)</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="tiempoMinimoRentaPropiedad" placeholder="Tiempo mínimo de renta"
-                name="tiempo_minimo_renta" [(ngModel)]="nueva_propiedad.tiempo_minimo_renta"
-                #tiempo_minimo_renta="ngModel">
+            <!-- fin edadPropiedad-->
+  
+            <!-- costoMantenimiento -->
+            <div class="form-group row">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
+              <div class="col-sm-12 col-md-6">
+                <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Costo mantenimiento"
+                  name="costoMantenimiento" [(ngModel)]="nuevaPropiedad.costoMantenimiento"
+                  #costoMantenimiento="ngModel">
+              </div>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="capacidadCisternaPropiedad" class="col-sm-12 col-md-3 col-form-label">Capacidad de cisterna (L)</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="capacidadCisternaPropiedad" placeholder="Capacidad de cisterna"
-                name="capacidad_cisterna" [(ngModel)]="nueva_propiedad.capacidad_cisterna"
-                #capacidad_cisterna>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="edadPropiedad" class="col-sm-12 col-md-3 col-form-label">Edad de la propiedad (años)</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="edadPropiedad" placeholder="Edad de la propiedad"
-                name="edad_propiedad" [(ngModel)]="nueva_propiedad.edad_propiedad"
-                #edad_propiedad>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-0 col-md-1">
-            </div>
-            <label for="costoMantenimientoPropiedad" class="col-sm-12 col-md-3 col-form-label">Costo Mantenimiento (mensual)</label>
-            <div class="col-sm-12 col-md-6">
-              <input type="number" class="form-control" id="costoMantenimientoPropiedad" placeholder="Costo mantenimiento"
-                name="costo_mantenimiento" [(ngModel)]="nueva_propiedad.costo_mantenimiento"
-                #costo_mantenimiento="ngModel">
-            </div>
+            <!-- fin costoMantenimiento -->
+  
           </div>
 
           <button class="btn btn-link wizard-nav-button2 back"
@@ -326,7 +928,7 @@
       <!-- Fin segundo paso - información avanzada -->
     
       <!-- Tercer paso - fotografías -->
-      <div id="fotografiasForm" *ngIf="numero_paso === 3">
+      <div id="fotografiasForm" *ngIf="numeroPaso === 3">
         <form (ngSubmit)="finalizarPaso3()">
 
           <div class="form-group row">
@@ -344,13 +946,13 @@
             </div>
           </div>
 
-          <div class="row" *ngIf="esEdicion && nueva_propiedad.urls_fotografias && nueva_propiedad.urls_fotografias.length !== 0">
+          <div class="row" *ngIf="esEdicion && nuevaPropiedad.urlsFotografias && nuevaPropiedad.urlsFotografias.length !== 0">
             <div class="col-12">
               <span>Imágenes en la nube</span>
             </div>
           </div>
-          <div class="form-group row" *ngIf="nueva_propiedad.urls_fotografias">
-            <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let url of nueva_propiedad.urls_fotografias; let i=index;">
+          <div class="form-group row" *ngIf="nuevaPropiedad.urlsFotografias">
+            <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let url of nuevaPropiedad.urlsFotografias; let i=index;">
               <div class="card dg-image-card">
                 <img [src]="url">
                 <button class="btn btn-link delete-button" (click)="borrarImagenEdicion(i)">
@@ -360,7 +962,7 @@
             </div>
           </div>
 
-          <div class="row" *ngIf="(mapaDeImagenes && mapaDeImagenes.size > 0) && (nueva_propiedad.urls_fotografias && nueva_propiedad.urls_fotografias.length !== 0)">
+          <div class="row" *ngIf="(mapaDeImagenes && mapaDeImagenes.size > 0) && (nuevaPropiedad.urlsFotografias && nuevaPropiedad.urlsFotografias.length !== 0)">
             <div class="col-12">
               <span>Imagenes nuevas</span>
             </div>
@@ -376,7 +978,7 @@
             </div>
           </div>
 
-          <div class="row" *ngIf="(!mapaDeImagenes || mapaDeImagenes.size == 0) && (!nueva_propiedad.urls_fotografias || nueva_propiedad.urls_fotografias.length === 0)">
+          <div class="row" *ngIf="(!mapaDeImagenes || mapaDeImagenes.size == 0) && (!nuevaPropiedad.urlsFotografias || nuevaPropiedad.urlsFotografias.length === 0)">
             <div class="no-image-message">
               <span>No hay imágenes cargadas</span>
             </div>
@@ -395,7 +997,7 @@
       <!-- Fin tercer paso - fotografías -->
 
       <!-- Cuarto paso - resumen y guardado -->
-      <div id="resumenForm" *ngIf="numero_paso === 4">
+      <div id="resumenForm" *ngIf="numeroPaso === 4">
         <form (ngSubmit)="finalizarPaso4()">
           
           <!-- Display de la propiedad -->
@@ -404,7 +1006,8 @@
               <div class="col-xl-2 col-lg-1 col-md-0"></div>
               <div class="col-xl-8 col-lg-10 col-md-12">
                 <app-property-display
-                  [propiedad]="nueva_propiedad">
+                  [propiedad]='nuevaPropiedad'
+                  [mapaDeImagenes]='mapaDeImagenes'>
                 </app-property-display>
               </div>
               <div class="col-xl-2 col-lg-1 col-md-0"></div>
@@ -433,7 +1036,7 @@
 
 <div class="loading-animation" *ngIf="loading">
   <app-loading style="min-height: inherit; max-height: inherit;"
-    [mensaje]="mensaje_loading">
+    [mensaje]="mensajeLoading">
   </app-loading>
 </div>
 
@@ -456,7 +1059,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Estas a punto de borrar la propiedad "{{nueva_propiedad.nombre}}", esta acción no puede ser revertida. ¿Deseas Continuar?
+        Estas a punto de borrar la propiedad "{{nuevaPropiedad.nombre}}", esta acción no puede ser revertida. ¿Deseas Continuar?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

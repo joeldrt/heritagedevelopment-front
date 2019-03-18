@@ -38,20 +38,20 @@
         <div class="card">
           <div class="image-viewport">
             <!-- Imagen por default -->
-            <img *ngIf="!propiedad.urls_fotografias || propiedad.urls_fotografias.length === 0"
+            <img *ngIf="!propiedad.urlsFotografias || propiedad.urlsFotografias.length === 0"
               src="../../../assets/images/departamento-img.jpg" alt="..."> 
             <!-- end Imagen por default -->
             <!-- Primera imagen de la propiedad -->
-            <img *ngIf="propiedad.urls_fotografias && propiedad.urls_fotografias.length >= 0"
-              [src]="propiedad.urls_fotografias[0]" alt="..."> 
+            <img *ngIf="propiedad.urlsFotografias && propiedad.urlsFotografias.length >= 0"
+              [src]="propiedad.urlsFotografias[0]" alt="..."> 
             <!-- Fin primera imagen de la propiedad -->
-            <div class="propiedad-precio-renta" *ngIf="propiedad.precio_renta && propiedad.precio_renta > 0">
-              <span class="titulo">{{propiedad.tipo_propiedad}} en renta</span>
-              <span>{{propiedad.precio_renta | currency}} / mes</span>
+            <div class="propiedad-precio-renta" *ngIf="propiedad.precioRenta && propiedad.precioRenta > 0">
+              <span class="titulo">{{propiedad.tipoPropiedad}} en renta</span>
+              <span>{{propiedad.precioRenta | currency}} / mes</span>
             </div>
-            <div class="propiedad-precio-venta" *ngIf="propiedad.precio_venta && propiedad.precio_venta > 0">
+            <div class="propiedad-precio-venta" *ngIf="propiedad.precioVenta && propiedad.precioVenta > 0">
               <span class="titulo">{{propiedad.nombre}}</span>
-              <span>{{propiedad.precio_venta | currency}}</span>
+              <span>{{propiedad.precioVenta | currency}}</span>
             </div>
           </div>
 

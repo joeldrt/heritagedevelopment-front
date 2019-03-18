@@ -8,7 +8,8 @@ import { Propiedad } from 'src/app/models/propiedad';
   styleUrls: ['./property-display.component.scss']
 })
 export class PropertyDisplayComponent implements OnInit {
-  @Input() propiedad: Observable<Propiedad>;
+  @Input() propiedad: Propiedad;
+  @Input() mapaDeImagenes: Map<string, string | ArrayBuffer>;
 
   constructor() { }
 

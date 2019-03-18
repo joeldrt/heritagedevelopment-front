@@ -14,29 +14,29 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore';
   styleUrls: ['./property-detail.component.scss']
 })
 export class PropertyDetailComponent implements OnInit {
-  property_id: string;
+  propertyId: string;
 
   private propiedadDoc: AngularFirestoreDocument<Propiedad>;
   propiedad: Observable<Propiedad>;
 
   constructor(
     private route: ActivatedRoute,
-    private _location: Location,
+    private location: Location,
     private propiedadService: PropiedadService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
-    this.property_id = this.route.snapshot.paramMap.get("property_id");
-    this.cargarPropiedad(this.property_id);
+    this.propertyId = this.route.snapshot.paramMap.get('propertyId');
+    this.cargarPropiedad(this.propertyId);
   }
 
   navigatePrevious() {
-    this._location.back();
+    this.location.back();
   }
 
-  cargarPropiedad(property_id: string) {
-    this.propiedadDoc = this.propiedadService.obtenerPropiedad(property_id);
+  cargarPropiedad(propertyId: string) {
+    this.propiedadDoc = this.propiedadService.obtenerPropiedad(propertyId);
     this.propiedad = this.propiedadDoc.valueChanges();
   }
 
