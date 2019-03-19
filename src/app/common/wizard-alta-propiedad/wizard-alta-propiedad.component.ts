@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Propiedad } from '../../models/propiedad';
 import { ToastrService } from '../../services/toastr/toastr.service';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
@@ -32,6 +33,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   nuevaPropiedad: Propiedad;
   mapaDeArchivos = new Map<string, File>();
   mapaDeImagenes = new Map<string, string | ArrayBuffer>();
+  urlsFotografiasBorrar: Array<string>;
 
   loading = false;
   mensajeLoading = 'cargando';
@@ -40,6 +42,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private storage: AngularFireStorage,
+    private db: AngularFirestore,
     private auth: AuthService,
     private propiedadService: PropiedadService,
     private location: Location,
@@ -65,6 +68,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   initWizard() {
+    this.urlsFotografiasBorrar = new Array<string>();
     this.envioAGuardar = false;
     this.esEdicion = false;
     this.nuevaPropiedad = new Propiedad();
@@ -149,20 +153,29 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   borrarImagenEdicion(position: number) {
-    this.nuevaPropiedad.urlsFotografias.splice(position, 1);
+    this.urlsFotografiasBorrar.push(this.nuevaPropiedad.urlsFotografias.splice(position, 1)[0]);
+    // this.nuevaPropiedad.urlsFotografias.splice(position, 1);
   }
 
   finalizarPaso4() {
+    if (!this.esEdicion) {
+      this.nuevaPropiedad.id = this.db.createId();
+    }
     this.irIniciodePaginaDe();
     if (!this.nuevaPropiedad.urlsFotografias) {
       this.nuevaPropiedad.urlsFotografias = [];
+    }
+    if (this.urlsFotografiasBorrar.length > 0) {
+      this.urlsFotografiasBorrar.forEach((urlImagen) => {
+        this.storage.storage.refFromURL(urlImagen).delete();
+      });
     }
     if (this.mapaDeArchivos.size > 0) {
       this.loading = true;
       this.mensajeLoading = 'guardando imagenes';
       this.mapaDeArchivos.forEach((value: File, key: string) => {
           const file = value;
-          const filePath = `propiedades/${this.user.uid}/${file.name}`;
+          const filePath = `propiedades/${this.nuevaPropiedad.id}/${file.name}`;
           const fileRef = this.storage.ref(filePath);
           const task = this.storage.upload(filePath, file);
           task.snapshotChanges().pipe(
@@ -220,8 +233,10 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   borrarPropiedad() {
+    const urlsFotografiasBorrado = this.nuevaPropiedad.urlsFotografias;
     this.propiedadService.borrarPropiedad(this.propertyId).then(
       () => {
+        this.borrarImagenesDelStorage(urlsFotografiasBorrado);
         this.router.navigate(['/admin/estate']);
         this.toastr.success(`Propiedad borrada!`);
       },
@@ -229,6 +244,12 @@ export class WizardAltaPropiedadComponent implements OnInit {
         this.toastr.error(`Error al borrar la propiedad: ${reason}`);
       }
     );
+  }
+
+  borrarImagenesDelStorage(urlsFotografiasBorrado: string[]) {
+    urlsFotografiasBorrado.forEach((urlImagen) => {
+      this.storage.storage.refFromURL(urlImagen).delete();
+    });
   }
 
 }

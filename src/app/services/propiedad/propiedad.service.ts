@@ -15,23 +15,20 @@ export class PropiedadService {
     return this.firestore.collection<Propiedad>('propiedades').snapshotChanges();
   }
 
-  agregarPropiedad(propiedad: Propiedad) {
-    delete propiedad.id;
-    return this.firestore.collection<Propiedad>('propiedades').add(propiedad);
+  agregarPropiedad(propiedad: any) {
+    return this.firestore.collection<Propiedad>('propiedades').doc(propiedad.id).set(propiedad);
   }
 
   actualizarPropiedad(propiedad: Propiedad) {
-    const propiedadId = propiedad.id;
-    delete propiedad.id;
-    return this.firestore.doc<Propiedad>('propiedades/' + propiedadId).update(propiedad);
+    return this.firestore.doc<Propiedad>(`propiedades/${propiedad.id}`).update(propiedad);
   }
 
   borrarPropiedad(propiedadId: string) {
-    return this.firestore.doc('propiedades/' + propiedadId).delete();
+    return this.firestore.doc(`propiedades/${propiedadId}`).delete();
   }
 
   obtenerPropiedad(propiedadId: string) {
-    return this.firestore.doc<Propiedad>('propiedades/' + propiedadId);
+    return this.firestore.doc<Propiedad>(`propiedades/${propiedadId}`);
   }
 
 }
