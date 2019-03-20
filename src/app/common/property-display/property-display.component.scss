@@ -43,6 +43,17 @@
     }
 }
 
+.col-no-padding {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.ubicacion-propiedad {
+    width: 100%;
+    min-height: 300px;
+    max-height: 300px;
+}
+
 .resumen-display-de-precio {
     margin-top: 50px;
     .titulo span {

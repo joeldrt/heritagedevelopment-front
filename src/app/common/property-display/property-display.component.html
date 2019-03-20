@@ -11,9 +11,9 @@
     </div>
     <!-- Fin titulo resumen -->
 
-    <!-- Carousel de fotos -->
-    <div class="row">
-      <div class="col-12">
+    <!-- Carousel de fotos y mapa -->
+    <div class="row align-items-end">
+      <div class="col-md-8 col-sm-12 col-no-padding">
         <div id="carouselComponent" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" *ngFor="let url of propiedad.urlsFotografias; let i=index;"
@@ -35,8 +35,12 @@
           </a>
         </div>
       </div>
+      <div class="col-md-4 col-sm-12 col-no-padding">
+        <div id="map" #map class="ubicacion-propiedad">
+        </div>
+      </div>
     </div>
-    <!-- Fin carousel de fotos -->
+    <!-- Fin carousel de fotos y mapa-->
 
     <!-- Área de precios -->
     <div class="row">
