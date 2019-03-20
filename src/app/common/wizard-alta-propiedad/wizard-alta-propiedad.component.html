@@ -641,9 +641,7 @@
 
       <!-- Segundo paso - ubicacion de la propiedad -->
       <div id="ubicacionForm" *ngIf="numeroPaso === 2">
-        <form class="contanier-fluid" (ngSubmit)="fIB.form.valid && finalizarPaso2()" #fIB="ngForm" novalidate>
-
-
+        <div class="contanier-fluid">
           <div id="map" #map class="ubicacion-propiedad">
           </div>
           <div class="ubicaciones-propiedad-search">
@@ -656,11 +654,11 @@
             (click)="pasoAnterior()">
             <i class="fas fa-chevron-left"></i>
           </button>
-          <button type="submit" class="btn btn-link wizard-nav-button2 forward">
+          <button class="btn btn-link wizard-nav-button2 forward"
+            (click)="finalizarPaso2()">
             <i class="fas fa-chevron-right"></i>
           </button>
-
-        </form>
+        </div>
       </div>
       <!-- Fin segundo paso - ubicacion de la propiedad -->
     

@@ -109,6 +109,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     if (this.numeroPaso === 2) {
       this.cargarMapa(this.nuevaPropiedad);
     }
+    this.limpiarMapa();
     this.irIniciodePaginaDe();
   }
 
@@ -178,6 +179,9 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   cambiarDireccionPorBusqueda(place: any) {
+    if (!place || !place.geometry) {
+      return;
+    }
     const geoPoint = new firebase.firestore.GeoPoint(
       place.geometry.location.lat(),
       place.geometry.location.lng());
@@ -199,9 +203,16 @@ export class WizardAltaPropiedadComponent implements OnInit {
     });
   }
 
+  limpiarMapa() {
+    this.map = undefined;
+    this.marker = undefined;
+    this.infowindow = undefined;
+  }
+
   finalizarPaso2() {
     this.numeroPaso = 3;
     this.irIniciodePaginaDe();
+    this.limpiarMapa();
   }
 
   finalizarPaso3() {
