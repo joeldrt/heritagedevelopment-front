@@ -40,6 +40,15 @@
           <div class="wizard-nav-item" id="informacionAvanzadaNavItem"
             [class.item-active]="numeroPaso === 2">
             <div class="border-circle">
+              <i class="fas fa-location-arrow"></i>
+            </div>
+            <span class="title d-none d-md-block">Ubicación</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="wizard-nav-item" id="informacionAvanzadaNavItem"
+            [class.item-active]="numeroPaso === 3">
+            <div class="border-circle">
               <i class="fas fa-plus"></i>
             </div>
             <span class="title d-none d-md-block">Información avanzada</span>
@@ -47,7 +56,7 @@
         </div>
         <div class="col">
           <div class="wizard-nav-item" id="fotografiasNavItem"
-            [class.item-active]="numeroPaso === 3">
+            [class.item-active]="numeroPaso === 4">
             <div class="border-circle">
               <i class="fas fa-images"></i>
             </div>
@@ -56,7 +65,7 @@
         </div>
         <div class="col">
           <div class="wizard-nav-item" id="resumenNavItem"
-            [class.item-active]="numeroPaso === 4">
+            [class.item-active]="numeroPaso === 5">
             <div class="border-circle">
               <i class="fas fa-file-alt"></i>
             </div>
@@ -211,7 +220,7 @@
             <!-- fin descripcion -->
   
             <!-- direccion -->
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <div class="col-sm-0 col-md-1">
               </div>
               <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
@@ -223,7 +232,7 @@
                     Debes ingresar una direccion
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- fin direccion -->
   
             <!-- precioVenta -->
@@ -364,7 +373,7 @@
             <!-- fin descripcion -->
   
             <!-- direccion -->
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <div class="col-sm-0 col-md-1">
               </div>
               <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
@@ -376,7 +385,7 @@
                     Debes ingresar una direccion
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- fin direccion -->
   
             <!-- precioVenta -->
@@ -485,7 +494,7 @@
             <!-- fin descripcion -->
   
             <!-- direccion -->
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <div class="col-sm-0 col-md-1">
               </div>
               <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
@@ -497,7 +506,7 @@
                     Debes ingresar una direccion
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- fin direccion -->
   
             <!-- precioVenta -->
@@ -577,7 +586,7 @@
             <!-- fin descripcion -->
   
             <!-- direccion -->
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <div class="col-sm-0 col-md-1">
               </div>
               <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
@@ -589,7 +598,7 @@
                     Debes ingresar una direccion
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- fin direccion -->
   
             <!-- precioVenta -->
@@ -619,6 +628,9 @@
             <!-- fin precioRenta -->  
           </div>
 
+          <div class="form-bottom-space">
+          </div>
+
           <button type="submit" class="btn btn-link wizard-nav-button2 forward">
             <i class="fas fa-chevron-right"></i>
           </button>
@@ -626,10 +638,35 @@
         </form>
       </div>
       <!-- Fin primer paso - información básica -->
+
+      <!-- Segundo paso - ubicacion de la propiedad -->
+      <div id="ubicacionForm" *ngIf="numeroPaso === 2">
+        <form class="contanier-fluid" (ngSubmit)="fIB.form.valid && finalizarPaso2()" #fIB="ngForm" novalidate>
+
+
+          <div id="map" #map class="ubicacion-propiedad">
+          </div>
+          <div class="ubicaciones-propiedad-search">
+            <app-google-places
+              (setAddress)="cambiarDireccionPorBusqueda($event)">
+            </app-google-places>
+          </div>
+
+          <button class="btn btn-link wizard-nav-button2 back"
+            (click)="pasoAnterior()">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button type="submit" class="btn btn-link wizard-nav-button2 forward">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+        </form>
+      </div>
+      <!-- Fin segundo paso - ubicacion de la propiedad -->
     
-      <!-- Segundo paso - información avanzada -->
-      <div id="informacionAvanzadaForm" *ngIf="numeroPaso === 2">
-        <form (ngSubmit)="fIA.form.valid && finalizarPaso2()" #fIA="ngForm" novalidate>
+      <!-- Tercer paso - información avanzada -->
+      <div id="informacionAvanzadaForm" *ngIf="numeroPaso === 3">
+        <form (ngSubmit)="fIA.form.valid && finalizarPaso3()" #fIA="ngForm" novalidate>
 
           <div id="informacionAvanzadaCasa" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Casa'">
             <!-- m2Terreno -->
@@ -915,6 +952,9 @@
   
           </div>
 
+          <div class="form-bottom-space">
+          </div>
+
           <button class="btn btn-link wizard-nav-button2 back"
               (click)="pasoAnterior()">
             <i class="fas fa-chevron-left"></i>
@@ -925,11 +965,11 @@
 
         </form>
       </div>
-      <!-- Fin segundo paso - información avanzada -->
+      <!-- Fin tercer paso - información avanzada -->
     
-      <!-- Tercer paso - fotografías -->
-      <div id="fotografiasForm" *ngIf="numeroPaso === 3">
-        <form (ngSubmit)="finalizarPaso3()">
+      <!-- Cuarto paso - fotografías -->
+      <div id="fotografiasForm" *ngIf="numeroPaso === 4">
+        <form (ngSubmit)="finalizarPaso4()">
 
           <div class="form-group row">
             <div class="col-sm-0 col-md-1">
@@ -984,6 +1024,9 @@
             </div>
           </div>
 
+          <div class="form-bottom-space">
+          </div>
+
           <button class="btn btn-link wizard-nav-button2 back"
             (click)="pasoAnterior()">
             <i class="fas fa-chevron-left"></i>
@@ -994,11 +1037,11 @@
 
         </form>
       </div>
-      <!-- Fin tercer paso - fotografías -->
+      <!-- Fin cuarto paso - fotografías -->
 
-      <!-- Cuarto paso - resumen y guardado -->
-      <div id="resumenForm" *ngIf="numeroPaso === 4">
-        <form (ngSubmit)="finalizarPaso4()">
+      <!-- Quinto paso - resumen y guardado -->
+      <div id="resumenForm" *ngIf="numeroPaso === 5">
+        <form (ngSubmit)="finalizarPaso5()">
           
           <!-- Display de la propiedad -->
           <div class="container-fluid">
@@ -1015,6 +1058,9 @@
           </div>
           <!-- Display de la propiedad -->
 
+          <div class="form-bottom-space">
+          </div>
+
           <button class="btn btn-link wizard-nav-button2 back"
             (click)="pasoAnterior()">
             <i class="fas fa-chevron-left"></i>
@@ -1025,7 +1071,7 @@
 
         </form>
       </div>
-      <!-- Fin cuarto paso - resumen y guardado -->
+      <!-- Fin quinto paso - resumen y guardado -->
 
     </div>
     <!-- Fin área del wizard -->

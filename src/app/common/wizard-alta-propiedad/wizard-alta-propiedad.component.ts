@@ -9,9 +9,11 @@ import { Location } from '@angular/common';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/user';
-import { finalize, take } from 'rxjs/operators';
+import { finalize, take, timeInterval } from 'rxjs/operators';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
+import {} from 'googlemaps';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-wizard-alta-propiedad',
@@ -20,6 +22,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class WizardAltaPropiedadComponent implements OnInit {
   @ViewChild('wizardWorkingArea') areaToScroll: ElementRef;
+  map: google.maps.Map;
+  marker: google.maps.Marker;
+  infowindow: google.maps.InfoWindow;
+  geoCoder: google.maps.Geocoder;
 
   thisIsTheEnd: boolean;
   numeroPaso: number;
@@ -53,6 +59,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.geoCoder = new google.maps.Geocoder();
     this.initWizard();
     this.auth.user$.subscribe((user) => {
       this.user = user;
@@ -99,12 +106,97 @@ export class WizardAltaPropiedadComponent implements OnInit {
 
   pasoAnterior() {
     this.numeroPaso--;
+    if (this.numeroPaso === 2) {
+      this.cargarMapa(this.nuevaPropiedad);
+    }
     this.irIniciodePaginaDe();
   }
 
   finalizarPaso1() {
     this.numeroPaso = 2;
+    this.cargarMapa(this.nuevaPropiedad);
     this.irIniciodePaginaDe();
+  }
+
+  cargarMapa(propiedad: Propiedad) {
+    const mapElement = document.getElementById('map');
+    if (!mapElement) {
+      setTimeout(() => {
+        this.cargarMapa(propiedad);
+      }, 200);
+      return;
+    }
+    let geoPoint = new firebase.firestore.GeoPoint(19.047153095866395, -98.23302070517542);
+    if (propiedad.geoposicion) {
+      geoPoint = new firebase.firestore.GeoPoint(
+        propiedad.geoposicion.latitude,
+        propiedad.geoposicion.longitude);
+    }
+    if (!this.map) {
+      const mapProperties = {
+        center: new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude),
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false,
+        zoomControl: false,
+        // gestureHandling: 'cooperative' as google.maps.GestureHandlingOptions,
+      };
+      this.map = new google.maps.Map(mapElement, mapProperties);
+    } else {
+      // this.map.setCenter(new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude));
+    }
+    if (!this.marker) {
+      const markerProperties = {
+        position: new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude),
+        map: this.map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        title: propiedad.direccion ? propiedad.direccion : '',
+      };
+      this.marker = new google.maps.Marker(markerProperties);
+      this.marker.addListener('dragend', (event) => {
+        this.cambiarDireccionPorDragNDrop(event);
+      });
+      this.marker.addListener('dragstart', () => {
+        this.infowindow.close();
+      });
+    } else {
+      this.marker.setTitle(propiedad.direccion ? propiedad.direccion : '');
+      this.marker.setPosition(new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude));
+    }
+    if (!this.infowindow) {
+      const infoWindowOptions = {
+        content: propiedad.direccion ? propiedad.direccion : '',
+      };
+      this.infowindow = new google.maps.InfoWindow(infoWindowOptions);
+      this.infowindow.open(this.map, this.marker);
+    } else {
+      this.infowindow.setContent(propiedad.direccion ? propiedad.direccion : '');
+      this.infowindow.open(this.map, this.marker);
+    }
+  }
+
+  cambiarDireccionPorBusqueda(place: any) {
+    const geoPoint = new firebase.firestore.GeoPoint(
+      place.geometry.location.lat(),
+      place.geometry.location.lng());
+    this.nuevaPropiedad.geoposicion = geoPoint;
+    this.nuevaPropiedad.direccion = place.formatted_address;
+    this.cargarMapa(this.nuevaPropiedad);
+  }
+
+  cambiarDireccionPorDragNDrop(place: any) {
+    const geoPoint = new firebase.firestore.GeoPoint(
+      place.latLng.lat(),
+      place.latLng.lng());
+    this.nuevaPropiedad.geoposicion = geoPoint;
+    this.geoCoder.geocode({
+      location: new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude),
+    }, (results) => {
+      this.nuevaPropiedad.direccion = results[0].formatted_address;
+      this.cargarMapa(this.nuevaPropiedad);
+    });
   }
 
   finalizarPaso2() {
@@ -114,6 +206,11 @@ export class WizardAltaPropiedadComponent implements OnInit {
 
   finalizarPaso3() {
     this.numeroPaso = 4;
+    this.irIniciodePaginaDe();
+  }
+
+  finalizarPaso4() {
+    this.numeroPaso = 5;
     this.irIniciodePaginaDe();
   }
 
@@ -157,7 +254,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     // this.nuevaPropiedad.urlsFotografias.splice(position, 1);
   }
 
-  finalizarPaso4() {
+  finalizarPaso5() {
     if (!this.esEdicion) {
       this.nuevaPropiedad.id = this.db.createId();
     }

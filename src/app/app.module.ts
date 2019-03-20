@@ -45,6 +45,7 @@ import { WizardAltaPropiedadComponent } from './common/wizard-alta-propiedad/wiz
 import { LoadingComponent } from './common/loading/loading.component';
 import { PropertyDetailComponent } from './admin/property-detail/property-detail.component';
 import { PropertyDisplayComponent } from './common/property-display/property-display.component';
+import { GooglePlacesComponent } from './common/google-places/google-places.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { PropertyDisplayComponent } from './common/property-display/property-dis
     WizardAltaPropiedadComponent,
     LoadingComponent,
     PropertyDetailComponent,
-    PropertyDisplayComponent
+    PropertyDisplayComponent,
+    GooglePlacesComponent
   ],
   imports: [
     BrowserModule,
