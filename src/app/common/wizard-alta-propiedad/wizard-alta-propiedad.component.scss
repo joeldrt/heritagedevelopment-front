@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: white;
+    background-color: #EBEBEB;
     z-index: 999;
 
     .top-navigation {
@@ -35,7 +35,7 @@
     }
 
     .working-area {
-        background-color: white;
+        background-color: #EBEBEB;
         position: absolute;
         top: 0;
         left: 0;
@@ -129,6 +129,7 @@
         .input-class {
             border: 1px solid #ced4da !important;
             border-radius: .25rem !important;
+            background-color: white;
         }
 
         .wizard-working-area {

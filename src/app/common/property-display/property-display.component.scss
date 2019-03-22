@@ -65,7 +65,6 @@
         color: white;
         font-size: 1.5rem;
         background-color: #87b23e;
-        border-radius: 10px;
     }
 }
 
@@ -82,7 +81,6 @@
     .direccion {
         color: #87b23e;
         font-size: 1.5rem;
-        background-color: white;
         text-align: center;
         @media screen and (min-width: 768px) {
             text-align: left;
@@ -141,6 +139,8 @@
         color: white;
         background-color: #87b23e;
         font-size: 0.9rem;
+        font-weight: lighter;
         margin-left: 5px;
+        border-radius: 0;
     }
 }
