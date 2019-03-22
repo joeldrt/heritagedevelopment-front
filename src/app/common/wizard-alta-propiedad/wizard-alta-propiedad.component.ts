@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/user';
-import { finalize, take, timeInterval } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import {} from 'googlemaps';
@@ -40,6 +40,8 @@ export class WizardAltaPropiedadComponent implements OnInit {
   mapaDeArchivos = new Map<string, File>();
   mapaDeImagenes = new Map<string, string | ArrayBuffer>();
   urlsFotografiasBorrar: Array<string>;
+  amenidadesSeleccionadas = [];
+  listaDeAmenidades = ['Alberca', 'Roof Garden', 'Jacussi', 'Jardín', 'Gym', 'Spa', 'Cine', 'Terraza', 'Bar', 'Casa Club', 'Lago'];
 
   loading = false;
   mensajeLoading = 'cargando';
@@ -91,6 +93,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     this.propiedadDoc.valueChanges().pipe(take(1)).subscribe( propiedad => {
       this.nuevaPropiedad = propiedad;
       this.nuevaPropiedad.id = propertyId;
+      this.amenidadesSeleccionadas = propiedad.amenidades;
       this.esEdicion = true;
     });
   }
@@ -313,6 +316,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   guardarDocumento() {
+    this.nuevaPropiedad.amenidades = this.amenidadesSeleccionadas;
     Propiedad.verificarValoresIndefinidos(this.nuevaPropiedad);
     if (!this.esEdicion) {
       this.mensajeLoading = 'guardando la propiedad';

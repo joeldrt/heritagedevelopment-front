@@ -273,7 +273,7 @@
 
     <!-- Área de descripcion y amenidades -->
     <div class="row mb-5">
-      <div class="col" *ngIf="(propiedad.descripcion) as descripcion">
+      <div class="col mt-5" *ngIf="(propiedad.descripcion) as descripcion">
         <div class="resumen-display-descripcion-amenidades text-center" *ngIf="descripcion != ''">
           <div class="titulo">
             <span>Descripción de la propiedad</span>
@@ -283,13 +283,16 @@
           </div>
         </div>
       </div>
-      <div class="col" *ngIf="(propiedad.amenidades) as amenidades">
+      <div class="col mt-5" *ngIf="(propiedad.amenidades) as amenidades" 
+        [class.borde-verde-izq]="propiedad.descripcion && propiedad.amenidades">
         <div class="resumen-display-descripcion-amenidades text-center" *ngIf="amenidades != ''">
           <div class="titulo">
             <span>Amenidades</span>
           </div>
           <div class="text">
-            <span>{{amenidades}}</span>
+            <span *ngFor="let amenidad of amenidades" class="badge badge-pill badge-light">
+              {{amenidad}}
+            </span>
           </div>
         </div>
       </div>

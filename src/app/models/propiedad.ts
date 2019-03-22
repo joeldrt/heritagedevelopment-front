@@ -16,7 +16,7 @@ export class Propiedad {
     public precioRenta?: number;
     public m2Terreno?: number;
     public niveles?: number;
-    public amenidades?: string;
+    public amenidades?: string[];
     public tiempoMinimoRenta?: number;
     public capacidadCisterna?: number;
     public edadPropiedad?: number;
@@ -41,7 +41,7 @@ export class Propiedad {
         if (obj.precioRenta === undefined) { obj.precioRenta = null; }
         if (obj.m2Terreno === undefined) { obj.m2Terreno = null; }
         if (obj.niveles === undefined) { obj.niveles = null; }
-        if (obj.amenidades === undefined) { obj.amenidades = null; }
+        if (obj.amenidades === undefined) { obj.amenidades = []; }
         if (obj.tiempoMinimoRenta === undefined) { obj.tiempoMinimoRenta = null; }
         if (obj.capacidadCisterna === undefined) { obj.capacidadCisterna = null; }
         if (obj.edadPropiedad === undefined) { obj.edadPropiedad = null; }

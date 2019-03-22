@@ -219,22 +219,6 @@
             </div>
             <!-- fin descripcion -->
   
-            <!-- direccion -->
-            <!-- <div class="form-group row">
-              <div class="col-sm-0 col-md-1">
-              </div>
-              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
-              <div class="col-sm-12 col-md-6">
-                <textarea class="form-control" id="direccionPropiedad" rows="4"
-                  name="direccion" [(ngModel)]="nuevaPropiedad.direccion"
-                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
-                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
-                    Debes ingresar una direccion
-                </div>
-              </div>
-            </div> -->
-            <!-- fin direccion -->
-  
             <!-- precioVenta -->
             <div class="form-group row">
               <div class="col-sm-0 col-md-1">
@@ -372,22 +356,6 @@
             </div>
             <!-- fin descripcion -->
   
-            <!-- direccion -->
-            <!-- <div class="form-group row">
-              <div class="col-sm-0 col-md-1">
-              </div>
-              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
-              <div class="col-sm-12 col-md-6">
-                <textarea class="form-control" id="direccionPropiedad" rows="4"
-                  name="direccion" [(ngModel)]="nuevaPropiedad.direccion"
-                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
-                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
-                    Debes ingresar una direccion
-                </div>
-              </div>
-            </div> -->
-            <!-- fin direccion -->
-  
             <!-- precioVenta -->
             <div class="form-group row">
               <div class="col-sm-0 col-md-1">
@@ -493,22 +461,6 @@
             </div>
             <!-- fin descripcion -->
   
-            <!-- direccion -->
-            <!-- <div class="form-group row">
-              <div class="col-sm-0 col-md-1">
-              </div>
-              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
-              <div class="col-sm-12 col-md-6">
-                <textarea class="form-control" id="direccionPropiedad" rows="4"
-                  name="direccion" [(ngModel)]="nuevaPropiedad.direccion"
-                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
-                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
-                    Debes ingresar una direccion
-                </div>
-              </div>
-            </div> -->
-            <!-- fin direccion -->
-  
             <!-- precioVenta -->
             <div class="form-group row">
               <div class="col-sm-0 col-md-1">
@@ -584,22 +536,6 @@
               </div>
             </div>
             <!-- fin descripcion -->
-  
-            <!-- direccion -->
-            <!-- <div class="form-group row">
-              <div class="col-sm-0 col-md-1">
-              </div>
-              <label for="direccionPropiedad" class="col-sm-12 col-md-3 col-form-label">Dirección</label>
-              <div class="col-sm-12 col-md-6">
-                <textarea class="form-control" id="direccionPropiedad" rows="4"
-                  name="direccion" [(ngModel)]="nuevaPropiedad.direccion"
-                  #direccion="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && direccion.invalid }" required></textarea>
-                <div *ngIf="fIB.submitted && direccion.invalid" class="invalid-feedback">
-                    Debes ingresar una direccion
-                </div>
-              </div>
-            </div> -->
-            <!-- fin direccion -->
   
             <!-- precioVenta -->
             <div class="form-group row">
@@ -699,9 +635,16 @@
               </div>
               <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
               <div class="col-sm-12 col-md-6">
-                <textarea class="form-control" id="amenidadesPropiedad" rows="4"
-                  name="amenidades" [(ngModel)]="nuevaPropiedad.amenidades"
-                  #amenidades="ngModel"></textarea>
+                <tag-input #tagInputElement class="input-class" name="tagInputElement"
+                  [(ngModel)]="amenidadesSeleccionadas"
+                  [modelAsStrings]="true"
+                  theme='minimal'
+                  [placeholder]="'+'"
+                  [secondaryPlaceholder]="'Amenidades'"
+                  [inputClass]="'input-class'">
+                  <tag-input-dropdown [autocompleteItems]="listaDeAmenidades">
+                  </tag-input-dropdown>
+                </tag-input>
               </div>
             </div>
             <!-- fin amenidades -->

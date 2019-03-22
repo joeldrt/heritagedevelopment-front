@@ -19,20 +19,19 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
-  ) { 
+  ) {
     // Get auth data, then get firestore user document || null
     this.user$ = this.afAuth.authState.pipe(
       switchMap(
         (user: firebase.User, index: number) => {
-          if(user) {
+          if (user) {
             return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-          }
-          else {
+          } else {
             return of(null);
           }
         }
       )
-    )
+    );
   }
 
   // método que se debe llamar cuando alguien se registre en el portal
@@ -45,7 +44,7 @@ export class AuthService {
       roles: {
         client: true
       }
-    }
+    };
     return userRef.set(data, { merge: true });
   }
 
@@ -56,12 +55,12 @@ export class AuthService {
 
   // determines if user has matching role
   private checkAuthorization(user: User, allowedRoles: string[]): boolean {
-    if (!user) return false
+    if (!user) { return false; }
     for (const role of allowedRoles) {
       if ( user.roles[role] ) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   }
 }
