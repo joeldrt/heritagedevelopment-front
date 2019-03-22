@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from 'src/app/models/propiedad';
-import { ToastrService } from '../../services/toastr/toastr.service'
+import { ToastrService } from '../../services/toastr/toastr.service';
 import { Observable } from 'rxjs';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 

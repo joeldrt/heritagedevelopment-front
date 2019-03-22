@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12">
         <div class="resumen-nombre-propiedad">
-          <div class="barra-verde"></div>
+          <!-- <div class="barra-verde"></div> -->
           <span>{{propiedad.nombre}}</span>
         </div>
       </div>
@@ -273,24 +273,24 @@
 
     <!-- Área de descripcion y amenidades -->
     <div class="row mb-5">
-      <div class="col mt-5" *ngIf="(propiedad.descripcion) as descripcion">
-        <div class="resumen-display-descripcion-amenidades text-center" *ngIf="descripcion != ''">
+      <div class="col mt-5" *ngIf="propiedad.descripcion">
+        <div class="resumen-display-descripcion-amenidades text-center" *ngIf="propiedad.descripcion != ''">
           <div class="titulo">
             <span>Descripción de la propiedad</span>
           </div>
           <div class="text">
-            <span>{{descripcion}}</span>
+            <span>{{propiedad.descripcion}}</span>
           </div>
         </div>
       </div>
-      <div class="col mt-5" *ngIf="(propiedad.amenidades) as amenidades" 
+      <div class="col mt-5" *ngIf="propiedad.amenidades" 
         [class.borde-verde-izq]="propiedad.descripcion && propiedad.amenidades">
-        <div class="resumen-display-descripcion-amenidades text-center" *ngIf="amenidades != ''">
+        <div class="resumen-display-descripcion-amenidades text-center" *ngIf="propiedad.amenidades.length > 0">
           <div class="titulo">
             <span>Amenidades</span>
           </div>
           <div class="text">
-            <span *ngFor="let amenidad of amenidades" class="badge badge-pill badge-light">
+            <span *ngFor="let amenidad of propiedad.amenidades" class="badge badge-pill badge-light">
               {{amenidad}}
             </span>
           </div>

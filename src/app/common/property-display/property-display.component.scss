@@ -5,7 +5,9 @@
 
 // formulario resumen
 .resumen-nombre-propiedad {
+    margin-top: 15px;
     font-size: 2rem;
+    border-left: 5px solid #87b23e;
     .barra-verde {
         background-color: #87b23e;
         min-width: 5px;
@@ -111,7 +113,9 @@
 }
 
 .borde-verde-izq {
-    border-left: 5px solid #87b23e;
+    @media screen and (min-width: 845px){
+        border-left: 5px solid #87b23e;
+    }
 }
 
 .resumen-display-descripcion-amenidades {
@@ -121,6 +125,9 @@
     min-width: 300px;
     @media screen and (min-width: 411px){
         min-width: 370px;
+    }
+    @media screen and (min-width: 320px){
+        min-width: 240px;
     }
     height: inherit;
     .titulo span {
