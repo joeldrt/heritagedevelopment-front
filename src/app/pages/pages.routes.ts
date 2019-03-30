@@ -6,10 +6,12 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { AdquirirComponent } from './contacto/adquirir/adquirir.component';
 import { OfertarComponent } from './contacto/ofertar/ofertar.component';
 import { LoginComponent } from './login/login.component';
+import { InmueblesResultadoComponent } from './inmuebles-resultado/inmuebles-resultado.component';
 
 export const PAGES_ROUTES: Routes = [
   { path: '', redirectTo: 'inmuebles', pathMatch: 'full' },
   { path: 'inmuebles', component: InmueblesComponent },
+  { path: 'inmuebles/resultados', component: InmueblesResultadoComponent},
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'contacto/adquirir', component: AdquirirComponent },

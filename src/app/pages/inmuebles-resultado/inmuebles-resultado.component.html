@@ -1,0 +1,48 @@
+<div class="inmuebles-resultado-background">
+  
+  <!-- Contenido de la página de inmuebles-resultado -->
+  <div class="page-area mb-5" id="resultArea" #resultArea>
+    <div class="container-fluid" *ngIf="propiedades">
+      <div class="row">
+
+        <!-- Tarjeta de inmueble -->
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="let propiedad of propiedades">
+          <div class="card">
+            <div class="image-viewport">
+              <!-- Imagen por default -->
+              <img *ngIf="!propiedad.urlsFotografias || propiedad.urlsFotografias.length === 0"
+                src="../../../assets/images/departamento-img.jpg" alt="..." [routerLink]="['/admin/estate', propiedad.id]"> 
+              <!-- end Imagen por default -->
+              <!-- Primera imagen de la propiedad -->
+              <img *ngIf="propiedad.urlsFotografias && propiedad.urlsFotografias.length >= 0"
+                [src]="propiedad.urlsFotografias[0]" alt="..." [routerLink]="['/admin/estate', propiedad.id]"> 
+              <!-- Fin primera imagen de la propiedad -->
+              <div class="propiedad-precio-renta" *ngIf="propiedad.precioRenta && propiedad.precioRenta > 0">
+                <span class="titulo">{{propiedad.tipoPropiedad}} en renta</span>
+                <span>{{propiedad.precioRenta | currency}} / mes</span>
+              </div>
+              <div class="propiedad-precio-venta" *ngIf="propiedad.precioVenta && propiedad.precioVenta > 0">
+                <span class="titulo">{{propiedad.nombre}}</span>
+                <span>{{propiedad.precioVenta | currency}}</span>
+              </div>
+            </div>
+  
+            <div class="card-body">
+              <h5 class="card-title">{{propiedad.nombre}}</h5>
+              <p class="card-text">{{propiedad.descripcion}}</p>
+              <a href="#" class="btn btn-link" [routerLink]="['.', propiedad.id]" >Detalle</a>
+            </div>
+          </div>
+        </div>
+        <!-- Fin tarjeta de inmueble -->
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Fin contenido de la página de inmuebles-resultado -->
+
+  <app-footer></app-footer>
+</div>
+
+

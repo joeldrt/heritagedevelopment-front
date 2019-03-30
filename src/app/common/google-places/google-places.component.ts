@@ -7,8 +7,8 @@ import {} from 'googlemaps';
   styleUrls: ['./google-places.component.scss']
 })
 export class GooglePlacesComponent implements OnInit, AfterViewInit {
-  @Input() adressType: string;
-  @Output() setAddress: EventEmitter<any> = new EventEmitter();
+  @Input() strictBounds = false;
+  @Output() setAddress: EventEmitter<google.maps.places.PlaceResult> = new EventEmitter();
   @ViewChild('addresstext') addresstext: any;
 
   autocompleteInput: string;
@@ -27,8 +27,13 @@ export class GooglePlacesComponent implements OnInit, AfterViewInit {
   private getPlaceAutocomplete() {
     const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
         {
-            // componentRestrictions: { country: 'MX' },
-            // types: [this.adressType]  // 'establishment' / 'address' / 'geocode'
+            bounds: new google.maps.LatLngBounds(
+              new google.maps.LatLng(18.842749,  -98.471144),
+              new google.maps.LatLng(19.133659,  -98.024678)
+            ),
+            componentRestrictions: this.strictBounds ? { country: 'MX' } : null, // restringir busqueda en México de ser true.
+            types: ['geocode'],  // 'establishment' / 'address' / 'geocode' -- muestra colonias y zonas
+            strictBounds: this.strictBounds, // de ser true en este momento solo muestra resultados en el área de puebla.
         });
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
         const place = autocomplete.getPlace();
@@ -36,7 +41,7 @@ export class GooglePlacesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  invokeEvent(place: any) {
+  invokeEvent(place: google.maps.places.PlaceResult) {
       this.setAddress.emit(place);
   }
 

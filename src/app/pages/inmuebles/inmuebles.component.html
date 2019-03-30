@@ -16,73 +16,22 @@
             <!-- Fin título del formulario -->
 
             <!-- Formulario -->
-            <form>
-              <div class="row">
-                <div class="col-xs-12 col-md-6">
-                  <div class="form-group">
-                    <label for="buscoSelect">Busco</label>
-                    <select class="form-control" id="buscoSelect">
-                      <option>Comprar</option>
-                      <option>Rentar</option>
-                    </select>
+            <div class="row">
+              <div class="col-12">
+                <div class="input-group">
+                  <input #addressInput id="addressInput" type="text" class="form-control" 
+                    placeholder="Ingresa una ubicación" aria-label="Ingresa una ubicación" 
+                    aria-describedby=""
+                    [ngClass]="{ 'is-invalid': searchEmpty }">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary boton-buscar" type="button" id="button-addon2" (click)="buscarPropiedades()">Buscar</button>
                   </div>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                  <div class="form-group">
-                    <label for="tipoSelect">Tipo</label>
-                    <select class="form-control" id="tipoSelect">
-                      <option>Casa</option>
-                      <option>Departamento</option>
-                      <option>Oficina</option>
-                      <option>Lote</option>
-                      <option>Terreno</option>
-                    </select>
+                  <div *ngIf="searchEmpty" class="invalid-feedback">
+                      Debes ingresar una ubicación
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-xs-12 col-md-6">
-                  <div class="form-group">
-                    <label for="precioMinimoInput">Precio Mínimo</label>
-                    <input type="number" class="form-control" id="precioMinimoInput">
-                  </div>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                  <div class="form-group">
-                    <label for="precioMaximoInput">Precio Máximo</label>
-                    <input type="number" class="form-control" id="precioMaximoInput">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-md-6">
-                  <div class="form-group">
-                    <label for="coloniaSelect">Colonia</label>
-                    <select class="form-control" id="coloniaSelect">
-                      <option>Esmeralda</option>
-                      <option>Lomas</option>
-                      <option>Huexotitla</option>
-                      <option>Los Fuertes</option>
-                      <option>La Paz</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                  <div class="form-group">
-                    <label for="numeroDeCuartosInput">Número de Cuartos</label>
-                    <input type="number" class="form-control" id="numeroDeCuartosInput">
-                  </div>
-                </div>
-              </div>
-    
-              <div class="row">
-                <div class="col-12">
-                  <button class="btn boton-buscar mb-4"> 
-                    Buscar
-                  </button>
-                </div>
-              </div>
-            </form>
+            </div>
             <!-- Fin formulario -->
 
           </div>

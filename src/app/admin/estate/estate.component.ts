@@ -44,7 +44,7 @@ export class EstateComponent implements OnInit, OnDestroy {
               ...item.payload.doc.data()
             } as Propiedad;
           }
-        )
+        );
         setTimeout(this.setLastScrollPosition, 1);
       }
     );

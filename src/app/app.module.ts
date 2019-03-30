@@ -50,6 +50,7 @@ import { LoadingComponent } from './common/loading/loading.component';
 import { PropertyDetailComponent } from './admin/property-detail/property-detail.component';
 import { PropertyDisplayComponent } from './common/property-display/property-display.component';
 import { GooglePlacesComponent } from './common/google-places/google-places.component';
+import { InmueblesResultadoComponent } from './pages/inmuebles-resultado/inmuebles-resultado.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { GooglePlacesComponent } from './common/google-places/google-places.comp
     LoadingComponent,
     PropertyDetailComponent,
     PropertyDisplayComponent,
-    GooglePlacesComponent
+    GooglePlacesComponent,
+    InmueblesResultadoComponent
   ],
   imports: [
     BrowserModule,
