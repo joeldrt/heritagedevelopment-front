@@ -318,6 +318,11 @@ export class WizardAltaPropiedadComponent implements OnInit {
   guardarDocumento() {
     this.nuevaPropiedad.amenidades = this.amenidadesSeleccionadas;
     Propiedad.verificarValoresIndefinidos(this.nuevaPropiedad);
+    if (this.nuevaPropiedad.geoposicion == null) {
+      this.loading = false;
+      this.toastr.error(`Error al guardar la propiedad: La ubiciación no es válida`);
+      return;
+    }
     if (!this.esEdicion) {
       this.mensajeLoading = 'guardando la propiedad';
       this.nuevaPropiedad.userUid = this.user.uid;

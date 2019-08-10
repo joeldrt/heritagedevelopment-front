@@ -31,7 +31,7 @@ export class InmueblesResultadoComponent implements OnInit {
 
   showResults() {
     console.log(this.place);
-    this.propiedadService.obtenerPropiedadesCercanasA(this.place.geometry.location.lat(), this.place.geometry.location.lng(), 4).subscribe(
+    this.propiedadService.obtenerPropiedadesCercanasA(this.place.geometry.location.lat(), this.place.geometry.location.lng()).subscribe(
       actionArray => {
         this.propiedades = actionArray.map(
           item => {

@@ -29,7 +29,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": ["./node_modules/latlon-geohash/latlon-geohash.js"],
             "es5BrowserSupport": true
           },
           "configurations": {

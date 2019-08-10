@@ -23,6 +23,7 @@ export class Propiedad {
     public costoMantenimiento?: number;
     public urlsFotografias?: string[];
     public geoposicion?: firebase.firestore.GeoPoint;
+    public geohash?: string;
     constructor() {
     }
 
@@ -48,5 +49,6 @@ export class Propiedad {
         if (obj.costoMantenimiento === undefined) { obj.costoMantenimiento = null; }
         if (obj.urlsFotografias === undefined) { obj.urlsFotografias = []; }
         if (obj.geoposicion === undefined) { obj.geoposicion = null; }
+        if (obj.geohash === undefined) { obj.geohash = null; }
     }
 }
