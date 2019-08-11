@@ -22,8 +22,7 @@ export class Propiedad {
     public edadPropiedad?: number;
     public costoMantenimiento?: number;
     public urlsFotografias?: string[];
-    public geoposicion?: firebase.firestore.GeoPoint;
-    public geohash?: string;
+    public coordinates?: firebase.firestore.GeoPoint;
     constructor() {
     }
 
@@ -48,7 +47,6 @@ export class Propiedad {
         if (obj.edadPropiedad === undefined) { obj.edadPropiedad = null; }
         if (obj.costoMantenimiento === undefined) { obj.costoMantenimiento = null; }
         if (obj.urlsFotografias === undefined) { obj.urlsFotografias = []; }
-        if (obj.geoposicion === undefined) { obj.geoposicion = null; }
-        if (obj.geohash === undefined) { obj.geohash = null; }
+        if (obj.coordinates === undefined) { obj.coordinates = null; }
     }
 }

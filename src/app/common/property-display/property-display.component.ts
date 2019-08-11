@@ -35,7 +35,7 @@ export class PropertyDisplayComponent implements OnInit, OnChanges, AfterViewIni
       return;
     }
     const mapProperties = {
-      center: new google.maps.LatLng(this.propiedad.geoposicion.latitude, this.propiedad.geoposicion.longitude),
+      center: new google.maps.LatLng(this.propiedad.coordinates.latitude, this.propiedad.coordinates.longitude),
       zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
@@ -46,7 +46,7 @@ export class PropertyDisplayComponent implements OnInit, OnChanges, AfterViewIni
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
     const markerProperties = {
-      position: new google.maps.LatLng(this.propiedad.geoposicion.latitude, this.propiedad.geoposicion.longitude),
+      position: new google.maps.LatLng(this.propiedad.coordinates.latitude, this.propiedad.coordinates.longitude),
       map: this.map,
       draggable: false,
       title: this.propiedad.direccion ? this.propiedad.direccion : '',

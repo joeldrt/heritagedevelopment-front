@@ -14,6 +14,7 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import {} from 'googlemaps';
 import * as firebase from 'firebase/app';
+import { GeoDocumentSnapshot } from 'geofirestore';
 
 @Component({
   selector: 'app-wizard-alta-propiedad',
@@ -89,11 +90,10 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   verificarEsEdicion(propertyId: string) {
-    this.propiedadDoc = this.propiedadService.obtenerPropiedad(propertyId);
-    this.propiedadDoc.valueChanges().pipe(take(1)).subscribe( propiedad => {
-      this.nuevaPropiedad = propiedad;
+    this.propiedadService.obtenerPropiedad(propertyId).onSnapshot((snapshot: GeoDocumentSnapshot) => {
+      this.nuevaPropiedad = snapshot.data() as Propiedad;
       this.nuevaPropiedad.id = propertyId;
-      this.amenidadesSeleccionadas = propiedad.amenidades;
+      this.amenidadesSeleccionadas = this.nuevaPropiedad.amenidades;
       this.esEdicion = true;
     });
   }
@@ -131,10 +131,12 @@ export class WizardAltaPropiedadComponent implements OnInit {
       return;
     }
     let geoPoint = new firebase.firestore.GeoPoint(19.047153095866395, -98.23302070517542);
-    if (propiedad.geoposicion) {
+    if (propiedad.coordinates) {
       geoPoint = new firebase.firestore.GeoPoint(
-        propiedad.geoposicion.latitude,
-        propiedad.geoposicion.longitude);
+        propiedad.coordinates.latitude,
+        propiedad.coordinates.longitude);
+    } else {
+      propiedad.coordinates = geoPoint;
     }
     if (!this.map) {
       const mapProperties = {
@@ -188,7 +190,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     const geoPoint = new firebase.firestore.GeoPoint(
       place.geometry.location.lat(),
       place.geometry.location.lng());
-    this.nuevaPropiedad.geoposicion = geoPoint;
+    this.nuevaPropiedad.coordinates = geoPoint;
     this.nuevaPropiedad.direccion = place.formatted_address;
     this.cargarMapa(this.nuevaPropiedad);
   }
@@ -197,7 +199,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     const geoPoint = new firebase.firestore.GeoPoint(
       place.latLng.lat(),
       place.latLng.lng());
-    this.nuevaPropiedad.geoposicion = geoPoint;
+    this.nuevaPropiedad.coordinates = geoPoint;
     this.geoCoder.geocode({
       location: new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude),
     }, (results) => {
@@ -318,7 +320,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   guardarDocumento() {
     this.nuevaPropiedad.amenidades = this.amenidadesSeleccionadas;
     Propiedad.verificarValoresIndefinidos(this.nuevaPropiedad);
-    if (this.nuevaPropiedad.geoposicion == null) {
+    if (this.nuevaPropiedad.coordinates == null) {
       this.loading = false;
       this.toastr.error(`Error al guardar la propiedad: La ubiciación no es válida`);
       return;

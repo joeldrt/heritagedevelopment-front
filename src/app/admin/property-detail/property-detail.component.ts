@@ -7,6 +7,7 @@ import { Propiedad } from 'src/app/models/propiedad';
 import { ToastrService } from '../../services/toastr/toastr.service';
 import { Observable } from 'rxjs';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { GeoDocumentSnapshot } from 'geofirestore';
 
 @Component({
   selector: 'app-property-detail',
@@ -17,7 +18,7 @@ export class PropertyDetailComponent implements OnInit {
   propertyId: string;
 
   private propiedadDoc: AngularFirestoreDocument<Propiedad>;
-  propiedad: Observable<Propiedad>;
+  propiedad: Propiedad;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,8 +37,9 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   cargarPropiedad(propertyId: string) {
-    this.propiedadDoc = this.propiedadService.obtenerPropiedad(propertyId);
-    this.propiedad = this.propiedadDoc.valueChanges();
+    this.propiedadService.obtenerPropiedad(propertyId).onSnapshot((snapshot: GeoDocumentSnapshot) => {
+      this.propiedad = snapshot.data() as Propiedad;
+    });
   }
 
 }

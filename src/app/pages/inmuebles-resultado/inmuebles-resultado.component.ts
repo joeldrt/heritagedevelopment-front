@@ -3,6 +3,7 @@ import { SessionService } from '../../services/session/session.service';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from '../../models/propiedad';
 import { Router } from '@angular/router';
+import { GeoQuerySnapshot } from 'geofirestore';
 
 @Component({
   selector: 'app-inmuebles-resultado',
@@ -30,17 +31,15 @@ export class InmueblesResultadoComponent implements OnInit {
   }
 
   showResults() {
-    console.log(this.place);
-    this.propiedadService.obtenerPropiedadesCercanasA(this.place.geometry.location.lat(), this.place.geometry.location.lng()).subscribe(
-      actionArray => {
-        this.propiedades = actionArray.map(
-          item => {
-            return {
-              id: item.payload.doc.id,
-              ...item.payload.doc.data()
-            } as Propiedad;
-          }
-        );
+    this.propiedadService.obtenerPropiedadesCercanasA(
+      this.place.geometry.location.lat(),
+      this.place.geometry.location.lng()
+    ).then(
+      (value: GeoQuerySnapshot) => {
+        this.propiedades = new Array<Propiedad>();
+        value.docs.forEach((element) => {
+          this.propiedades.push(element.data() as Propiedad);
+        });
       }
     );
   }

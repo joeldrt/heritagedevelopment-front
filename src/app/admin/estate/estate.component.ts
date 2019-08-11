@@ -4,6 +4,7 @@ import { Propiedad } from '../../models/propiedad';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { GeoQuerySnapshot } from 'geofirestore';
 
 @Component({
   selector: 'app-estate',
@@ -30,21 +31,18 @@ export class EstateComponent implements OnInit, OnDestroy {
   constructor(
     private propiedadService: PropiedadService,
     private _location: Location,
-  ) { 
+  ) {
     this.filter = new PropertyFilter('', '');
+    this.propiedades = new Array<Propiedad>();
   }
 
   ngOnInit() {
-    this.propiedadService.obtenerPropiedades().subscribe(
-      actionArray => {
-        this.propiedades = actionArray.map(
-          item => {
-            return {
-              id: item.payload.doc.id,
-              ...item.payload.doc.data()
-            } as Propiedad;
-          }
-        );
+    this.propiedadService.obtenerPropiedades().onSnapshot(
+      (snapshot: GeoQuerySnapshot) => {
+        this.propiedades = new Array<Propiedad>();
+        snapshot.docs.forEach((value) => {
+          this.propiedades.push((value.data() as Propiedad));
+        });
         setTimeout(this.setLastScrollPosition, 1);
       }
     );
