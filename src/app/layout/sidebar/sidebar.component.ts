@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from  "@angular/router";
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastrService } from '../../services/toastr/toastr.service';
 
@@ -23,16 +23,16 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.auth.user$.subscribe(user => this.user = user)
+    this.auth.user$.subscribe(user => this.user = user);
   }
 
-  logout(){
+  logout() {
     this.afAuth.auth.signOut().then(
       (value) => {
         this.router.navigate(['/inmuebles']);
       },
       (error) => {
-        this.toastr.error(error.message, "Error");
+        this.toastr.error(error.message, 'Error');
       }
     );
   }

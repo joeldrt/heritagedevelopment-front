@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from  "@angular/router";
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { ToastrService } from '../../services/toastr/toastr.service';
@@ -12,7 +12,7 @@ import { ToastrService } from '../../services/toastr/toastr.service';
 export class LoginComponent implements OnInit {
 
   loading = false;
-  mensaje_loading = "";
+  mensaje_loading = '';
 
   public email: string;
   public password: string;
@@ -28,11 +28,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (!this.email || !this.password) {
-      this.toastr.error('Nombre de usuario o contraseña inválidos', "Error");
+      this.toastr.error('Nombre de usuario o contraseña inválidos', 'Error');
       return;
     }
     this.loading = true;
-    this.mensaje_loading = "Ingresando..."
+    this.mensaje_loading = 'Ingresando...';
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(
       (credentials) => {
         this.router.navigate(['/admin']);
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        this.toastr.error(error.message, "Error");
+        this.toastr.error(error.message, 'Error');
         this.loading = false;
       }
     );

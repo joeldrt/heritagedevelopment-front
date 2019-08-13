@@ -1,0 +1,25 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	function getRole(role) {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+    }
+    match /users/{document} {
+      allow read: if request.auth.uid != null;
+      allow create: if request.resource.data.roles.keys().hasAny(['root', 'admin']) == false;
+      allow update: if getRole('root') == true || getRole('admin') == true;
+    }
+    match /propiedades/{document} {
+    	allow read;
+      allow create: if request.auth.uid != null;
+      allow update: if (
+      	getRole('root') == true ||
+        getRole('admin') == true ||
+        request.auth.uid == document[user_uid]
+      );
+      allow delete: if (
+      	getRole('root') == true ||
+        getRole('admin') == true
+      );
+    }
+  }
+}
