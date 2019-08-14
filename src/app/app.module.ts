@@ -51,6 +51,8 @@ import { PropertyDetailComponent } from './admin/property-detail/property-detail
 import { PropertyDisplayComponent } from './common/property-display/property-display.component';
 import { GooglePlacesComponent } from './common/google-places/google-places.component';
 import { InmueblesResultadoComponent } from './pages/inmuebles-resultado/inmuebles-resultado.component';
+import { FiltroPrecioComponent } from './pages/inmuebles-resultado/filtro-precio/filtro-precio.component';
+import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { InmueblesResultadoComponent } from './pages/inmuebles-resultado/inmuebl
     PropertyDetailComponent,
     PropertyDisplayComponent,
     GooglePlacesComponent,
-    InmueblesResultadoComponent
+    InmueblesResultadoComponent,
+    FiltroPrecioComponent,
+    ClickStopPropagationDirective
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
 import {} from 'googlemaps';
-
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-inmuebles',
@@ -17,6 +17,7 @@ export class InmueblesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private sessionService: SessionService,
+    private storageService: StorageService,
     private router: Router,
   ) { }
 
@@ -35,7 +36,7 @@ export class InmueblesComponent implements OnInit, AfterViewInit {
           //   new google.maps.LatLng(19.133659,  -98.024678)
           // ),
           componentRestrictions: { country: 'MX' },
-          types: ['geocode'],  // 'establishment' / 'address' / 'geocode' -- muestra colonias y zonas
+          types: [],  // 'establishment' / 'address' / 'geocode' -- muestra colonias y zonas
           strictBounds: false, // true limitado a puebla - false limitado a país méxico
       });
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
@@ -50,6 +51,7 @@ export class InmueblesComponent implements OnInit, AfterViewInit {
       return;
     }
     this.sessionService.setPlace(this.place);
+    this.storageService.saveData(StorageService.SAVED_PLACE, this.place);
     this.router.navigate(['inmuebles/resultados']);
   }
 

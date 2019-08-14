@@ -1,3 +1,64 @@
+.barra-busqueda-filtros {
+    background-color: rgba(255, 255, 255, 1);
+    position: absolute;
+    margin-top: 129px;
+    // z-index: 1031; // para estar arriba del header si fuera necesario
+    width: 100%;
+    min-height: 93px;
+    max-height: 93px;
+}
+
+.botones-filtros {
+    padding-right: 6px !important;
+    padding-left: 6px !important;
+}
+
+.area-busqueda {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.dropdown {
+    display: inline !important;
+}
+
+.dropdown-menu {
+    padding: 0 !important;
+    -webkit-box-shadow: 0px 6px 6px 0px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0px 6px 6px 0px rgba(0,0,0,0.23);
+    box-shadow: 0px 6px 6px 0px rgba(0,0,0,0.23);
+}
+
+.boton-heritage {
+    :focus {
+        outline:0;
+    }
+    background-color: rgb(135, 178, 62);
+    color: white;
+    border-color: rgb(135, 178, 62);
+    :hover {
+        background-color: rgb(135, 178, 62);
+        border-color: green;
+    }
+}
+
+.boton-inline-heritage {
+    color: #87b23e;
+    border-color: #87b23e;
+    background-color: white;
+    margin: 9px;
+    :focus {
+        background-color: #87b23e !important;
+        border-color: #87b23e !important;
+        color: white !important;
+    }
+}
+
+.result-area {
+    padding-top: calc(129px + 93px);
+    min-height: calc(100vh - 97px);
+}
+
 .inmuebles-resultado-background {
     background-color: #EBEBEB;
     min-height: 100vh;
@@ -7,7 +68,8 @@
 }
 
 .card {
-    margin-top: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     max-height: 510px;
     -webkit-box-shadow: 3px 6px 12px 1px rgba(122,122,122,0.9);
     -moz-box-shadow: 3px 6px 12px 1px rgba(122,122,122,0.9);

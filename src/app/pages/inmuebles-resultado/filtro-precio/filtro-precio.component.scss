@@ -1,0 +1,24 @@
+.dropdownBodyForm {
+    padding: 15px;
+    width: calc(100vw - 21px);
+    max-width: 375px;
+    max-height: calc(100vh - (129px + 93px));
+    overflow-y: auto;
+}
+
+.dropdownFooterForm {
+    background-color: rgb(135, 178, 62);
+    text-align: right;
+}
+
+.boton-inline-heritage {
+    color: #87b23e;
+    border-color: #87b23e;
+    background-color: white;
+    margin: 9px;
+    :focus {
+        background-color: #87b23e !important;
+        border-color: #87b23e !important;
+        color: white !important;
+    }
+}

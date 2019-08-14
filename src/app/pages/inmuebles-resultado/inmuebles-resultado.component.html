@@ -1,20 +1,55 @@
 <div class="inmuebles-resultado-background">
+
+  <div class="barra-busqueda-filtros">
+    <div class="area-busqueda">
+      <div class="input-group search-group">
+        <input #addressInput id="addressInput" type="text" class="form-control" 
+          placeholder="Ingresa una ubicación" aria-label="Ingresa una ubicación" 
+          aria-describedby=""
+          [ngClass]="{ 'is-invalid': searchEmpty }">
+        <div class="input-group-append">
+          <button class="btn btn-primary boton-heritage" type="button" id="button-addon2" (click)="buscarPropiedades()">Buscar</button>
+        </div>
+        <div *ngIf="searchEmpty" class="invalid-feedback">
+            Debes ingresar una ubicación
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid botones-filtros">
+      <div class="dropdown">
+        <button class="btn boton-inline-heritage" type="button" id="precioDropdown" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Precio
+        </button>
+        <div class="dropdown-menu" aria-labelledby="precioDropdown" appClickStopPropagation>
+          <app-filtro-precio 
+            [preciomenor]="precioMenor" (preciomenorChange)="precioMenorChange($event)"
+            [preciomayor]="precioMayor" (preciomayorChange)="precioMayorChange($event)"></app-filtro-precio>
+        </div>
+      </div>
+      
+      <button class="btn boton-inline-heritage d-none d-md-inline" type="button">Recámaras</button>
+      <button class="btn boton-inline-heritage " type="button">Tipo de Propiedad</button>
+      <button class="btn boton-inline-heritage" type="button">Más</button>
+    </div>
+  </div>
+  
   
   <!-- Contenido de la página de inmuebles-resultado -->
-  <div class="page-area mb-5" id="resultArea" #resultArea>
-    <div class="container-fluid" *ngIf="propiedades">
+  <div class="result-area" id="resultArea" #resultArea>
+    <div class="container-fluid" *ngIf="propiedadesFiltradas">
       <div class="row">
 
         <!-- Tarjeta de inmueble -->
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="let propiedad of propiedades">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="let propiedad of propiedadesFiltradas">
           <div class="card">
             <div class="image-viewport">
               <!-- Imagen por default -->
-              <img *ngIf="!propiedad.urlsFotografias || propiedad.urlsFotografias.length === 0"
+              <img *ngIf="!propiedad.urlsFotografias || propiedad.urlsFotografias.length == 0 || propiedad.urlsFotografias[0] === null" 
                 src="../../../assets/images/departamento-img.jpg" alt="..." [routerLink]="['/admin/estate', propiedad.id]"> 
               <!-- end Imagen por default -->
               <!-- Primera imagen de la propiedad -->
-              <img *ngIf="propiedad.urlsFotografias && propiedad.urlsFotografias.length >= 0"
+              <img *ngIf="propiedad.urlsFotografias && propiedad.urlsFotografias.length > 0"
                 [src]="propiedad.urlsFotografias[0]" alt="..." [routerLink]="['/admin/estate', propiedad.id]"> 
               <!-- Fin primera imagen de la propiedad -->
               <div class="propiedad-precio-renta" *ngIf="propiedad.precioRenta && propiedad.precioRenta > 0">

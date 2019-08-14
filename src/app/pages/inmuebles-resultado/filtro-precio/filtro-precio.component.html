@@ -1,0 +1,21 @@
+<div class="dropdown-form">
+  <div class="dropdownBodyForm">
+    <label>Rango de Precios</label>
+    <form>
+      <div class="form-row">
+        <div class="col">
+          <input type="number" class="form-control" id="precioMenor" #precioMenor placeholder="Min"
+          (change)="handleMenorChanges(precioMenor.value)" [value]="preciomenor">
+        </div>
+        <span style="padding: 5px;">–</span>
+        <div class="col">
+          <input type="number" class="form-control" id="precioMayor" #precioMayor placeholder="Max"
+          (change)="handleMayorChanges(precioMayor.value)" [value]="preciomayor">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="dropdownFooterForm">
+      <button type="button" class="btn boton-inline-heritage dont-stop-propagation">Terminar</button>
+  </div>
+</div>
