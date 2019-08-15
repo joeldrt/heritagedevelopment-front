@@ -53,6 +53,8 @@ import { GooglePlacesComponent } from './common/google-places/google-places.comp
 import { InmueblesResultadoComponent } from './pages/inmuebles-resultado/inmuebles-resultado.component';
 import { FiltroPrecioComponent } from './pages/inmuebles-resultado/filtro-precio/filtro-precio.component';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
+import { FiltroRentaVentaComponent } from './pages/inmuebles-resultado/filtro-renta-venta/filtro-renta-venta.component';
+import { FiltroTipoPropiedadComponent } from './pages/inmuebles-resultado/filtro-tipo-propiedad/filtro-tipo-propiedad.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     GooglePlacesComponent,
     InmueblesResultadoComponent,
     FiltroPrecioComponent,
-    ClickStopPropagationDirective
+    ClickStopPropagationDirective,
+    FiltroRentaVentaComponent,
+    FiltroTipoPropiedadComponent
   ],
   imports: [
     BrowserModule,

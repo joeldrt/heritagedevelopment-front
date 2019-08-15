@@ -1,0 +1,32 @@
+.dropdownBodyForm {
+    padding: 15px;
+    width: calc(100vw - 21px);
+    max-width: 375px;
+    max-height: calc(100vh - (129px + 93px));
+    overflow-y: auto;
+}
+
+input[type=checkbox] {
+    margin: 12px;
+}
+
+input[type=checkbox][ng-reflect-model=true] {
+    background-color: #87b23e;
+}
+
+.dropdownFooterForm {
+    background-color: #87b23e;
+    text-align: right;
+}
+
+.boton-inline-heritage {
+    color: #87b23e;
+    border-color: #87b23e;
+    background-color: white;
+    margin: 9px;
+    :focus {
+        background-color: #87b23e !important;
+        border-color: #87b23e !important;
+        color: white !important;
+    }
+}

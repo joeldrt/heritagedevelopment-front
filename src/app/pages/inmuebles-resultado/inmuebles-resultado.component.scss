@@ -2,7 +2,7 @@
     background-color: rgba(255, 255, 255, 1);
     position: absolute;
     margin-top: 129px;
-    // z-index: 1031; // para estar arriba del header si fuera necesario
+    z-index: 9;// z-index: 1031; // para estar arriba del header si fuera necesario
     width: 100%;
     min-height: 93px;
     max-height: 93px;

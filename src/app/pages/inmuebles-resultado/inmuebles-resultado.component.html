@@ -15,7 +15,19 @@
         </div>
       </div>
     </div>
+
     <div class="container-fluid botones-filtros">
+      <div class="dropdown">
+        <button class="btn boton-inline-heritage" type="button" id="rentaVentaDropdown"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{rentaVenta | titlecase}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="rentaVentaDropdown" appClickStopPropagation>
+          <app-filtro-renta-venta
+            [rentaventa]="rentaVenta" (rentaventaChange)="rentaventaChange($event)"></app-filtro-renta-venta>
+        </div>
+      </div>
+
       <div class="dropdown">
         <button class="btn boton-inline-heritage" type="button" id="precioDropdown" 
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,9 +39,20 @@
             [preciomayor]="precioMayor" (preciomayorChange)="precioMayorChange($event)"></app-filtro-precio>
         </div>
       </div>
+
+      <div class="dropdown">
+        <button class="btn boton-inline-heritage d-none d-md-inline" type="button" id="tipoDropdown"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tipo de Propiedad
+        </button>
+        <div class="dropdown-menu" aria-labelledby="tipoDropdown" appClickStopPropagation>
+          <app-filtro-tipo-propiedad
+            [tiposPropiedadesSeleccionadas]="tiposPropiedad" (tiposPropiedadesSeleccionadasChange)="tiposPropiedadChange($event)">
+          </app-filtro-tipo-propiedad>
+        </div>
+      </div>
+
       
-      <button class="btn boton-inline-heritage d-none d-md-inline" type="button">Recámaras</button>
-      <button class="btn boton-inline-heritage " type="button">Tipo de Propiedad</button>
       <button class="btn boton-inline-heritage" type="button">Más</button>
     </div>
   </div>

@@ -19,8 +19,12 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   propiedadesFiltradas: Propiedad[];
   searchEmpty = false;
 
-  precioMenor: number;
-  precioMayor: number;
+  rentaVenta: string; // filtro de renta o venta
+
+  precioMenor: number; // filtro precio menor
+  precioMayor: number; // filtro precio mayor
+
+  tiposPropiedad: Array<string>; // filtro tipo propiedad
 
   constructor(
     private sessionService: SessionService,
@@ -39,6 +43,14 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
       }
       this.place = storedPlace as google.maps.places.PlaceResult;
     }
+    this.rentaVenta = this.storageService.getData(StorageService.FILTER_RENTA_VENTA);
+    if (this.rentaVenta === undefined || this.rentaVenta === null) {
+      this.rentaVenta = 'renta';
+      this.storageService.saveData(StorageService.FILTER_RENTA_VENTA, 'renta');
+    }
+    this.precioMenor = this.storageService.getData(StorageService.FILTER_PRECIO_MENOR);
+    this.precioMayor = this.storageService.getData(StorageService.FILTER_PRECIO_MAYOR);
+    this.tiposPropiedad = this.storageService.getData(StorageService.FILTER_TIPO_PROPIEDAD);
   }
 
   ngAfterViewInit() {
@@ -62,6 +74,8 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     this.propiedadService.obtenerPropiedadesCercanasA(lat, lng)
     .then(
       (value: GeoQuerySnapshot) => {
+        this.sessionService.setPlace(this.place);
+        this.storageService.saveData(StorageService.SAVED_PLACE, this.place);
         this.propiedades = new Array<Propiedad>();
         value.docs.forEach((element) => {
           this.propiedades.push(element.data() as Propiedad);
@@ -75,13 +89,31 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     this.propiedadesFiltradas = new Array<Propiedad>();
     this.propiedades.forEach((propiedad) => {
       let shouldBeAdded = true;
-      if (this.precioMenor !== undefined && this.precioMenor > 0) { // precio de venta mínimo
-        if (propiedad.precioVenta < this.precioMenor) {
-          shouldBeAdded = false;
+      if (this.rentaVenta === 'venta') {
+        if (this.precioMenor !== undefined && this.precioMenor > 0) { // precio de venta mínimo
+          if (propiedad.precioVenta && (propiedad.precioVenta < this.precioMenor)) {
+            shouldBeAdded = false;
+          }
+        }
+        if (this.precioMayor !== undefined && this.precioMayor > 0) { // precio de venta máximo
+          if (propiedad.precioVenta && (propiedad.precioVenta > this.precioMayor)) {
+            shouldBeAdded = false;
+          }
+        }
+      } else {
+        if (this.precioMenor !== undefined && this.precioMenor > 0) { // precio de renta mínimo
+          if (propiedad.precioRenta && (propiedad.precioRenta < this.precioMenor)) {
+            shouldBeAdded = false;
+          }
+        }
+        if (this.precioMayor !== undefined && this.precioMayor > 0) { // precio de renta máximo
+          if (propiedad.precioRenta && (propiedad.precioRenta > this.precioMayor)) {
+            shouldBeAdded = false;
+          }
         }
       }
-      if (this.precioMayor !== undefined && this.precioMayor > 0) { // precio de venta máximo
-        if (propiedad.precioVenta > this.precioMayor) {
+      if (this.tiposPropiedad && this.tiposPropiedad.length > 0) {
+        if (this.tiposPropiedad.indexOf(propiedad.tipoPropiedad) === -1) {
           shouldBeAdded = false;
         }
       }
@@ -113,8 +145,6 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
       this.searchEmpty = true;
       return;
     }
-    this.sessionService.setPlace(this.place);
-    this.storageService.saveData(StorageService.SAVED_PLACE, this.place);
     this.showResults();
   }
 
@@ -125,12 +155,28 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   precioMenorChange(value: number) {
     this.precioMenor = value;
     console.log(this.precioMenor);
+    this.storageService.saveData(StorageService.FILTER_PRECIO_MENOR, this.precioMenor);
     this.filtrarPropiedades();
   }
 
   precioMayorChange(value: number) {
     this.precioMayor = value;
     console.log(this.precioMayor);
+    this.storageService.saveData(StorageService.FILTER_PRECIO_MAYOR, this.precioMayor);
+    this.filtrarPropiedades();
+  }
+
+  rentaventaChange(value: string) {
+    this.rentaVenta = value;
+    console.log(this.rentaVenta);
+    this.storageService.saveData(StorageService.FILTER_RENTA_VENTA, this.rentaVenta);
+    this.filtrarPropiedades();
+  }
+
+  tiposPropiedadChange(value: Array<string>) {
+    this.tiposPropiedad = value;
+    console.log(this.tiposPropiedad);
+    this.storageService.saveData(StorageService.FILTER_TIPO_PROPIEDAD, this.tiposPropiedad);
     this.filtrarPropiedades();
   }
 
