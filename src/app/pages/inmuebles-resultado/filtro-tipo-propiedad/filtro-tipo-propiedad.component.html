@@ -1,14 +1,26 @@
 <div class="dropdown-form">
-    <div class="dropdownBodyForm">
-      <form>
-          <div *ngFor="let tipo of posiblesTipos; let i = index">
-            <input type="checkbox" [attr.id]="tipo" [(ngModel)]="posiblesTiposMarcados[i]" 
-              (change)="handleTipoPropiedadChanges($event)" [ngModelOptions]="{standalone: true}" />
-            <label [attr.for]="tipo">{{tipo}}</label>
-          </div>
-      </form>
-    </div>
-    <div class="dropdownFooterForm">
-        <button type="button" class="btn boton-inline-heritage dont-stop-propagation">Terminar</button>
-    </div>
+  <div>
+    <button type="button" class="btn boton-inline-heritage" 
+      [disabled]="tiposPropiedadesSeleccionadas.length === posiblesTiposMarcados.length"
+      (click)="seleccionarTodos()">
+      Seleccionar todos
+    </button>
+    <button type="button" class="btn boton-inline-heritage" 
+      [disabled]="tiposPropiedadesSeleccionadas.length === 0"
+      (click)="limpiarSeleccion()">
+      Limpiar seleccion
+    </button>
   </div>
+  <div class="dropdownBodyForm">
+    <form>
+        <div *ngFor="let tipo of posiblesTipos; let i = index">
+          <input type="checkbox" [attr.id]="tipo" [(ngModel)]="posiblesTiposMarcados[i]" 
+            (change)="handleTipoPropiedadChanges()" [ngModelOptions]="{standalone: true}" />
+          <label [attr.for]="tipo">{{tipo}}</label>
+        </div>
+    </form>
+  </div>
+  <div class="dropdownFooterForm">
+      <button type="button" class="btn boton-inline-heritage dont-stop-propagation">Terminar</button>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, NgZone } from '@angular/core';
 import { SessionService } from '../../services/session/session.service';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from '../../models/propiedad';
@@ -27,6 +27,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   tiposPropiedad: Array<string>; // filtro tipo propiedad
 
   constructor(
+    private zone: NgZone,
     private sessionService: SessionService,
     private propiedadService: PropiedadService,
     private storageService: StorageService,
@@ -51,6 +52,10 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     this.precioMenor = this.storageService.getData(StorageService.FILTER_PRECIO_MENOR);
     this.precioMayor = this.storageService.getData(StorageService.FILTER_PRECIO_MAYOR);
     this.tiposPropiedad = this.storageService.getData(StorageService.FILTER_TIPO_PROPIEDAD);
+    if (this.tiposPropiedad === undefined || this.tiposPropiedad == null) {
+      this.tiposPropiedad = ['Casa', 'Departamento', 'Oficina', 'Terreno'];
+      this.storageService.saveData(StorageService.FILTER_TIPO_PROPIEDAD, this.tiposPropiedad);
+    }
   }
 
   ngAfterViewInit() {
@@ -88,38 +93,45 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   filtrarPropiedades() {
     this.propiedadesFiltradas = new Array<Propiedad>();
     this.propiedades.forEach((propiedad) => {
-      let shouldBeAdded = true;
       if (this.rentaVenta === 'venta') {
+        if (propiedad.precioVenta === undefined || propiedad.precioVenta == null) { // verifica si tiene precio de venta el inmueble
+          return;
+        }
         if (this.precioMenor !== undefined && this.precioMenor > 0) { // precio de venta mínimo
           if (propiedad.precioVenta && (propiedad.precioVenta < this.precioMenor)) {
-            shouldBeAdded = false;
+            return;
           }
         }
         if (this.precioMayor !== undefined && this.precioMayor > 0) { // precio de venta máximo
           if (propiedad.precioVenta && (propiedad.precioVenta > this.precioMayor)) {
-            shouldBeAdded = false;
+            return;
           }
         }
       } else {
+        if (propiedad.precioRenta === undefined || propiedad.precioRenta == null) { // verifica si tiene precio de renta el inmueble
+          return;
+        }
         if (this.precioMenor !== undefined && this.precioMenor > 0) { // precio de renta mínimo
           if (propiedad.precioRenta && (propiedad.precioRenta < this.precioMenor)) {
-            shouldBeAdded = false;
+            return;
           }
         }
         if (this.precioMayor !== undefined && this.precioMayor > 0) { // precio de renta máximo
           if (propiedad.precioRenta && (propiedad.precioRenta > this.precioMayor)) {
-            shouldBeAdded = false;
+            return;
           }
         }
       }
+      if (this.tiposPropiedad === undefined || this.tiposPropiedad == null || this.tiposPropiedad.length === 0) {
+        return;
+      }
       if (this.tiposPropiedad && this.tiposPropiedad.length > 0) {
         if (this.tiposPropiedad.indexOf(propiedad.tipoPropiedad) === -1) {
-          shouldBeAdded = false;
+          return;
         }
       }
-      if (shouldBeAdded) {
-        this.propiedadesFiltradas.push(propiedad);
-      }
+      // si pasa todos los filtros, la propiedad es agregada para mostrarse
+      this.propiedadesFiltradas.push(propiedad);
     });
   }
 
@@ -137,6 +149,9 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
         this.place = autocomplete.getPlace();
         this.searchEmpty = false;
+        this.zone.run(() => {
+          this.buscarPropiedades();
+        });
     });
   }
 

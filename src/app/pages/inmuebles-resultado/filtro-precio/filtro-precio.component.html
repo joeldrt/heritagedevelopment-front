@@ -1,16 +1,31 @@
 <div class="dropdown-form">
   <div class="dropdownBodyForm">
-    <label>Rango de Precios</label>
+    <label>{{tipoPrecio | titlecase}} - rango de precios</label>
     <form>
-      <div class="form-row">
-        <div class="col">
-          <input type="number" class="form-control" id="precioMenor" #precioMenor placeholder="Min"
-          (change)="handleMenorChanges(precioMenor.value)" [value]="preciomenor">
+      <div class="form-row mb-3">
+        <div class="col-2" style="text-align: center">
+          <button type="button" class="btn boton-inline-heritage" (click)="disminuirMinimo()">-</button>
         </div>
-        <span style="padding: 5px;">–</span>
-        <div class="col">
-          <input type="number" class="form-control" id="precioMayor" #precioMayor placeholder="Max"
-          (change)="handleMayorChanges(precioMayor.value)" [value]="preciomayor">
+        <div class="col-8 align-bottom">
+          <input class="form-control heritage-input" id="precioMenor" #precioMenor placeholder="Min"
+          (keyup)="inputValidator($event)"
+          (change)="handleMenorChanges(precioMenor.value)" [value]="preciomenor | currency">
+        </div>
+        <div class="col-2 align-bottom" style="text-align: center">
+          <button type="button" class="btn boton-inline-heritage" (click)="aumentarMinimo()">+</button>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-2 align-bottom" style="text-align: center">
+          <button type="button" class="btn boton-inline-heritage" (click)="disminuirMaximo()">-</button>
+        </div>
+        <div class="col-8 align-bottom">
+          <input class="form-control heritage-input" id="precioMayor" #precioMayor placeholder="Max"
+          (keyup)="inputValidator($event)"
+          (change)="handleMayorChanges(precioMayor.value)" [value]="preciomayor | currency">
+        </div>
+        <div class="col-2 align-bottom" style="text-align: center">
+          <button type="button" class="btn boton-inline-heritage" (click)="aumentarMaximo()">+</button>
         </div>
       </div>
     </form>

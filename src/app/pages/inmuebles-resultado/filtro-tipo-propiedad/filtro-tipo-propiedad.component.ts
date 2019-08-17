@@ -8,7 +8,7 @@ import {  } from 'protractor';
 })
 export class FiltroTipoPropiedadComponent implements OnInit {
   posiblesTipos = ['Casa', 'Departamento', 'Oficina', 'Terreno'];
-  posiblesTiposMarcados = [false, false, false, false];
+  posiblesTiposMarcados = [true, true, true, true];
 
   @Input() tiposPropiedadesSeleccionadas = [];
   @Output() tiposPropiedadesSeleccionadasChange = new EventEmitter<Array<string>>();
@@ -23,7 +23,7 @@ export class FiltroTipoPropiedadComponent implements OnInit {
     });
   }
 
-  handleTipoPropiedadChanges(value: any) {
+  handleTipoPropiedadChanges() {
     this.tiposPropiedadesSeleccionadas = [];
     this.posiblesTipos.forEach((item, index) => {
       if (this.posiblesTiposMarcados[index]) {
@@ -31,6 +31,20 @@ export class FiltroTipoPropiedadComponent implements OnInit {
       }
     });
     this.tiposPropiedadesSeleccionadasChange.emit(this.tiposPropiedadesSeleccionadas);
+  }
+
+  seleccionarTodos() {
+    this.posiblesTiposMarcados.forEach((item, index) => {
+      this.posiblesTiposMarcados[index] = true;
+    });
+    this.handleTipoPropiedadChanges();
+  }
+
+  limpiarSeleccion() {
+    this.posiblesTiposMarcados.forEach((item, index) => {
+      this.posiblesTiposMarcados[index] = false;
+    });
+    this.handleTipoPropiedadChanges();
   }
 
 }

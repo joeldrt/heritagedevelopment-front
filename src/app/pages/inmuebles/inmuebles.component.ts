@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, NgZone } from '@angular/core';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
 import {} from 'googlemaps';
@@ -16,6 +16,7 @@ export class InmueblesComponent implements OnInit, AfterViewInit {
   searchEmpty = false;
 
   constructor(
+    private zone: NgZone,
     private sessionService: SessionService,
     private storageService: StorageService,
     private router: Router,
@@ -42,6 +43,9 @@ export class InmueblesComponent implements OnInit, AfterViewInit {
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
         this.place = autocomplete.getPlace();
         this.searchEmpty = false;
+        this.zone.run(() => {
+          this.buscarPropiedades();
+        });
     });
   }
 

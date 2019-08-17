@@ -1,6 +1,4 @@
-<div class="inmuebles-resultado-background">
-
-  <div class="barra-busqueda-filtros">
+<div class="barra-busqueda-filtros">
     <div class="area-busqueda">
       <div class="input-group search-group">
         <input #addressInput id="addressInput" type="text" class="form-control" 
@@ -35,6 +33,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="precioDropdown" appClickStopPropagation>
           <app-filtro-precio 
+            [tipoPrecio]="rentaVenta"
             [preciomenor]="precioMenor" (preciomenorChange)="precioMenorChange($event)"
             [preciomayor]="precioMayor" (preciomayorChange)="precioMayorChange($event)"></app-filtro-precio>
         </div>
@@ -56,7 +55,8 @@
       <button class="btn boton-inline-heritage" type="button">Más</button>
     </div>
   </div>
-  
+
+<div class="inmuebles-resultado-background">
   
   <!-- Contenido de la página de inmuebles-resultado -->
   <div class="result-area" id="resultArea" #resultArea>
