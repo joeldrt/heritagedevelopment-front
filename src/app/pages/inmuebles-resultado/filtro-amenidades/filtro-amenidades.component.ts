@@ -10,7 +10,7 @@ import { Amenidades } from 'src/app/models/amenidades';
 export class FiltroAmenidadesComponent implements OnInit {
 
   todasLasAmenidades: Array<string>;
-  amenidadesSeleccionadas = [];
+  amenidadesSeleccionadas: Array<boolean>;
 
   @Input() amenidades = [];
   @Output() amenidadesChange = new EventEmitter<string[]>();
@@ -35,6 +35,21 @@ export class FiltroAmenidadesComponent implements OnInit {
           this.todasLasAmenidades.push(value);
           this.amenidadesSeleccionadas.push(false);
         });
+        this.marcarPropiedadesYaSeleccionadas();
+      }
+    });
+  }
+
+  marcarPropiedadesYaSeleccionadas() {
+    if (!this.amenidades || !this.todasLasAmenidades) {
+      return;
+    }
+    if (this.amenidades.length === 0 || this.todasLasAmenidades.length === 0) {
+      return;
+    }
+    this.todasLasAmenidades.forEach((amenidad, index) => {
+      if (this.amenidades.includes(amenidad)) {
+        this.amenidadesSeleccionadas[index] = true;
       }
     });
   }
