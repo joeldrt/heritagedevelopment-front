@@ -234,7 +234,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
           return;
         }
       }
-      if (this.amenidades.length > 0) { // se busca si tiene amenidades seleccionadas
+      if (this.amenidades && this.amenidades.length > 0) { // se busca si tiene amenidades seleccionadas
         for (const amenidad of this.amenidades) { // todas las amenidades deben ser completadas
           if (!propiedad.amenidades.includes(amenidad)) {
             return;
