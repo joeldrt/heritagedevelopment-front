@@ -635,7 +635,7 @@
               </div>
               <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
               <div class="col-sm-12 col-md-6">
-                <tag-input #tagInputElement class="input-class" name="tagInputElement"
+                <!-- <tag-input #tagInputElement class="input-class" name="tagInputElement"
                   [(ngModel)]="amenidadesSeleccionadas"
                   [modelAsStrings]="true"
                   theme='minimal'
@@ -644,7 +644,14 @@
                   [inputClass]="'input-class'">
                   <tag-input-dropdown [autocompleteItems]="listaDeAmenidades">
                   </tag-input-dropdown>
-                </tag-input>
+                </tag-input> -->
+                <div class="row">
+                  <div class="col-sm-12 col-md-6" *ngFor="let amenidad of listaDeAmenidades; let i = index">
+                    <input type="checkbox" [attr.id]="amenidad" [(ngModel)]="mapaSeleccionAmenidades[i]" 
+                      (change)="handleAmenidadesChanges()" [ngModelOptions]="{standalone: true}" />
+                    <label [attr.for]="amenidad">{{amenidad}}</label>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- fin amenidades -->
@@ -722,9 +729,16 @@
               </div>
               <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
               <div class="col-sm-12 col-md-6">
-                <textarea class="form-control" id="amenidadesPropiedad" rows="4"
+                <!-- <textarea class="form-control" id="amenidadesPropiedad" rows="4"
                   name="amenidades" [(ngModel)]="nuevaPropiedad.amenidades"
-                  #amenidades="ngModel"></textarea>
+                  #amenidades="ngModel"></textarea> -->
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6" *ngFor="let amenidad of listaDeAmenidades; let i = index">
+                      <input type="checkbox" [attr.id]="amenidad" [(ngModel)]="mapaSeleccionAmenidades[i]" 
+                        (change)="handleAmenidadesChanges()" [ngModelOptions]="{standalone: true}" />
+                      <label [attr.for]="amenidad">{{amenidad}}</label>
+                    </div>
+                  </div>
               </div>
             </div>
             <!-- fin amenidades -->
@@ -804,9 +818,16 @@
               </div>
               <label for="amenidadesPropiedad" class="col-sm-12 col-md-3 col-form-label">Amenidades</label>
               <div class="col-sm-12 col-md-6">
-                <textarea class="form-control" id="amenidadesPropiedad" rows="4"
+                <!-- <textarea class="form-control" id="amenidadesPropiedad" rows="4"
                   name="amenidades" [(ngModel)]="nuevaPropiedad.amenidades"
-                  #amenidades="ngModel"></textarea>
+                  #amenidades="ngModel"></textarea> -->
+                <div class="row">
+                  <div class="col-sm-12 col-md-6" *ngFor="let amenidad of listaDeAmenidades; let i = index">
+                    <input type="checkbox" [attr.id]="amenidad" [(ngModel)]="mapaSeleccionAmenidades[i]" 
+                      (change)="handleAmenidadesChanges()" [ngModelOptions]="{standalone: true}" />
+                    <label [attr.for]="amenidad">{{amenidad}}</label>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- fin amenidades -->

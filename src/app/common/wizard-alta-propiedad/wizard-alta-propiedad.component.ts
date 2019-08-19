@@ -15,6 +15,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {} from 'googlemaps';
 import * as firebase from 'firebase/app';
 import { GeoDocumentSnapshot } from 'geofirestore';
+import { AmenidadesService } from 'src/app/services/amenidades/amenidades.service';
+import { Amenidades } from 'src/app/models/amenidades';
+import { stringify } from '@angular/core/src/util';
 
 @Component({
   selector: 'app-wizard-alta-propiedad',
@@ -41,8 +44,9 @@ export class WizardAltaPropiedadComponent implements OnInit {
   mapaDeArchivos = new Map<string, File>();
   mapaDeImagenes = new Map<string, string | ArrayBuffer>();
   urlsFotografiasBorrar: Array<string>;
-  amenidadesSeleccionadas = [];
-  listaDeAmenidades = ['Alberca', 'Roof Garden', 'Jacussi', 'Jardín', 'Gym', 'Spa', 'Cine', 'Terraza', 'Bar', 'Casa Club', 'Lago'];
+  amenidadesSeleccionadas: Array<string>;
+  mapaSeleccionAmenidades: Array<boolean>;
+  listaDeAmenidades: Array<string>;
 
   loading = false;
   mensajeLoading = 'cargando';
@@ -54,6 +58,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     private db: AngularFirestore,
     private auth: AuthService,
     private propiedadService: PropiedadService,
+    private amenidadesService: AmenidadesService,
     private location: Location,
     private route: ActivatedRoute,
     private router: Router,
@@ -71,6 +76,42 @@ export class WizardAltaPropiedadComponent implements OnInit {
     if (this.propertyId) {
       this.verificarEsEdicion(this.propertyId);
     }
+    this.amenidadesService.obtenerAmenidades().subscribe((document) => {
+      const amenidadesDoc = (document.data() as Amenidades);
+      if (amenidadesDoc.todas && amenidadesDoc.todas.length > 0) {
+        this.listaDeAmenidades = new Array<string>();
+        this.mapaSeleccionAmenidades = new Array<boolean>();
+        amenidadesDoc.todas.forEach((value, index) => {
+          this.listaDeAmenidades.push(value);
+          this.mapaSeleccionAmenidades.push(false);
+        });
+        this.marcarPropiedadesYaSeleccionadas();
+      }
+    });
+  }
+
+  marcarPropiedadesYaSeleccionadas() {
+    if (!this.nuevaPropiedad.amenidades || !this.listaDeAmenidades) {
+      return;
+    }
+    if (this.nuevaPropiedad.amenidades.length === 0 || this.listaDeAmenidades.length === 0) {
+      return;
+    }
+    this.listaDeAmenidades.forEach((amenidad, index) => {
+      if (this.nuevaPropiedad.amenidades.includes(amenidad)) {
+        this.mapaSeleccionAmenidades[index] = true;
+      }
+    });
+  }
+
+  handleAmenidadesChanges() {
+    this.amenidadesSeleccionadas = [];
+    this.listaDeAmenidades.forEach((item, index) => {
+      if (this.mapaSeleccionAmenidades[index]) {
+        this.amenidadesSeleccionadas.push(item);
+      }
+    });
+    console.log(this.amenidadesSeleccionadas);
   }
 
   navigatePrevious() {
@@ -95,6 +136,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
       this.nuevaPropiedad.id = propertyId;
       this.amenidadesSeleccionadas = this.nuevaPropiedad.amenidades;
       this.esEdicion = true;
+      this.marcarPropiedadesYaSeleccionadas();
     });
   }
 

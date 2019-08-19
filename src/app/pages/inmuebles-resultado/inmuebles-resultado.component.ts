@@ -5,7 +5,6 @@ import { Propiedad } from '../../models/propiedad';
 import { Router } from '@angular/router';
 import { GeoQuerySnapshot } from 'geofirestore';
 import { StorageService } from 'src/app/services/storage/storage.service';
-import { Amenidades } from 'src/app/models/amenidades';
 
 @Component({
   selector: 'app-inmuebles-resultado',
@@ -88,10 +87,6 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     this.edadPropiedad = this.storageService.getData(StorageService.FILTER_EDAD_PROPIEDAD);
     if (!this.edadPropiedad) { this.edadPropiedad = 0; }
     this.amenidades = this.storageService.getData(StorageService.FILTER_AMENIDADES);
-    if (!this.amenidades) {
-      this.amenidades = ['Alberca', 'Roof Garden', 'Jacussi', 'Jardín', 'Gym', 'Spa', 'Cine', 'Terraza', 'Bar', 'Casa Club', 'Lago'];
-      this.storageService.saveData(StorageService.FILTER_AMENIDADES, this.amenidades);
-    }
   }
 
   ngAfterViewInit() {
@@ -237,6 +232,13 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
         }
         if (propiedad.edadPropiedad > this.edadPropiedad) {
           return;
+        }
+      }
+      if (this.amenidades.length > 0) { // se busca si tiene amenidades seleccionadas
+        for (const amenidad of this.amenidades) { // todas las amenidades deben ser completadas
+          if (!propiedad.amenidades.includes(amenidad)) {
+            return;
+          }
         }
       }
       // si pasa todos los filtros, la propiedad es agregada para mostrarse
@@ -424,6 +426,13 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     this.edadPropiedad = value;
     console.log(this.edadPropiedad);
     this.storageService.saveData(StorageService.FILTER_EDAD_PROPIEDAD, this.edadPropiedad);
+    this.filtrarPropiedades();
+  }
+
+  tiposAmenidadesChange(value: Array<string>) {
+    this.amenidades = value;
+    console.log(this.amenidades);
+    this.storageService.saveData(StorageService.FILTER_AMENIDADES, this.amenidades);
     this.filtrarPropiedades();
   }
 

@@ -129,7 +129,7 @@
         .input-class {
             border: 1px solid #ced4da !important;
             border-radius: .25rem !important;
-            background-color: white;
+            background-color: white !important;
         }
 
         .wizard-working-area {
@@ -166,6 +166,14 @@
             }
         }
     }
+}
+
+input[type=checkbox] {
+    margin: 12px;
+}
+
+input[type=checkbox][ng-reflect-model=true] {
+    background-color: #87b23e;
 }
 
 .wizard-nav-button2 {

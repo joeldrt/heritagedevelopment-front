@@ -1,3 +1,26 @@
-<p>
-  filtro-amenidades works!
-</p>
+<div class="dropdown-form">
+  <div>
+    <button type="button" class="btn boton-inline-heritage" 
+      [disabled]="todasLasAmenidades.length === amenidades.length"
+      (click)="seleccionarTodos()">
+      Seleccionar todos
+    </button>
+    <button type="button" class="btn boton-inline-heritage" 
+      [disabled]="amenidades.length === 0"
+      (click)="limpiarSeleccion()">
+      Limpiar seleccion
+    </button>
+  </div>
+  <div class="dropdownBodyForm">
+    <form>
+        <div *ngFor="let amenidad of todasLasAmenidades; let i = index">
+          <input type="checkbox" [attr.id]="amenidad" [(ngModel)]="amenidadesSeleccionadas[i]" 
+            (change)="handleAmenidadesChanges()" [ngModelOptions]="{standalone: true}" />
+          <label [attr.for]="amenidad">{{amenidad}}</label>
+        </div>
+    </form>
+  </div>
+  <div class="dropdownFooterForm">
+      <button type="button" class="btn boton-inline-heritage dont-stop-propagation">Terminar</button>
+  </div>
+</div>

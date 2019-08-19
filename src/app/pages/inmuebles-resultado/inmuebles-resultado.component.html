@@ -57,7 +57,8 @@
           Amenidades
         </button>
         <div class="dropdown-menu" aria-labelledby="amenidadesDropdown" appClickStopPropagation>
-          <app-filtro-amenidades>
+          <app-filtro-amenidades
+            [amenidades]="amenidades" (amenidadesChange)="tiposAmenidadesChange($event)">
           </app-filtro-amenidades>
         </div>
       </div>

@@ -20,6 +20,12 @@ export class FiltroAmenidadesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (!this.amenidades) {
+      this.amenidades = new Array<string>();
+    }
+    if (!this.todasLasAmenidades) {
+      this.todasLasAmenidades = new Array<string>();
+    }
     this.amenidadesService.obtenerAmenidades().subscribe((document) => {
       const amenidadesDoc = (document.data() as Amenidades);
       if (amenidadesDoc.todas && amenidadesDoc.todas.length > 0) {
@@ -31,6 +37,30 @@ export class FiltroAmenidadesComponent implements OnInit {
         });
       }
     });
+  }
+
+  handleAmenidadesChanges() {
+    this.amenidades = [];
+    this.todasLasAmenidades.forEach((item, index) => {
+      if (this.amenidadesSeleccionadas[index]) {
+        this.amenidades.push(item);
+      }
+    });
+    this.amenidadesChange.emit(this.amenidades);
+  }
+
+  seleccionarTodos() {
+    this.amenidadesSeleccionadas.forEach((item, index) => {
+      this.amenidadesSeleccionadas[index] = true;
+    });
+    this.handleAmenidadesChanges();
+  }
+
+  limpiarSeleccion() {
+    this.amenidadesSeleccionadas.forEach((item, index) => {
+      this.amenidadesSeleccionadas[index] = false;
+    });
+    this.handleAmenidadesChanges();
   }
 
 }

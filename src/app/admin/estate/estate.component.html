@@ -42,7 +42,7 @@
               src="../../../assets/images/departamento-img.jpg" alt="..." [routerLink]="['/admin/estate', propiedad.id]"> 
             <!-- end Imagen por default -->
             <!-- Primera imagen de la propiedad -->
-            <img *ngIf="propiedad.urlsFotografias && propiedad.urlsFotografias.length >= 0"
+            <img *ngIf="propiedad.urlsFotografias && propiedad.urlsFotografias.length > 0"
               [src]="propiedad.urlsFotografias[0]" alt="..." [routerLink]="['/admin/estate', propiedad.id]"> 
             <!-- Fin primera imagen de la propiedad -->
             <div class="propiedad-precio-renta" *ngIf="propiedad.precioRenta && propiedad.precioRenta > 0">
