@@ -55,6 +55,8 @@ import { FiltroPrecioComponent } from './pages/inmuebles-resultado/filtro-precio
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { FiltroRentaVentaComponent } from './pages/inmuebles-resultado/filtro-renta-venta/filtro-renta-venta.component';
 import { FiltroTipoPropiedadComponent } from './pages/inmuebles-resultado/filtro-tipo-propiedad/filtro-tipo-propiedad.component';
+import { FiltroMasComponent } from './pages/inmuebles-resultado/filtro-mas/filtro-mas.component';
+import { FiltroAmenidadesComponent } from './pages/inmuebles-resultado/filtro-amenidades/filtro-amenidades.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { FiltroTipoPropiedadComponent } from './pages/inmuebles-resultado/filtro
     FiltroPrecioComponent,
     ClickStopPropagationDirective,
     FiltroRentaVentaComponent,
-    FiltroTipoPropiedadComponent
+    FiltroTipoPropiedadComponent,
+    FiltroMasComponent,
+    FiltroAmenidadesComponent
   ],
   imports: [
     BrowserModule,

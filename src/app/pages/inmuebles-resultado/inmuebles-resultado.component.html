@@ -51,8 +51,20 @@
         </div>
       </div>
 
-      
-      <button class="btn boton-inline-heritage" type="button">Más</button>
+      <div class="dropdown">
+        <button class="btn boton-inline-heritage" type="button" id="amenidadesDropdown"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Amenidades
+        </button>
+        <div class="dropdown-menu" aria-labelledby="amenidadesDropdown" appClickStopPropagation>
+          <app-filtro-amenidades>
+          </app-filtro-amenidades>
+        </div>
+      </div>
+
+      <button type="button" class="btn boton-inline-heritage" data-toggle="modal" data-target="#masFiltrosModal">
+        Más
+      </button>
     </div>
   </div>
 
@@ -101,6 +113,21 @@
   <!-- Fin contenido de la página de inmuebles-resultado -->
 
   <app-footer></app-footer>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="masFiltrosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <app-filtro-mas
+    [minM2Construccion]="m2Construccion" (minM2ConstruccionChange)="m2ConstruccionChange($event)"
+    [minM2Terreno]="m2Terreno" (minM2TerrenoChange)="m2TerrenoChange($event)"
+    [minNiveles]="niveles" (minNivelesChange)="nivelesChange($event)"
+    [minRecamaras]="recamaras" (minRecamarasChange)="recamarasChange($event)"
+    [minBanos]="banos" (minBanosChange)="banosChange($event)"
+    [minMediosBanos]="mediosBanos" (minMediosBanosChange)="mediosBanosChange($event)"
+    [minCajonesEstacionamiento]="cajonesEstacionamiento" (minCajonesEstacionamientoChange)="cajonesEstacionamientoChange($event)"
+    [minCapacidadCisterna]="capacidadCisterna" (minCapacidadCisternaChange)="capacidadCisternaChange($event)"
+    [maxEdadPropiedad]="edadPropiedad" (maxEdadPropiedadChange)="edadPropiedadChange($event)"
+  ></app-filtro-mas>
 </div>
 
 

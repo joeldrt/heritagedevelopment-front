@@ -1,0 +1,206 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <p class="modal-title" id="exampleModalLongTitle">Busqueda avanzada</p>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <!-- Min M2 Cosntrucción -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirM2Cons()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="minM2Cons">M2 de construcción</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">M2</div>
+              </div>
+              <input type="number" step="50" min="0" class="form-control" id="minM2Cons" #minM2Cons placeholder="Min M2 Construcción"
+              (change)="handleMinM2ConsChange(minM2Cons.value)" [value]="minM2Construccion">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarM2Cons()">+</button>
+          </div>
+        </div>
+        <!-- End Min M2 Cosntrucción -->
+
+        <!-- Min M2 Terreno -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirM2Terreno()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="minM2Terr">M2 de terreno</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">M2</div>
+              </div>
+              <input type="number" step="50" min="0" class="form-control" id="minM2Terr" #minM2Terr placeholder="Min M2 Terreno"
+              (change)="handleMinM2TerrenoChange(minM2Terr.value)" [value]="minM2Terreno">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarM2Terreno()">+</button>
+          </div>
+        </div>
+        <!-- End Min M2 Terreno -->
+
+        <!-- Min Niveles -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirNiveles()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="minNiv">Número de niveles</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Niveles</div>
+              </div>
+              <input type="number" step="1" min="0" class="form-control" id="minNiv" #minNiv placeholder="Niveles"
+              (change)="handleNivelesChange(minNiv.value)" [value]="minNiveles">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarNiveles()">+</button>
+          </div>
+        </div>
+        <!-- End Min Niveles -->
+
+        <!-- Min Recamaras -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirRecamaras()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="minRecam">Número de recámaras</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Recámaras</div>
+              </div>
+              <input type="number" step="1" min="0" class="form-control" id="minRecam" #minRecam placeholder="Niveles"
+              (change)="handleRecamarasChange(minRecam.value)" [value]="minRecamaras">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarRecamaras()">+</button>
+          </div>
+        </div>
+        <!-- End Min Recamaras -->
+
+        <!-- Min Baños -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirBanos()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="minBan">Número de baños</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Baños</div>
+              </div>
+              <input type="number" step="1" min="0" class="form-control" id="minBan" #minBan placeholder="Baños"
+              (change)="handleBanosChange(minBan.value)" [value]="minBanos">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarBanos()">+</button>
+          </div>
+        </div>
+        <!-- End Min Baños -->
+
+        <!-- Min Medios Baños -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirMediosBanos()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="minMediosBan">Número de medios baños</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Med. Baños</div>
+              </div>
+              <input type="number" step="1" min="0" class="form-control" id="minMediosBan" #minMediosBan placeholder="Baños"
+              (change)="handleMediosBanosChange(minMediosBan.value)" [value]="minMediosBanos">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarMediosBanos()">+</button>
+          </div>
+        </div>
+        <!-- End Min Medios Baños -->
+
+        <!-- Min Cajones Estacionamiento -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirCajones()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="minCaj">Número de cajones de estacionamiento</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Cajones</div>
+              </div>
+              <input type="number" step="1" min="0" class="form-control" id="minCaj" #minCaj placeholder="Cajones"
+              (change)="handleCajonesChange(minCaj.value)" [value]="minCajonesEstacionamiento">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarCajones()">+</button>
+          </div>
+        </div>
+        <!-- End Min Cajones Estacionamiento  -->
+
+        <!-- Min Capacidad Cisterna -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirCapacidadCisterna()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="minCapacidadCister">Capacidad de cisterna</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Litros</div>
+              </div>
+              <input type="number" step="1" min="0" class="form-control" id="minCapacidadCister" #minCapacidadCister placeholder="Capacidad Cisterna"
+              (change)="handleCapacidadCisternaChange(minCapacidadCister.value)" [value]="minCapacidadCisterna">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarCapacidadCisterna()">+</button>
+          </div>
+        </div>
+        <!-- End Min Capacidad Cisterna  -->
+
+        <!-- Min Edad Propiedad -->
+        <div class="form-row mb-3 align-items-end">
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="disminuirEdadPropiedad()">-</button>
+          </div>
+          <div class="col-8">
+            <label for="maxEdadPropie">Maxima edad de la propiedad</label>
+            <div class="input-group heritage-input">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Años</div>
+              </div>
+              <input type="number" step="1" min="0" class="form-control" id="maxEdadPropie" #maxEdadPropie placeholder="Edad de la propiedad"
+              (change)="handleEdadPropiedadChange(maxEdadPropie.value)" [value]="maxEdadPropiedad">
+            </div>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <button type="button" class="btn boton-inline-heritage" (click)="aumentarEdadPropiedad()">+</button>
+          </div>
+        </div>
+        <!-- End Edad Propiedad -->
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn boton-inline-heritage" data-dismiss="modal">Terminar</button>
+    </div>
+  </div>
+</div>

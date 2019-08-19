@@ -5,6 +5,7 @@ import { Propiedad } from '../../models/propiedad';
 import { Router } from '@angular/router';
 import { GeoQuerySnapshot } from 'geofirestore';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { Amenidades } from 'src/app/models/amenidades';
 
 @Component({
   selector: 'app-inmuebles-resultado',
@@ -25,6 +26,18 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   precioMayor: number; // filtro precio mayor
 
   tiposPropiedad: Array<string>; // filtro tipo propiedad
+
+  m2Construccion: number; // metros cuadrados de construcción
+  m2Terreno: number; // metros cuadrados de terreno
+  niveles: number; // niveles que contiene la propiedad (pisos)
+  recamaras: number; // número de recamaras
+  banos: number; // número de baños
+  mediosBanos: number; // número de medios baños
+  cajonesEstacionamiento: number; // numero de cajones de estacionamiento
+  capacidadCisterna: number; // capacidad de la cisterna
+  edadPropiedad: number; // edad de la propiedad
+
+  amenidades: Array<string>;
 
   constructor(
     private zone: NgZone,
@@ -55,6 +68,29 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     if (this.tiposPropiedad === undefined || this.tiposPropiedad == null) {
       this.tiposPropiedad = ['Casa', 'Departamento', 'Oficina', 'Terreno'];
       this.storageService.saveData(StorageService.FILTER_TIPO_PROPIEDAD, this.tiposPropiedad);
+    }
+    this.m2Construccion = this.storageService.getData(StorageService.FILTER_M2_CONSTRUCCION);
+    if (!this.m2Construccion) { this.m2Construccion = 0; }
+    this.m2Terreno = this.storageService.getData(StorageService.FILTER_M2_TERRENO);
+    if (!this.m2Terreno) { this.m2Terreno = 0; }
+    this.niveles = this.storageService.getData(StorageService.FILTER_NIVELES);
+    if (!this.niveles) { this.niveles = 0; }
+    this.recamaras = this.storageService.getData(StorageService.FILTER_RECAMARAS);
+    if (!this.recamaras) { this.recamaras = 0; }
+    this.banos = this.storageService.getData(StorageService.FILTER_BANOS);
+    if (!this.banos) { this.banos = 0; }
+    this.mediosBanos = this.storageService.getData(StorageService.FILTER_MEDIOS_BANOS);
+    if (!this.mediosBanos) { this.mediosBanos = 0; }
+    this.cajonesEstacionamiento = this.storageService.getData(StorageService.FILTER_CAJONES_ESTACIONAMIENT);
+    if (!this.cajonesEstacionamiento) { this.cajonesEstacionamiento = 0; }
+    this.capacidadCisterna = this.storageService.getData(StorageService.FILTER_CAPACIDAD_CISTERNA);
+    if (!this.capacidadCisterna) { this.capacidadCisterna = 0; }
+    this.edadPropiedad = this.storageService.getData(StorageService.FILTER_EDAD_PROPIEDAD);
+    if (!this.edadPropiedad) { this.edadPropiedad = 0; }
+    this.amenidades = this.storageService.getData(StorageService.FILTER_AMENIDADES);
+    if (!this.amenidades) {
+      this.amenidades = ['Alberca', 'Roof Garden', 'Jacussi', 'Jardín', 'Gym', 'Spa', 'Cine', 'Terraza', 'Bar', 'Casa Club', 'Lago'];
+      this.storageService.saveData(StorageService.FILTER_AMENIDADES, this.amenidades);
     }
   }
 
@@ -122,11 +158,84 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
           }
         }
       }
+      // siempre debe tener un tipo de propiedad
       if (this.tiposPropiedad === undefined || this.tiposPropiedad == null || this.tiposPropiedad.length === 0) {
         return;
       }
       if (this.tiposPropiedad && this.tiposPropiedad.length > 0) {
         if (this.tiposPropiedad.indexOf(propiedad.tipoPropiedad) === -1) {
+          return;
+        }
+      }
+      if (this.m2Construccion !== undefined && this.m2Construccion != null && this.m2Construccion !== 0) {
+        if (!propiedad.m2Construccion) {
+          return;
+        }
+        if (propiedad.m2Construccion < this.m2Construccion) {
+          return;
+        }
+      }
+      if (this.m2Terreno !== undefined && this.m2Terreno != null && this.m2Terreno !== 0) {
+        if (!propiedad.m2Terreno) {
+          return;
+        }
+        if (propiedad.m2Terreno < this.m2Terreno) {
+          return;
+        }
+      }
+      if (this.niveles !== undefined && this.niveles != null && this.niveles !== 0) {
+        if (!propiedad.niveles) {
+          return;
+        }
+        if (propiedad.niveles < this.niveles) {
+          return;
+        }
+      }
+      if (this.recamaras !== undefined && this.recamaras != null && this.recamaras !== 0) {
+        if (!propiedad.recamaras) {
+          return;
+        }
+        if (propiedad.recamaras < this.recamaras) {
+          return;
+        }
+      }
+      if (this.banos !== undefined && this.banos != null && this.banos !== 0) {
+        if (!propiedad.banos) {
+          return;
+        }
+        if (propiedad.banos < this.banos) {
+          return;
+        }
+      }
+      if (this.mediosBanos !== undefined && this.mediosBanos != null && this.mediosBanos !== 0) {
+        if (!propiedad.mediosBanos) {
+          return;
+        }
+        if (propiedad.mediosBanos < this.mediosBanos) {
+          return;
+        }
+      }
+      if (this.cajonesEstacionamiento !== undefined && this.cajonesEstacionamiento != null && this.cajonesEstacionamiento !== 0) {
+        if (!propiedad.cajonesEstacionamiento) {
+          return;
+        }
+        if (propiedad.cajonesEstacionamiento < this.cajonesEstacionamiento) {
+          return;
+        }
+      }
+      if (this.capacidadCisterna !== undefined && this.capacidadCisterna != null && this.capacidadCisterna !== 0) {
+        if (!propiedad.capacidadCisterna) {
+          return;
+        }
+        if (propiedad.capacidadCisterna < this.capacidadCisterna) {
+          return;
+        }
+      }
+      if (this.edadPropiedad !== undefined && this.edadPropiedad != null && this.edadPropiedad !== 0) {
+        if (!propiedad.edadPropiedad) {
+          return;
+        }
+        if (propiedad.edadPropiedad > this.edadPropiedad) {
           return;
         }
       }
@@ -168,6 +277,9 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   }
 
   precioMenorChange(value: number) {
+    if (this.precioMenor === undefined || this.precioMenor == null || isNaN(this.precioMenor)) {
+      this.precioMenor = 0;
+    }
     this.precioMenor = value;
     console.log(this.precioMenor);
     this.storageService.saveData(StorageService.FILTER_PRECIO_MENOR, this.precioMenor);
@@ -175,6 +287,9 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   }
 
   precioMayorChange(value: number) {
+    if (this.precioMayor === undefined || this.precioMayor == null || isNaN(this.precioMayor)) {
+      this.precioMayor = 0;
+    }
     this.precioMayor = value;
     console.log(this.precioMayor);
     this.storageService.saveData(StorageService.FILTER_PRECIO_MAYOR, this.precioMayor);
@@ -192,6 +307,123 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     this.tiposPropiedad = value;
     console.log(this.tiposPropiedad);
     this.storageService.saveData(StorageService.FILTER_TIPO_PROPIEDAD, this.tiposPropiedad);
+    this.filtrarPropiedades();
+  }
+
+  m2ConstruccionChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.m2Construccion === undefined || this.m2Construccion == null) {
+      this.m2Construccion = 0;
+    }
+    this.m2Construccion = value;
+    console.log(this.m2Construccion);
+    this.storageService.saveData(StorageService.FILTER_M2_CONSTRUCCION, this.m2Construccion);
+    this.filtrarPropiedades();
+  }
+
+  m2TerrenoChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.m2Terreno === undefined || this.m2Terreno == null) {
+      this.m2Terreno = 0;
+    }
+    this.m2Terreno = value;
+    console.log(this.m2Terreno);
+    this.storageService.saveData(StorageService.FILTER_M2_TERRENO, this.m2Terreno);
+    this.filtrarPropiedades();
+  }
+
+  nivelesChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.niveles === undefined || this.niveles == null) {
+      this.niveles = 0;
+    }
+    this.niveles = value;
+    console.log(this.niveles);
+    this.storageService.saveData(StorageService.FILTER_NIVELES, this.niveles);
+    this.filtrarPropiedades();
+  }
+
+  recamarasChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.recamaras === undefined || this.recamaras == null) {
+      this.recamaras = 0;
+    }
+    this.recamaras = value;
+    console.log(this.recamaras);
+    this.storageService.saveData(StorageService.FILTER_RECAMARAS, this.recamaras);
+    this.filtrarPropiedades();
+  }
+
+  banosChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.banos === undefined || this.banos == null) {
+      this.banos = 0;
+    }
+    this.banos = value;
+    console.log(this.banos);
+    this.storageService.saveData(StorageService.FILTER_BANOS, this.banos);
+    this.filtrarPropiedades();
+  }
+
+  mediosBanosChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.mediosBanos === undefined || this.mediosBanos == null) {
+      this.mediosBanos = 0;
+    }
+    this.mediosBanos = value;
+    console.log(this.mediosBanos);
+    this.storageService.saveData(StorageService.FILTER_MEDIOS_BANOS, this.mediosBanos);
+    this.filtrarPropiedades();
+  }
+
+  cajonesEstacionamientoChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.cajonesEstacionamiento === undefined || this.cajonesEstacionamiento == null) {
+      this.cajonesEstacionamiento = 0;
+    }
+    this.cajonesEstacionamiento = value;
+    console.log(this.cajonesEstacionamiento);
+    this.storageService.saveData(StorageService.FILTER_CAJONES_ESTACIONAMIENT, this.cajonesEstacionamiento);
+    this.filtrarPropiedades();
+  }
+
+  capacidadCisternaChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.capacidadCisterna === undefined || this.capacidadCisterna == null) {
+      this.capacidadCisterna = 0;
+    }
+    this.capacidadCisterna = value;
+    console.log(this.capacidadCisterna);
+    this.storageService.saveData(StorageService.FILTER_CAPACIDAD_CISTERNA, this.capacidadCisterna);
+    this.filtrarPropiedades();
+  }
+
+  edadPropiedadChange(value: number) {
+    if (isNaN(value)) {
+      value = 0;
+    }
+    if (this.edadPropiedad === undefined || this.edadPropiedad == null) {
+      this.edadPropiedad = 0;
+    }
+    this.edadPropiedad = value;
+    console.log(this.edadPropiedad);
+    this.storageService.saveData(StorageService.FILTER_EDAD_PROPIEDAD, this.edadPropiedad);
     this.filtrarPropiedades();
   }
 

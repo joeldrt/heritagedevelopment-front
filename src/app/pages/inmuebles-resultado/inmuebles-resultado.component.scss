@@ -1,6 +1,6 @@
 .barra-busqueda-filtros {
     background-color: rgba(255, 255, 255, 1);
-    position: absolute;
+    position: fixed;
     margin-top: 129px;
     z-index: 9;// z-index: 1031; // para estar arriba del header si fuera necesario
     width: 100%;
@@ -51,6 +51,12 @@
         background-color: #87b23e !important;
         border-color: #87b23e !important;
         color: white !important;
+    }
+    @media (max-width: 576px) {
+        font-size: 0.81rem;
+    }
+    @media (max-width: 360px) {
+        font-size: 0.79rem;
     }
 }
 

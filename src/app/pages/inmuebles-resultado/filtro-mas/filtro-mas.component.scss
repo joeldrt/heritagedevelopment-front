@@ -1,0 +1,21 @@
+.heritage-input {
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.boton-inline-heritage {
+    color: #87b23e;
+    border-color: #87b23e;
+    background-color: white;
+    margin: 9px;
+    :focus {
+        background-color: #87b23e !important;
+        border-color: #87b23e !important;
+        color: white !important;
+    }
+}
+
+.modal-footer {
+    background-color: rgb(135, 178, 62);
+    padding: 0 !important;
+}
