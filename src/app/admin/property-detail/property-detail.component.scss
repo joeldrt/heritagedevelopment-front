@@ -1,5 +1,5 @@
 .propiedad-detalle-area {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -11,7 +11,7 @@
     .top-navigation {
         color: white;
         background-color: #87b23e;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
@@ -40,22 +40,26 @@
 
     .working-area {
         background-color: #EBEBEB;
-        position: absolute;
-        top: 0;
+        position: fixed;
+        top: 54px;
         left: 0;
         right: 0;
         overflow-x: hidden;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
-        min-height: 100vh;
-        max-height: 100vh;
-        padding-top: 54px;
-        padding-bottom: 20px;
-        
+        min-height: calc(100vh - 54px);
+        max-height: calc(100vh - 54px);
 
         .container-fluid {
+            position: fixed;
+            top: 54px;
             padding-right: 5px;
             padding-left: 5px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            min-height: calc(100vh - 54px);
+            max-height: calc(100vh - 54px);
         }
     }
 }

@@ -1,6 +1,13 @@
 .wrapper {
-    display: flex;
-    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-width: calc(100vw);
+    max-width: calc(100vw);
+    min-height: calc(100vh);
+    max-height: calc(100vh);
 }
 
 #working-area {
@@ -27,6 +34,14 @@
 }
 
 #page-container {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 54px;
+    left: 0; 
+    @media screen and (min-width: 770px) {
+        left: 70px;
+    }
     min-height: calc(100vh - 54px);
     max-height: calc(100vh - 54px);
 }

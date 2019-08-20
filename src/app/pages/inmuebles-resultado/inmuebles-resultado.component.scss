@@ -1,9 +1,10 @@
 .barra-busqueda-filtros {
     background-color: rgba(255, 255, 255, 1);
     position: fixed;
-    margin-top: 129px;
+    top: 129px;
+    left: 0;
+    right: 0;
     z-index: 9;// z-index: 1031; // para estar arriba del header si fuera necesario
-    width: 100%;
     min-height: 93px;
     max-height: 93px;
 }
@@ -61,16 +62,32 @@
 }
 
 .result-area {
-    padding-top: calc(129px + 93px);
-    min-height: calc(100vh - 97px);
+    position: fixed;
+    top: calc(129px + 93px);
+    min-height: calc(100vh - (129px + 93px));
+    max-height: calc(100vh - (129px + 93px));
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+
+    .container-fluid {
+        min-height: calc(100vh - (129px + 93px + 94px));
+    }
 }
 
 .inmuebles-resultado-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-color: #EBEBEB;
     min-height: 100vh;
     max-height: 100vh;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+}
+
+.modal.fade {
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
 }
 
 .card {
