@@ -3,7 +3,7 @@ function closenavbar(){
 }
 
 function toggleSidebar() {
-    $('#sidebar, #working-area').toggleClass('active');
+    $('#sidebar, #working-area, #admin-navbar').toggleClass('active');
     $('.collapse.in').toggleClass('in');
     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
 };

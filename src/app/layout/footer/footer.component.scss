@@ -4,11 +4,10 @@
     font-size: small;
     min-height: 97px;
     background-color: rgb(135, 178, 62);
-    
-    .container-fluid {
-        @media screen and (max-width: 767px) {
-            margin-bottom: 51px;
-        }
+    min-width: calc(100vw);
+    max-width: calc(100vw);
+    @media screen and (max-width: 767px) {
+        padding-bottom: 51px;
     }
 
     .footer-section {

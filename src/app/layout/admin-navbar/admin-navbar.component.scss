@@ -1,11 +1,19 @@
-.navbar {
+#admin-navbar {
     background-color: #87b23e;
-    position: relative;
+    position: fixed;
     top: 0;
+    right: -220px;
+    height: 54px;
+    left: 220px;
+    transition: all 0.3s;
+}
+
+#admin-navbar.active {
     right: 0;
     left: 0;
-    height: 54px;
-    transition: all 0.3s;
+    @media (min-width: 770px) {
+        left: 70px;
+    } 
 }
 
 #toggleButton {
