@@ -38,6 +38,8 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
 
   amenidades: Array<string>;
 
+  propiedadAMostrar: Propiedad;
+
   constructor(
     private zone: NgZone,
     private sessionService: SessionService,
@@ -119,6 +121,10 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
         this.filtrarPropiedades();
       }
     );
+  }
+
+  elegirPropiedadAMostar(index: number) {
+    this.propiedadAMostrar = this.propiedadesFiltradas[index];
   }
 
   filtrarPropiedades() {

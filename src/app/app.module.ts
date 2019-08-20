@@ -57,6 +57,7 @@ import { FiltroRentaVentaComponent } from './pages/inmuebles-resultado/filtro-re
 import { FiltroTipoPropiedadComponent } from './pages/inmuebles-resultado/filtro-tipo-propiedad/filtro-tipo-propiedad.component';
 import { FiltroMasComponent } from './pages/inmuebles-resultado/filtro-mas/filtro-mas.component';
 import { FiltroAmenidadesComponent } from './pages/inmuebles-resultado/filtro-amenidades/filtro-amenidades.component';
+import { DetalleInmuebleComponent } from './pages/inmuebles-resultado/detalle-inmueble/detalle-inmueble.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { FiltroAmenidadesComponent } from './pages/inmuebles-resultado/filtro-am
     FiltroRentaVentaComponent,
     FiltroTipoPropiedadComponent,
     FiltroMasComponent,
-    FiltroAmenidadesComponent
+    FiltroAmenidadesComponent,
+    DetalleInmuebleComponent
   ],
   imports: [
     BrowserModule,
