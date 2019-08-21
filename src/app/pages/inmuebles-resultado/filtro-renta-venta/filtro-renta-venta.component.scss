@@ -2,7 +2,8 @@
     padding: 15px;
     width: calc(100vw - 21px);
     max-width: 375px;
-    max-height: calc(100vh - (129px + 93px));
+    // max-height: calc(100vh - (129px + 93px));
+    max-height: calc(100vh - (81px + 93px));
     overflow-y: auto;
 }
 

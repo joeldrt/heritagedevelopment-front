@@ -31,12 +31,12 @@ export class PropertyDisplayComponent implements OnInit, OnChanges, AfterViewIni
     if (!this.mapElement) {
       setTimeout(() => {
         this.initMap();
-      }, 500);
+      }, 396);
       return;
     }
     const mapProperties = {
       center: new google.maps.LatLng(this.propiedad.coordinates.latitude, this.propiedad.coordinates.longitude),
-      zoom: 16,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       streetViewControl: false,
@@ -44,7 +44,17 @@ export class PropertyDisplayComponent implements OnInit, OnChanges, AfterViewIni
       fullscreenControl: true,
       gestureHandling: 'none' as google.maps.GestureHandlingOptions,
     };
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
+    if (this.map) {
+      if (this.infoWindow) {
+        this.infoWindow.close();
+      }
+      if (this.marker) {
+        this.marker.setMap(null);
+      }
+      this.map.setCenter(new google.maps.LatLng(this.propiedad.coordinates.latitude, this.propiedad.coordinates.longitude));
+    } else {
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
+    }
     const markerProperties = {
       position: new google.maps.LatLng(this.propiedad.coordinates.latitude, this.propiedad.coordinates.longitude),
       map: this.map,
