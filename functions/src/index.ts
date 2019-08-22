@@ -15,6 +15,7 @@ export const actualizarListaTodasPropiedades = functions.firestore
     .document('propiedades/{propiedadId}')
     .onCreate(
         (snapshot: FirebaseFirestore.DocumentSnapshot) => {
-            console.log(snapshot);
+            console.log(snapshot.get('d'));
+            return true;
         }
     );

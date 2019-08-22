@@ -8,6 +8,10 @@ service cloud.firestore {
       allow create: if request.resource.data.roles.keys().hasAny(['root', 'admin']) == false;
       allow update: if getRole('root') == true || getRole('admin') == true;
     }
+    match /amenidades/{document} {
+    	allow read;
+      allow update;
+    }
     match /propiedades/{document} {
     	allow read;
       allow create: if request.auth.uid != null;
