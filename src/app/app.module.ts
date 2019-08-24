@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 // Taginput
 import { TagInputModule } from 'ngx-chips';
@@ -58,6 +59,7 @@ import { FiltroTipoPropiedadComponent } from './pages/inmuebles-resultado/filtro
 import { FiltroMasComponent } from './pages/inmuebles-resultado/filtro-mas/filtro-mas.component';
 import { FiltroAmenidadesComponent } from './pages/inmuebles-resultado/filtro-amenidades/filtro-amenidades.component';
 import { DetalleInmuebleComponent } from './pages/inmuebles-resultado/detalle-inmueble/detalle-inmueble.component';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,7 @@ import { DetalleInmuebleComponent } from './pages/inmuebles-resultado/detalle-in
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -107,7 +110,12 @@ import { DetalleInmuebleComponent } from './pages/inmuebles-resultado/detalle-in
   ],
   providers: [
     { provide: FirestoreSettingsToken, useValue: {} },
-    { provide: StorageBucket, useValue: 'heritagedevelopment-18797.appspot.com' }
+    { provide: StorageBucket, useValue: 'heritagedevelopment-18797.appspot.com' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

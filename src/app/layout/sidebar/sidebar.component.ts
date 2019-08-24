@@ -13,7 +13,7 @@ import { User } from '../../models/user';
 })
 export class SidebarComponent implements OnInit {
 
-  user: User;
+  user: any;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -23,18 +23,20 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.auth.user$.subscribe(user => this.user = user);
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   logout() {
-    this.afAuth.auth.signOut().then(
-      (value) => {
-        this.router.navigate(['/inmuebles']);
-      },
-      (error) => {
-        this.toastr.error(error.message, 'Error');
-      }
-    );
+    // this.afAuth.auth.signOut().then(
+    //   (value) => {
+    //     this.router.navigate(['/inmuebles']);
+    //   },
+    //   (error) => {
+    //     this.toastr.error(error.message, 'Error');
+    //   }
+    // );
+    this.auth.logout();
+    this.router.navigate(['/inmuebles']);
   }
 
 }

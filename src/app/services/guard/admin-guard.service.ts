@@ -10,21 +10,33 @@ import { AdminUsersComponent } from 'src/app/admin/admin-users/admin-users.compo
 })
 export class AdminGuardService implements CanActivate {
 
+  private adminArray: Array<string> = ['superuser', 'administrator'];
+
   constructor(
     private router: Router,
     private auth: AuthService,
   ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.auth.user$.pipe(
-      take(1),
-      map(user => user && (user.roles.admin || user.roles.root)? true : false),
-      tap(isAdminOrRoot => {
-        if (!isAdminOrRoot) {
-          console.error('Access denied - Admins only');
-          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-        }
-      })
-    );
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    // return this.auth.user$.pipe(
+    //   take(1),
+    //   map(user => user && (user.roles.admin || user.roles.root)? true : false),
+    //   tap(isAdminOrRoot => {
+    //     if (!isAdminOrRoot) {
+    //       console.error('Access denied - Admins only');
+    //       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+    //     }
+    //   })
+    // );
+    const localUserString = localStorage.getItem('user');
+    const user = JSON.parse(localUserString);
+    if (user && user.role && user.role.type) {
+      if (this.adminArray.includes(user.role.type)) {
+        return true;
+      }
+    }
+    console.error('Access denied - Admins only');
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+    return false;
   }
 }
