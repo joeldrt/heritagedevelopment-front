@@ -5,7 +5,7 @@
     right: 0;
     bottom: 0;
     background-color: white;
-    z-index: 999;
+    z-index: 1032;
     overflow: hidden;
 
     .top-navigation {
@@ -15,9 +15,6 @@
         top: 0;
         right: 0;
         left: 0;
-        @media (min-width: 770px) {
-            left: 70px;
-        } 
         padding: 9px 12px;
         min-height: 54px;
         max-height: 54px;
@@ -47,9 +44,6 @@
         top: 54px;
         right: 0;
         left: 0;
-        @media (min-width: 770px) {
-            left: 70px;
-        }
         overflow-x: hidden;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;

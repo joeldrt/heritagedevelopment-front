@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } fro
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from '../../models/propiedad';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { GeoQuerySnapshot } from 'geofirestore';
 
 @Component({
@@ -17,22 +15,13 @@ export class EstateComponent implements OnInit, OnDestroy {
 
   propiedades: Propiedad[];
 
-  filters = [
-    new PropertyFilter('nombre', 'nombre'),
-    new PropertyFilter('m2 terreno', 'm2t.'),
-    new PropertyFilter('m2 construcción', 'm2c.'),
-    new PropertyFilter('niveles', 'niv.'),
-  ]
-  filter: PropertyFilter;
-
-  end_wizard = false;
+  endWizard = false;
   wizardIniciado = false;
 
   constructor(
     private propiedadService: PropiedadService,
-    private _location: Location,
+    private location: Location,
   ) {
-    this.filter = new PropertyFilter('', '');
     this.propiedades = new Array<Propiedad>();
   }
 
@@ -63,17 +52,13 @@ export class EstateComponent implements OnInit, OnDestroy {
     }
   }
 
-  changeFilter(new_filter: PropertyFilter) {
-    this.filter = new_filter;
-  }
-
   haFinalizadoElWizard($event: any) {
-    this.end_wizard = $event;
+    this.endWizard = $event;
   }
 
   iniciarWizardAgregarPropiedad() {
     this.wizardIniciado = true;
-    this.end_wizard = false;
+    this.endWizard = false;
   }
 
   finalizarWizardAgregarPropiedad() {
@@ -81,7 +66,7 @@ export class EstateComponent implements OnInit, OnDestroy {
   }
 
   navigatePrevious() {
-    this._location.back();
+    this.location.back();
   }
 
   cerrarWizardAgregarPropiedad() {
@@ -93,11 +78,4 @@ export class EstateComponent implements OnInit, OnDestroy {
     // console.debug(event.target.scrollTop);
   }
 
-}
-
-class PropertyFilter {
-  constructor(
-    public nombre: string,
-    public short_name: string,
-  ) {}
 }

@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private afAuth: AngularFireAuth,
     private router: Router,
     private toastr: ToastrService,
   ) { }
@@ -38,7 +37,6 @@ export class LoginComponent implements OnInit {
     this.mensajeLoading = 'Ingresando...';
     this.authService.login(this.email, this.password).subscribe(
       (response: any) => {
-        localStorage.setItem('user', JSON.stringify(response.user));
         this.router.navigate(['/admin']);
         this.loading = false;
       },
@@ -48,17 +46,6 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       }
     );
-    // this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(
-    //   (credentials) => {
-    //     this.router.navigate(['/admin']);
-    //     this.loading = false;
-    //   },
-    //   (error) => {
-    //     this.loading = false;
-    //     this.toastr.error(error.message, 'Error');
-    //     this.loading = false;
-    //   }
-    // );
   }
 
 }

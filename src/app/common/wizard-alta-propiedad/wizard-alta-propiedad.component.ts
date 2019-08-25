@@ -38,7 +38,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   propertyId: string;
   private propiedadDoc: AngularFirestoreDocument<Propiedad>;
 
-  user: User;
+  user: any;
 
   nuevaPropiedad: Propiedad;
   mapaDeArchivos = new Map<string, File>();
@@ -69,9 +69,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
   ngOnInit() {
     this.geoCoder = new google.maps.Geocoder();
     this.initWizard();
-    this.auth.user$.subscribe((user) => {
-      this.user = user;
-    });
+    this.user = this.auth.getCurrentUser();
     this.propertyId = this.route.snapshot.paramMap.get('propertyId');
     if (this.propertyId) {
       this.verificarEsEdicion(this.propertyId);
@@ -369,7 +367,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     }
     if (!this.esEdicion) {
       this.mensajeLoading = 'guardando la propiedad';
-      this.nuevaPropiedad.userUid = this.user.uid;
+      this.nuevaPropiedad.userUid = this.user.username;
       const propiedadAGuardar = Object.assign({}, this.nuevaPropiedad);
       this.propiedadService.agregarPropiedad(propiedadAGuardar).then(
         (value) => {

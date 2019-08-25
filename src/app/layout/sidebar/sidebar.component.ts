@@ -27,14 +27,6 @@ export class SidebarComponent implements OnInit {
   }
 
   logout() {
-    // this.afAuth.auth.signOut().then(
-    //   (value) => {
-    //     this.router.navigate(['/inmuebles']);
-    //   },
-    //   (error) => {
-    //     this.toastr.error(error.message, 'Error');
-    //   }
-    // );
     this.auth.logout();
     this.router.navigate(['/inmuebles']);
   }

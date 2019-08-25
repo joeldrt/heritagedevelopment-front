@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -9,33 +10,21 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 export class AdminNavbarComponent implements OnInit {
 
   title: string;
+  user: any;
 
   constructor(
+    private authService: AuthService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { 
-    router.events.subscribe(
-      (event) => {
-        if (event instanceof NavigationEnd) {
-          this.title = this.getTitle(router.routerState, router.routerState.root).join('-');
-        }
-      }
-    );
+  ) {
+    this.user = authService.getCurrentUser();
   }
 
   ngOnInit() {
   }
 
-  getTitle(state, parent) {
-    var data = [];
-    if(parent && parent.snapshot.data && parent.snapshot.data.title) {
-      data.push(parent.snapshot.data.title);
-    }
-
-    if(state && parent) {
-      data.push(... this.getTitle(state, state.firstChild(parent)));
-    }
-    return data;
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/inmuebles']);
   }
 
 }
