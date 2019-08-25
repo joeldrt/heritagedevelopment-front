@@ -3,48 +3,62 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Propiedad } from '../../models/propiedad';
 import Geohash from 'latlon-geohash';
 import { GeoCollectionReference, GeoFirestore} from 'geofirestore';
-import * as firebase from 'firebase/app';
+
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropiedadService {
 
-  geofirestore$: GeoFirestore;
-  geocollection: GeoCollectionReference;
+  private PROPIEDAD_URL = environment.API_URL + 'propiedads';
 
   constructor(
-    private firestore: AngularFirestore,
-  ) {
-    this.geofirestore$ = new GeoFirestore(firestore.firestore);
-    this.geocollection = this.geofirestore$.collection('propiedades');
+    private http: HttpClient,
+  ) {}
+
+  obtenerPropiedadesStrapi(): Observable<HttpResponse<Propiedad[]>> {
+    return this.http.get<Propiedad[]>(this.PROPIEDAD_URL, { observe: 'response' });
   }
 
-  obtenerPropiedades() {
-    return this.geofirestore$.collection('propiedades');
+  agregarPropiedadStrapi(propiedad: Propiedad): Observable<HttpResponse<Propiedad>> {
+    propiedad.geohash = this.generarGeohash(propiedad.coordinates._lat, propiedad.coordinates._long);
+    return this.http.post<Propiedad>(this.PROPIEDAD_URL, propiedad, { observe: 'response' });
   }
 
-  agregarPropiedad(propiedad: any) {
-    return this.geocollection.doc(propiedad.id).set(propiedad);
+  actualizarPropiedadStrapi(propiedad: Propiedad): Observable<HttpResponse<Propiedad>> {
+    return this.http.put<Propiedad>(`${this.PROPIEDAD_URL}/${propiedad.id}`, propiedad, {observe: 'response'});
   }
 
-  actualizarPropiedad(propiedad: Propiedad) {
-    return this.geocollection.doc(propiedad.id).update(propiedad);
+  borrarPropiedadStrapi(propiedadId: string) {
+    return this.http.delete<any>(`${this.PROPIEDAD_URL}/${propiedadId}`, {observe: 'response'});
   }
 
-  borrarPropiedad(propiedadId: string) {
-    return this.geocollection.doc(propiedadId).delete();
+  obtenerPropiedadStrapi(propiedadId: string) {
+    return this.http.get<Propiedad>(`${this.PROPIEDAD_URL}/${propiedadId}`, { observe: 'response' });
   }
 
-  obtenerPropiedad(propiedadId: string) {
-    return this.geocollection.doc(propiedadId);
-  }
-
-  obtenerPropiedadesCercanasA(latitude: number, longitude: number) {
-    return  this.geocollection.near({
-      center: new firebase.firestore.GeoPoint(latitude, longitude),
-      radius: 30,
-    }).get();
+  obtenerPropiedadesCercanasAStrapi(latitude: number, longitude: number): Observable<HttpResponse<Propiedad[]>> {
+    const distance = 9;
+    // ~1 mile of lat and lon in degrees
+    const lat = 0.0144927536231884;
+    const lon = 0.0181818181818182;
+    const lowerLat = latitude - (lat * distance);
+    const lowerLon = longitude - (lon * distance);
+    const greaterLat = latitude + (lat * distance);
+    const greaterLon = longitude + (lon * distance);
+    console.log(`lower pos: ${lowerLat}, ${lowerLon}`);
+    console.log(`greater pos: ${greaterLat}, ${greaterLon}`);
+    const query = `latitud_gte=${lowerLat}&latitud_lte=${greaterLat}&longitud_gte=${lowerLon}&longitud_lte=${greaterLon}`;
+    console.log(query);
+    const params = new HttpParams()
+      .set('latitud_gte', lowerLat.toString())
+      .set('latitud_lte', greaterLat.toString())
+      .set('longitud_gte', lowerLon.toString())
+      .set('longitud_lte', greaterLon.toString());
+    return this.http.get<Propiedad[]>(this.PROPIEDAD_URL, { params, observe: 'response'});
   }
 
   generarGeohash(latitude: number, longitude: number): string {

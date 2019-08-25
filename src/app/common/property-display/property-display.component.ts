@@ -35,7 +35,7 @@ export class PropertyDisplayComponent implements OnInit, OnChanges, AfterViewIni
       return;
     }
     const mapProperties = {
-      center: new google.maps.LatLng(this.propiedad.coordinates.latitude, this.propiedad.coordinates.longitude),
+      center: new google.maps.LatLng(this.propiedad.latitud, this.propiedad.longitud),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
@@ -51,12 +51,12 @@ export class PropertyDisplayComponent implements OnInit, OnChanges, AfterViewIni
       if (this.marker) {
         this.marker.setMap(null);
       }
-      this.map.setCenter(new google.maps.LatLng(this.propiedad.coordinates.latitude, this.propiedad.coordinates.longitude));
+      this.map.setCenter(new google.maps.LatLng(this.propiedad.latitud, this.propiedad.longitud));
     } else {
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
     }
     const markerProperties = {
-      position: new google.maps.LatLng(this.propiedad.coordinates.latitude, this.propiedad.coordinates.longitude),
+      position: new google.maps.LatLng(this.propiedad.latitud, this.propiedad.longitud),
       map: this.map,
       draggable: false,
       title: this.propiedad.direccion ? this.propiedad.direccion : '',

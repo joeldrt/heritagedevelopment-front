@@ -3,6 +3,7 @@ import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from '../../models/propiedad';
 import { Location } from '@angular/common';
 import { GeoQuerySnapshot } from 'geofirestore';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-estate',
@@ -26,13 +27,22 @@ export class EstateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.propiedadService.obtenerPropiedades().onSnapshot(
-      (snapshot: GeoQuerySnapshot) => {
-        this.propiedades = new Array<Propiedad>();
-        snapshot.docs.forEach((value) => {
-          this.propiedades.push((value.data() as Propiedad));
-        });
+    // this.propiedadService.obtenerPropiedades().onSnapshot(
+    //   (snapshot: GeoQuerySnapshot) => {
+    //     this.propiedades = new Array<Propiedad>();
+    //     snapshot.docs.forEach((value) => {
+    //       this.propiedades.push((value.data() as Propiedad));
+    //     });
+    //     setTimeout(this.setLastScrollPosition, 1);
+    //   }
+    // );
+    this.propiedadService.obtenerPropiedadesStrapi().subscribe(
+      (response: HttpResponse<Propiedad[]>) => {
+        this.propiedades = response.body;
         setTimeout(this.setLastScrollPosition, 1);
+      },
+      (error: any) => {
+        console.log(error);
       }
     );
   }

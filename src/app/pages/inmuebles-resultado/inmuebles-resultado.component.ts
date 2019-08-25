@@ -5,6 +5,7 @@ import { Propiedad } from '../../models/propiedad';
 import { Router } from '@angular/router';
 import { GeoQuerySnapshot } from 'geofirestore';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-inmuebles-resultado',
@@ -109,15 +110,24 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
       lat = this.place.geometry.location.lat as any;
       lng = this.place.geometry.location.lng as any;
     }
-    this.propiedadService.obtenerPropiedadesCercanasA(lat, lng)
-    .then(
-      (value: GeoQuerySnapshot) => {
+    // this.propiedadService.obtenerPropiedadesCercanasA(lat, lng)
+    // .then(
+    //   (value: GeoQuerySnapshot) => {
+    //     this.sessionService.setPlace(this.place);
+    //     this.storageService.saveData(StorageService.SAVED_PLACE, this.place);
+    //     this.propiedades = new Array<Propiedad>();
+    //     value.docs.forEach((element) => {
+    //       this.propiedades.push(element.data() as Propiedad);
+    //     });
+    //     this.filtrarPropiedades();
+    //   }
+    // );
+    this.propiedadService.obtenerPropiedadesCercanasAStrapi(lat, lng)
+    .subscribe(
+      (value: HttpResponse<Propiedad[]>) => {
         this.sessionService.setPlace(this.place);
         this.storageService.saveData(StorageService.SAVED_PLACE, this.place);
-        this.propiedades = new Array<Propiedad>();
-        value.docs.forEach((element) => {
-          this.propiedades.push(element.data() as Propiedad);
-        });
+        this.propiedades = value.body;
         this.filtrarPropiedades();
       }
     );

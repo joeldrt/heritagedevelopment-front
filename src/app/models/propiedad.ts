@@ -1,7 +1,23 @@
-import * as firebase from 'firebase/app';
+export class Coordinates {
+    public _lat: number;
+    public _long: number;
+    public isEqual(other: any) {
+        if (this._long === other._long && this._lat === other._lat) {
+            return true;
+        }
+        return false;
+    }
+
+    constructor(lat: number, long: number) {
+        this._lat = lat;
+        this._long = long;
+    }
+}
 
 export class Propiedad {
     public id?: string;
+    public latitud: number;
+    public longitud: number;
     public userUid: string;
     public tipoPropiedad: string;
     public nombre: string;
@@ -22,7 +38,9 @@ export class Propiedad {
     public edadPropiedad?: number;
     public costoMantenimiento?: number;
     public urlsFotografias?: string[];
-    public coordinates?: firebase.firestore.GeoPoint;
+    public coordinates?: Coordinates;
+    public geoposicion?: Coordinates;
+    public geohash?: string;
     constructor() {
     }
 
@@ -48,5 +66,7 @@ export class Propiedad {
         if (obj.costoMantenimiento === undefined) { obj.costoMantenimiento = null; }
         if (obj.urlsFotografias === undefined) { obj.urlsFotografias = []; }
         if (obj.coordinates === undefined) { obj.coordinates = null; }
+        if (obj.geoposicion === undefined) { obj.geoposicion = null; }
+        if (obj.geohash === undefined) { obj.geohash = null; }
     }
 }

@@ -8,6 +8,7 @@ import { ToastrService } from '../../services/toastr/toastr.service';
 import { Observable } from 'rxjs';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { GeoDocumentSnapshot } from 'geofirestore';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-property-detail',
@@ -37,9 +38,14 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   cargarPropiedad(propertyId: string) {
-    this.propiedadService.obtenerPropiedad(propertyId).onSnapshot((snapshot: GeoDocumentSnapshot) => {
-      this.propiedad = snapshot.data() as Propiedad;
-    });
+    this.propiedadService.obtenerPropiedadStrapi(propertyId).subscribe(
+      (response: HttpResponse<Propiedad>) => {
+        this.propiedad = response.body;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
 }

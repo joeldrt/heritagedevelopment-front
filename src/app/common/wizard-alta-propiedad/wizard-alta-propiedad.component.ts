@@ -1,23 +1,20 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Propiedad } from '../../models/propiedad';
+import { Propiedad, Coordinates } from '../../models/propiedad';
 import { ToastrService } from '../../services/toastr/toastr.service';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { AuthService } from '../../services/auth/auth.service';
-import { User } from '../../models/user';
 import { finalize, take } from 'rxjs/operators';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import {} from 'googlemaps';
-import * as firebase from 'firebase/app';
-import { GeoDocumentSnapshot } from 'geofirestore';
 import { AmenidadesService } from 'src/app/services/amenidades/amenidades.service';
 import { Amenidades } from 'src/app/models/amenidades';
-import { stringify } from '@angular/core/src/util';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-wizard-alta-propiedad',
@@ -36,7 +33,6 @@ export class WizardAltaPropiedadComponent implements OnInit {
   esEdicion: boolean;
   envioAGuardar: boolean;
   propertyId: string;
-  private propiedadDoc: AngularFirestoreDocument<Propiedad>;
 
   user: any;
 
@@ -129,13 +125,25 @@ export class WizardAltaPropiedadComponent implements OnInit {
   }
 
   verificarEsEdicion(propertyId: string) {
-    this.propiedadService.obtenerPropiedad(propertyId).onSnapshot((snapshot: GeoDocumentSnapshot) => {
-      this.nuevaPropiedad = snapshot.data() as Propiedad;
-      this.nuevaPropiedad.id = propertyId;
-      this.amenidadesSeleccionadas = this.nuevaPropiedad.amenidades;
-      this.esEdicion = true;
-      this.marcarPropiedadesYaSeleccionadas();
-    });
+    // this.propiedadService.obtenerPropiedad(propertyId).onSnapshot((snapshot: GeoDocumentSnapshot) => {
+    //   this.nuevaPropiedad = snapshot.data() as Propiedad;
+    //   this.nuevaPropiedad.id = propertyId;
+    //   this.amenidadesSeleccionadas = this.nuevaPropiedad.amenidades;
+    //   this.esEdicion = true;
+    //   this.marcarPropiedadesYaSeleccionadas();
+    // });
+    this.propiedadService.obtenerPropiedadStrapi(propertyId).subscribe(
+      (response: HttpResponse<Propiedad>) => {
+        this.nuevaPropiedad = response.body;
+        this.nuevaPropiedad.id = propertyId;
+        this.amenidadesSeleccionadas = this.nuevaPropiedad.amenidades;
+        this.esEdicion = true;
+        this.marcarPropiedadesYaSeleccionadas();
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   sendEndSignal() {
@@ -170,17 +178,13 @@ export class WizardAltaPropiedadComponent implements OnInit {
       }, 200);
       return;
     }
-    let geoPoint = new firebase.firestore.GeoPoint(19.047153095866395, -98.23302070517542);
-    if (propiedad.coordinates) {
-      geoPoint = new firebase.firestore.GeoPoint(
-        propiedad.coordinates.latitude,
-        propiedad.coordinates.longitude);
-    } else {
-      propiedad.coordinates = geoPoint;
+    let geoPoint = new Coordinates(19.047153095866395, -98.23302070517542);
+    if (propiedad.latitud && propiedad.longitud) {
+      geoPoint = new Coordinates(propiedad.latitud, propiedad.longitud);
     }
     if (!this.map) {
       const mapProperties = {
-        center: new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude),
+        center: new google.maps.LatLng(geoPoint._lat, geoPoint._long),
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
@@ -194,7 +198,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     }
     if (!this.marker) {
       const markerProperties = {
-        position: new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude),
+        position: new google.maps.LatLng(geoPoint._lat, geoPoint._long),
         map: this.map,
         draggable: true,
         animation: google.maps.Animation.DROP,
@@ -209,7 +213,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
       });
     } else {
       this.marker.setTitle(propiedad.direccion ? propiedad.direccion : '');
-      this.marker.setPosition(new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude));
+      this.marker.setPosition(new google.maps.LatLng(geoPoint._lat, geoPoint._long));
     }
     if (!this.infowindow) {
       const infoWindowOptions = {
@@ -227,21 +231,27 @@ export class WizardAltaPropiedadComponent implements OnInit {
     if (!place || !place.geometry) {
       return;
     }
-    const geoPoint = new firebase.firestore.GeoPoint(
+    const geoPoint = new Coordinates(
       place.geometry.location.lat(),
       place.geometry.location.lng());
     this.nuevaPropiedad.coordinates = geoPoint;
+    this.nuevaPropiedad.geoposicion = geoPoint;
+    this.nuevaPropiedad.latitud = geoPoint._lat;
+    this.nuevaPropiedad.longitud = geoPoint._long;
     this.nuevaPropiedad.direccion = place.formatted_address;
     this.cargarMapa(this.nuevaPropiedad);
   }
 
   cambiarDireccionPorDragNDrop(place: any) {
-    const geoPoint = new firebase.firestore.GeoPoint(
+    const geoPoint = new Coordinates(
       place.latLng.lat(),
       place.latLng.lng());
     this.nuevaPropiedad.coordinates = geoPoint;
+    this.nuevaPropiedad.geoposicion = geoPoint;
+    this.nuevaPropiedad.latitud = geoPoint._lat;
+    this.nuevaPropiedad.longitud = geoPoint._long;
     this.geoCoder.geocode({
-      location: new google.maps.LatLng(geoPoint.latitude, geoPoint.longitude),
+      location: new google.maps.LatLng(geoPoint._lat, geoPoint._long),
     }, (results) => {
       this.nuevaPropiedad.direccion = results[0].formatted_address;
       this.cargarMapa(this.nuevaPropiedad);
@@ -369,22 +379,22 @@ export class WizardAltaPropiedadComponent implements OnInit {
       this.mensajeLoading = 'guardando la propiedad';
       this.nuevaPropiedad.userUid = this.user.username;
       const propiedadAGuardar = Object.assign({}, this.nuevaPropiedad);
-      this.propiedadService.agregarPropiedad(propiedadAGuardar).then(
-        (value) => {
+      this.propiedadService.agregarPropiedadStrapi(propiedadAGuardar).subscribe(
+        (response: HttpResponse<Propiedad>) => {
           this.sendEndSignal();
         },
-        (error) => {
+        (error: any) => {
           this.loading = false;
           this.toastr.error(`Error al guardar la propiedad: ${error}`);
         });
     } else {
       this.mensajeLoading = 'editando la propiedad';
       const propiedadAEditar = Object.assign({}, this.nuevaPropiedad);
-      this.propiedadService.actualizarPropiedad(propiedadAEditar).then(
-        (value) => {
+      this.propiedadService.actualizarPropiedadStrapi(propiedadAEditar).subscribe(
+        (response: HttpResponse<Propiedad>) => {
           this.sendEndSignal();
         },
-        (error) => {
+        (error: any) => {
           this.loading = false;
           this.toastr.error(`Error al editar la propiedad: ${error}`);
         });
@@ -393,8 +403,8 @@ export class WizardAltaPropiedadComponent implements OnInit {
 
   borrarPropiedad() {
     const urlsFotografiasBorrado = this.nuevaPropiedad.urlsFotografias;
-    this.propiedadService.borrarPropiedad(this.propertyId).then(
-      () => {
+    this.propiedadService.borrarPropiedadStrapi(this.propertyId).subscribe(
+      (response: HttpResponse<any>) => {
         this.borrarImagenesDelStorage(urlsFotografiasBorrado);
         this.router.navigate(['/admin/estate']);
         this.toastr.success(`Propiedad borrada!`);
