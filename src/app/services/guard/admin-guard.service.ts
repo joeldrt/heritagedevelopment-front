@@ -10,7 +10,7 @@ import { AdminUsersComponent } from 'src/app/admin/admin-users/admin-users.compo
 })
 export class AdminGuardService implements CanActivate {
 
-  private adminArray: Array<string> = ['superuser', 'administrator'];
+  private adminArray: Array<string> = ['root', 'superuser', 'administrator', 'hdadministrator'];
 
   constructor(
     private router: Router,
