@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AmenidadesService } from 'src/app/services/amenidades/amenidades.service';
 import { Amenidades } from 'src/app/models/amenidades';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-filtro-amenidades',
@@ -26,8 +27,21 @@ export class FiltroAmenidadesComponent implements OnInit {
     if (!this.todasLasAmenidades) {
       this.todasLasAmenidades = new Array<string>();
     }
-    this.amenidadesService.obtenerAmenidades().subscribe((document) => {
-      const amenidadesDoc = (document.data() as Amenidades);
+    // this.amenidadesService.obtenerAmenidades().subscribe((document) => {
+    //   const amenidadesDoc = (document.data() as Amenidades);
+    //   if (amenidadesDoc.todas && amenidadesDoc.todas.length > 0) {
+    //     this.amenidadesSeleccionadas = [];
+    //     this.todasLasAmenidades = [];
+    //     amenidadesDoc.todas.forEach((value, index) => {
+    //       this.todasLasAmenidades.push(value);
+    //       this.amenidadesSeleccionadas.push(false);
+    //     });
+    //     this.marcarPropiedadesYaSeleccionadas();
+    //   }
+    // });
+    this.amenidadesService.obtenerAmenidadesStrapi().subscribe(
+      (response: HttpResponse<Amenidades>) => {
+      const amenidadesDoc = response.body;
       if (amenidadesDoc.todas && amenidadesDoc.todas.length > 0) {
         this.amenidadesSeleccionadas = [];
         this.todasLasAmenidades = [];
@@ -37,7 +51,8 @@ export class FiltroAmenidadesComponent implements OnInit {
         });
         this.marcarPropiedadesYaSeleccionadas();
       }
-    });
+      }
+    );
   }
 
   marcarPropiedadesYaSeleccionadas() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Propiedad, Coordinates } from '../../models/propiedad';
@@ -8,8 +8,7 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { AuthService } from '../../services/auth/auth.service';
-import { finalize, take } from 'rxjs/operators';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import {} from 'googlemaps';
 import { AmenidadesService } from 'src/app/services/amenidades/amenidades.service';
@@ -70,18 +69,32 @@ export class WizardAltaPropiedadComponent implements OnInit {
     if (this.propertyId) {
       this.verificarEsEdicion(this.propertyId);
     }
-    this.amenidadesService.obtenerAmenidades().subscribe((document) => {
-      const amenidadesDoc = (document.data() as Amenidades);
-      if (amenidadesDoc.todas && amenidadesDoc.todas.length > 0) {
-        this.listaDeAmenidades = new Array<string>();
-        this.mapaSeleccionAmenidades = new Array<boolean>();
-        amenidadesDoc.todas.forEach((value, index) => {
-          this.listaDeAmenidades.push(value);
-          this.mapaSeleccionAmenidades.push(false);
-        });
-        this.marcarPropiedadesYaSeleccionadas();
+    // this.amenidadesService.obtenerAmenidades().subscribe((document) => {
+    //   const amenidadesDoc = (document.data() as Amenidades);
+    //   if (amenidadesDoc.todas && amenidadesDoc.todas.length > 0) {
+    //     this.listaDeAmenidades = new Array<string>();
+    //     this.mapaSeleccionAmenidades = new Array<boolean>();
+    //     amenidadesDoc.todas.forEach((value, index) => {
+    //       this.listaDeAmenidades.push(value);
+    //       this.mapaSeleccionAmenidades.push(false);
+    //     });
+    //     this.marcarPropiedadesYaSeleccionadas();
+    //   }
+    // });
+    this.amenidadesService.obtenerAmenidadesStrapi().subscribe(
+      (response: HttpResponse<Amenidades>) => {
+        const amenidadesDoc = response.body;
+        if (amenidadesDoc.todas && amenidadesDoc.todas.length > 0) {
+          this.listaDeAmenidades = new Array<string>();
+          this.mapaSeleccionAmenidades = new Array<boolean>();
+          amenidadesDoc.todas.forEach((value, index) => {
+            this.listaDeAmenidades.push(value);
+            this.mapaSeleccionAmenidades.push(false);
+          });
+          this.marcarPropiedadesYaSeleccionadas();
+        }
       }
-    });
+    );
   }
 
   marcarPropiedadesYaSeleccionadas() {

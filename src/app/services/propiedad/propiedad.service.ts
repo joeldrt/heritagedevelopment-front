@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Propiedad } from '../../models/propiedad';
 import Geohash from 'latlon-geohash';
-import { GeoCollectionReference, GeoFirestore} from 'geofirestore';
 
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
