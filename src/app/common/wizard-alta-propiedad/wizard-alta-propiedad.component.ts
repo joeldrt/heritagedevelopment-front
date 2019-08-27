@@ -14,6 +14,10 @@ import {} from 'googlemaps';
 import { AmenidadesService } from 'src/app/services/amenidades/amenidades.service';
 import { Amenidades } from 'src/app/models/amenidades';
 import { HttpResponse } from '@angular/common/http';
+import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
+import { UploadResponse } from 'src/app/models/upload-response';
+
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-wizard-alta-propiedad',
@@ -49,6 +53,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
+    private uploadFileService: UploadFileService,
     private storage: AngularFireStorage,
     private db: AngularFirestore,
     private auth: AuthService,
@@ -341,30 +346,42 @@ export class WizardAltaPropiedadComponent implements OnInit {
     if (!this.nuevaPropiedad.urlsFotografias) {
       this.nuevaPropiedad.urlsFotografias = [];
     }
-    if (this.urlsFotografiasBorrar.length > 0) {
-      this.urlsFotografiasBorrar.forEach((urlImagen) => {
-        this.storage.storage.refFromURL(urlImagen).delete();
-      });
-    }
+    // if (this.urlsFotografiasBorrar.length > 0) {
+    //   this.urlsFotografiasBorrar.forEach((urlImagen) => {
+    //     this.storage.storage.refFromURL(urlImagen).delete();
+    //   });
+    // }
     if (this.mapaDeArchivos.size > 0) {
       this.loading = true;
       this.mensajeLoading = 'guardando imagenes';
       this.mapaDeArchivos.forEach((value: File, key: string) => {
-          const file = value;
-          const filePath = `propiedades/${this.nuevaPropiedad.id}/${file.name}`;
-          const fileRef = this.storage.ref(filePath);
-          const task = this.storage.upload(filePath, file);
-          task.snapshotChanges().pipe(
-            finalize(() => {
-              fileRef.getDownloadURL().subscribe(url => {
-                if (url) {
-                  this.nuevaPropiedad.urlsFotografias.push(url);
-                  this.contadorImagenesGuardadas += 1;
-                  this.seDebeGuardarElDocumento();
-                }
-              });
-            }),
-          ).subscribe();
+          // const file = value;
+          // const filePath = `propiedades/${this.nuevaPropiedad.id}/${file.name}`;
+          // const fileRef = this.storage.ref(filePath);
+          // const task = this.storage.upload(filePath, file);
+          // task.snapshotChanges().pipe(
+          //   finalize(() => {
+          //     fileRef.getDownloadURL().subscribe(url => {
+          //       if (url) {
+          //         this.nuevaPropiedad.urlsFotografias.push(url);
+          //         this.contadorImagenesGuardadas += 1;
+          //         this.seDebeGuardarElDocumento();
+          //       }
+          //     });
+          //   }),
+          // ).subscribe();
+          this.uploadFileService.uploadFile(value).subscribe(
+            (response: HttpResponse<UploadResponse>) => {
+              const result = response.body[0];
+              const url = `${environment.API_URL}${result.url.substr(1, result.url.length - 1)}`;
+              this.nuevaPropiedad.urlsFotografias.push(url);
+              this.contadorImagenesGuardadas += 1;
+              this.seDebeGuardarElDocumento();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
       });
     } else {
       this.loading = true;
@@ -418,7 +435,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     const urlsFotografiasBorrado = this.nuevaPropiedad.urlsFotografias;
     this.propiedadService.borrarPropiedadStrapi(this.propertyId).subscribe(
       (response: HttpResponse<any>) => {
-        this.borrarImagenesDelStorage(urlsFotografiasBorrado);
+        // this.borrarImagenesDelStorage(urlsFotografiasBorrado);
         this.router.navigate(['/admin/estate']);
         this.toastr.success(`Propiedad borrada!`);
       },
@@ -428,10 +445,10 @@ export class WizardAltaPropiedadComponent implements OnInit {
     );
   }
 
-  borrarImagenesDelStorage(urlsFotografiasBorrado: string[]) {
-    urlsFotografiasBorrado.forEach((urlImagen) => {
-      this.storage.storage.refFromURL(urlImagen).delete();
-    });
-  }
+  // borrarImagenesDelStorage(urlsFotografiasBorrado: string[]) {
+  //   urlsFotografiasBorrado.forEach((urlImagen) => {
+  //     this.storage.storage.refFromURL(urlImagen).delete();
+  //   });
+  // }
 
 }
