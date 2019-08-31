@@ -1,0 +1,107 @@
+<div class="amenities-working-area">
+  <div class="card-holder">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-pills fa-pull-right">
+          <button class="btn btn-primary btn-circle btn-circle-sm m-1"
+            *ngIf="isDirty" (click)="actualizarAmenidades()">
+            <i class="fas fa-save"></i>
+          </button>
+          <button class="btn btn-success btn-circle btn-circle-sm m-1" data-toggle="modal" data-target="#addModal">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+        <h2 style="display: inline !important;">Lista de amenidades</h2>
+      </div>
+      <div class="card-body">
+        <div class="body-wrapper">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">orden</th>
+                <th scope="col">nombre</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="objAmenidades && objAmenidades.todas && objAmenidades.todas.length > 0">
+              <tr *ngFor="let amenidad of objAmenidades.todas; let i=index;">
+                <th scope="row">{{i+1}}</th>
+                <td>{{amenidad}}</td>
+                <td>
+                  <button type="button" class="btn btn-link" *ngIf="i > 0"
+                    (click)="subir(i)">
+                    <i class="fas fa-caret-up"></i>
+                  </button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-link" *ngIf="i < objAmenidades.todas.length-1"
+                    (click)="bajar(i)">
+                    <i class="fas fa-caret-down"></i>
+                  </button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-link"
+                    data-toggle="modal" data-target="#deleteModal"
+                    (click)="seleccionarAmenidadABorrar(i)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Borrar amenidad</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="objAmenidades && objAmenidades.todas && indiceAmenidadABorrar >= 0">
+        ¿Deseas borrar permanentemente la amenidad <b>{{objAmenidades.todas[indiceAmenidadABorrar]}}</b>? Esta acción no podrá ser revertida.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hacerBorrardo()">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Agregar amenidad</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="nuevaAmenidad">Nombre de la amenidad</label>
+            <input type="text" class="form-control" id="nuevaAmenidadCampo" placeholder="nombre de la amenidad"
+              name="nuevaAmenidadCampo"
+              [(ngModel)]="nuevaAmenidad">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarAmenidad()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>

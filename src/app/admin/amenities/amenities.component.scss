@@ -1,0 +1,23 @@
+.amenities-working-area {
+    background-color: #EBEBEB;
+    position: fixed;
+    top: 81px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    min-height: calc(100vh - 81px);
+    max-height: calc(100vh - 81px);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+.card-holder {
+    padding: 15px;
+}
+
+.body-wrapper {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}

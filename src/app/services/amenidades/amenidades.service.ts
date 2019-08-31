@@ -25,7 +25,11 @@ export class AmenidadesService {
   }
 
   obtenerAmenidadesStrapi(): Observable<HttpResponse<Amenidades>> {
-    return this.http.get<Amenidades>(this.AMENIDADES_URL, { observe: 'response'});
+    return this.http.get<Amenidades>(this.AMENIDADES_URL, {observe: 'response'});
+  }
+
+  actualizarAmenidadesStrapi(amenidades: Amenidades): Observable<HttpResponse<Amenidades>> {
+    return this.http.put<Amenidades>(this.AMENIDADES_URL, amenidades, {observe: 'response'});
   }
 
 }

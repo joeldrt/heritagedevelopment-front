@@ -60,6 +60,7 @@ import { FiltroMasComponent } from './pages/inmuebles-resultado/filtro-mas/filtr
 import { FiltroAmenidadesComponent } from './pages/inmuebles-resultado/filtro-amenidades/filtro-amenidades.component';
 import { DetalleInmuebleComponent } from './pages/inmuebles-resultado/detalle-inmueble/detalle-inmueble.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { AmenitiesComponent } from './admin/amenities/amenities.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     FiltroTipoPropiedadComponent,
     FiltroMasComponent,
     FiltroAmenidadesComponent,
-    DetalleInmuebleComponent
+    DetalleInmuebleComponent,
+    AmenitiesComponent
   ],
   imports: [
     BrowserModule,

@@ -74,18 +74,6 @@ export class WizardAltaPropiedadComponent implements OnInit {
     if (this.propertyId) {
       this.verificarEsEdicion(this.propertyId);
     }
-    // this.amenidadesService.obtenerAmenidades().subscribe((document) => {
-    //   const amenidadesDoc = (document.data() as Amenidades);
-    //   if (amenidadesDoc.todas && amenidadesDoc.todas.length > 0) {
-    //     this.listaDeAmenidades = new Array<string>();
-    //     this.mapaSeleccionAmenidades = new Array<boolean>();
-    //     amenidadesDoc.todas.forEach((value, index) => {
-    //       this.listaDeAmenidades.push(value);
-    //       this.mapaSeleccionAmenidades.push(false);
-    //     });
-    //     this.marcarPropiedadesYaSeleccionadas();
-    //   }
-    // });
     this.amenidadesService.obtenerAmenidadesStrapi().subscribe(
       (response: HttpResponse<Amenidades>) => {
         const amenidadesDoc = response.body;
@@ -355,21 +343,6 @@ export class WizardAltaPropiedadComponent implements OnInit {
       this.loading = true;
       this.mensajeLoading = 'guardando imagenes';
       this.mapaDeArchivos.forEach((value: File, key: string) => {
-          // const file = value;
-          // const filePath = `propiedades/${this.nuevaPropiedad.id}/${file.name}`;
-          // const fileRef = this.storage.ref(filePath);
-          // const task = this.storage.upload(filePath, file);
-          // task.snapshotChanges().pipe(
-          //   finalize(() => {
-          //     fileRef.getDownloadURL().subscribe(url => {
-          //       if (url) {
-          //         this.nuevaPropiedad.urlsFotografias.push(url);
-          //         this.contadorImagenesGuardadas += 1;
-          //         this.seDebeGuardarElDocumento();
-          //       }
-          //     });
-          //   }),
-          // ).subscribe();
           this.uploadFileService.uploadFile(value).subscribe(
             (response: HttpResponse<UploadResponse>) => {
               const result = response.body[0];
