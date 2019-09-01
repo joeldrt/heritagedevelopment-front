@@ -1,3 +1,16 @@
+.loader-holder {
+    height: calc(100vh - (81px + 93px + 97px)) !important;
+    background-color: #87b23e;
+}
+
+.no-properties-found {
+    height: calc(100vh - (81px + 93px + 97px)) !important;
+    background-color: #EBEBEB;
+    text-align: center;
+    padding-top: 123px;
+    color: #87b23e;
+}
+
 .barra-busqueda-filtros {
     background-color: rgba(255, 255, 255, 1);
     position: fixed;

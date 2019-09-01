@@ -3,9 +3,9 @@ import { SessionService } from '../../services/session/session.service';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
 import { Propiedad } from '../../models/propiedad';
 import { Router } from '@angular/router';
-import { GeoQuerySnapshot } from 'geofirestore';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { HttpResponse } from '@angular/common/http';
+import { ToastrService } from 'src/app/services/toastr/toastr.service';
 
 @Component({
   selector: 'app-inmuebles-resultado',
@@ -19,6 +19,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   propiedades: Propiedad[];
   propiedadesFiltradas: Propiedad[];
   searchEmpty = false;
+  buscando = false;
 
   rentaVenta: string; // filtro de renta o venta
 
@@ -47,6 +48,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     private propiedadService: PropiedadService,
     private storageService: StorageService,
     private router: Router,
+    private toastrService: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -110,6 +112,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
       lat = this.place.geometry.location.lat as any;
       lng = this.place.geometry.location.lng as any;
     }
+    this.buscando = true;
     this.propiedadService.obtenerPropiedadesCercanasAStrapi(lat, lng)
     .subscribe(
       (value: HttpResponse<Propiedad[]>) => {
@@ -117,6 +120,11 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
         this.storageService.saveData(StorageService.SAVED_PLACE, this.place);
         this.propiedades = value.body;
         this.filtrarPropiedades();
+      },
+      (error: any) => {
+        this.buscando = false;;
+        console.error(error);
+        this.toastrService.error('Error al comunicarse con el servidor');
       }
     );
   }
@@ -126,6 +134,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   }
 
   filtrarPropiedades() {
+    this.buscando = true;
     this.propiedadesFiltradas = new Array<Propiedad>();
     this.propiedades.forEach((propiedad) => {
       if (this.rentaVenta === 'venta') {
@@ -248,6 +257,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
       // si pasa todos los filtros, la propiedad es agregada para mostrarse
       this.propiedadesFiltradas.push(propiedad);
     });
+    this.buscando = false;
   }
 
   createAutocompleteInput() {
@@ -437,6 +447,28 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
     this.amenidades = value;
     console.log(this.amenidades);
     this.storageService.saveData(StorageService.FILTER_AMENIDADES, this.amenidades);
+    this.filtrarPropiedades();
+  }
+
+  limpiarFiltros() {
+    this.precioMenor = null; // filtro precio menor
+    this.precioMayor = null; // filtro precio mayor
+
+    this.tiposPropiedad = ['Casa', 'Departamento', 'Oficina', 'Terreno'];
+    this.storageService.saveData(StorageService.FILTER_TIPO_PROPIEDAD, this.tiposPropiedad);
+
+    this.m2Construccion = null; // metros cuadrados de construcción
+    this.m2Terreno = null; // metros cuadrados de terreno
+    this.niveles = null; // niveles que contiene la propiedad (pisos)
+    this.recamaras = null; // número de recamaras
+    this.banos = null; // número de baños
+    this.mediosBanos = null; // número de medios baños
+    this.cajonesEstacionamiento = null; // numero de cajones de estacionamiento
+    this.capacidadCisterna = null; // capacidad de la cisterna
+    this.edadPropiedad = null; // edad de la propiedad
+
+    this.amenidades = [];
+    this.storageService.clearSearchFilters();
     this.filtrarPropiedades();
   }
 

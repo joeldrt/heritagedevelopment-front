@@ -73,7 +73,15 @@
   
   <!-- Contenido de la página de inmuebles-resultado -->
   <div class="result-area" id="resultArea" #resultArea>
-    <div class="container-fluid" *ngIf="propiedadesFiltradas">
+    <div *ngIf="buscando" class="loader-holder">
+        <app-loading [mensaje]="'cargando propiedades...'">
+        </app-loading>
+    </div>
+    <div class="no-properties-found" *ngIf="!buscando && propiedadesFiltradas && propiedadesFiltradas.length == 0">
+      <h3>No hay propiedades para esta búsqueda</h3>
+      <p>Intenta otra búsqueda o <button class="btn btn-link" (click)="limpiarFiltros()">reinicia los filtros</button></p>
+    </div>
+    <div class="container-fluid" *ngIf="propiedadesFiltradas && propiedadesFiltradas.length > 0 && !buscando">
       <div class="row">
 
         <!-- Tarjeta de inmueble -->

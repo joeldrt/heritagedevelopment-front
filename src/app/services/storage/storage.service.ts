@@ -21,6 +21,22 @@ export class StorageService {
     static FILTER_EDAD_PROPIEDAD = 'filter_edad_propiedad';
     static FILTER_AMENIDADES = 'filter_amenidades';
 
+    static ALL_FILTERS = [
+        StorageService.FILTER_RENTA_VENTA,
+        StorageService.FILTER_PRECIO_MENOR,
+        StorageService.FILTER_PRECIO_MAYOR,
+        StorageService.FILTER_M2_CONSTRUCCION,
+        StorageService.FILTER_M2_TERRENO,
+        StorageService.FILTER_NIVELES,
+        StorageService.FILTER_RECAMARAS,
+        StorageService.FILTER_BANOS,
+        StorageService.FILTER_MEDIOS_BANOS,
+        StorageService.FILTER_CAJONES_ESTACIONAMIENT,
+        StorageService.FILTER_CAPACIDAD_CISTERNA,
+        StorageService.FILTER_EDAD_PROPIEDAD,
+        StorageService.FILTER_AMENIDADES,
+    ];
+
     constructor() {}
 
     saveData(key: string, data: any) {
@@ -29,5 +45,13 @@ export class StorageService {
 
     getData(key: string): any {
         return JSON.parse(localStorage.getItem(key));
+    }
+
+    clearSearchFilters() {
+        StorageService.ALL_FILTERS.forEach(
+            (key: string) => {
+                localStorage.removeItem(key);
+            }
+        );
     }
 }
