@@ -8,7 +8,6 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { AuthService } from '../../services/auth/auth.service';
-import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import {} from 'googlemaps';
 import { AmenidadesService } from 'src/app/services/amenidades/amenidades.service';
@@ -324,6 +323,26 @@ export class WizardAltaPropiedadComponent implements OnInit {
   borrarImagenEdicion(position: number) {
     this.urlsFotografiasBorrar.push(this.nuevaPropiedad.urlsFotografias.splice(position, 1)[0]);
     // this.nuevaPropiedad.urlsFotografias.splice(position, 1);
+  }
+
+  disminuir(index: number) {
+    if ((index - 1) < 0) {
+      console.error('index out of bounds');
+      return;
+    }
+    const swappingObject = this.nuevaPropiedad.urlsFotografias[index - 1];
+    this.nuevaPropiedad.urlsFotografias[index - 1] = this.nuevaPropiedad.urlsFotografias[index];
+    this.nuevaPropiedad.urlsFotografias[index] = swappingObject;
+  }
+
+  aumentar(index: number) {
+    if ((index + 1) > this.nuevaPropiedad.urlsFotografias.length - 1) {
+      console.error('index out of bounds');
+      return;
+    }
+    const swappingObject = this.nuevaPropiedad.urlsFotografias[index + 1];
+    this.nuevaPropiedad.urlsFotografias[index + 1] = this.nuevaPropiedad.urlsFotografias[index];
+    this.nuevaPropiedad.urlsFotografias[index] = swappingObject;
   }
 
   finalizarPaso5() {
