@@ -273,7 +273,7 @@
 
     <!-- Área de descripcion y amenidades -->
     <div class="row mb-5">
-      <div class="col mt-5" *ngIf="propiedad.descripcion">
+      <div class="col-12 mt-5" *ngIf="propiedad.descripcion">
         <div class="resumen-display-descripcion-amenidades text-center" *ngIf="propiedad.descripcion != ''">
           <div class="titulo">
             <span>Descripción de la propiedad</span>
@@ -283,8 +283,7 @@
           </div>
         </div>
       </div>
-      <div class="col mt-5" *ngIf="propiedad.amenidades" 
-        [class.borde-verde-izq]="propiedad.descripcion && propiedad.amenidades">
+      <div class="col-12 mt-5" *ngIf="propiedad.amenidades">
         <div class="resumen-display-descripcion-amenidades text-center" *ngIf="propiedad.amenidades.length > 0">
           <div class="titulo">
             <span>Amenidades</span>
