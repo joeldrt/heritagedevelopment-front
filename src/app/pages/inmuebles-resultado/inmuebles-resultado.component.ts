@@ -19,7 +19,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
   propiedades: Propiedad[];
   propiedadesFiltradas: Propiedad[];
   searchEmpty = false;
-  buscando = false;
+  buscando =  true;
 
   rentaVenta: string; // filtro de renta o venta
 
