@@ -18,7 +18,7 @@
           Inmuebles
         </a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item" *ngIf="!user">
         <a class="nav-link" routerLink="/contacto" routerLinkActive="active" onclick="closenavbar()">
           Contacto
         </a>
@@ -32,16 +32,63 @@
             onclick="closenavbar()">Vender o Poner en Renta</a>
         </div> -->
       </li>
-      <li class="nav-item dropdown" *ngIf="!user">
+      <li class="nav-item" *ngIf="!user">
         <a class="nav-link" routerLink="/login" routerLinkActive="active" onclick="closenavbar()">
           Iniciar Sesion
         </a>
       </li>
-      <li class="nav-item dropdown" *ngIf="user">
+      <li class="nav-item" *ngIf="user">
         <a class="nav-link" routerLink="/login" routerLinkActive="active" onclick="closenavbar()">
           Home
         </a>
       </li>
+      <li class="nav-item" *ngIf="user">
+        <button type="button" class="btn btn-link" style="color: #8A8A89;" data-toggle="modal" data-target="#exampleModal">
+          Cerrar sesión
+        </button>
+      </li>
     </ul>
   </div>
 </nav>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Deseas salir de tu sesión?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="logout()"
+        >
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

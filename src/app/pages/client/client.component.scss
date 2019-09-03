@@ -1,0 +1,14 @@
+.client-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 81px;
+    min-height: calc(100vh - 81px);
+    max-height: calc(100vh - 81px);
+}
+
+.my-properties {
+    position: relative;
+    background-color: #EBEBEB;
+    min-height: calc(100vh - (81px + 94px));
+}
