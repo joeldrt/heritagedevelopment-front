@@ -41,6 +41,7 @@ export class Propiedad {
     public coordinates?: Coordinates;
     public geoposicion?: Coordinates;
     public geohash?: string;
+    public estatus: string;
     constructor() {
     }
 
@@ -68,5 +69,6 @@ export class Propiedad {
         if (obj.coordinates === undefined) { obj.coordinates = null; }
         if (obj.geoposicion === undefined) { obj.geoposicion = null; }
         if (obj.geohash === undefined) { obj.geohash = null; }
+        if (obj.estatus === undefined) { obj.estatus = null; }
     }
 }

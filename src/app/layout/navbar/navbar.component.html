@@ -10,19 +10,19 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/nosotros" routerLinkActive="active" onclick="closenavbar()">
-          NOSOTROS
+          Nosotros
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/inmuebles/resultados" routerLinkActive="active" onclick="closenavbar()">
-          INMUEBLES
+          Inmuebles
         </a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link" routerLink="/contacto" routerLinkActive="active" onclick="closenavbar()">
-          CONTACTO
+          Contacto
         </a>
-        <a class="nav-link dropdown-toggle dg-dropdown-wrapper" href="#" id="navbarDropdown" role="button"
+        <!-- <a class="nav-link dropdown-toggle dg-dropdown-wrapper" href="#" id="navbarDropdown" role="button"
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -30,7 +30,17 @@
             onclick="closenavbar()">Comprar o Rentar</a>
           <a class="dropdown-item" routerLink="/contacto/ofertar" routerLinkActive="active"
             onclick="closenavbar()">Vender o Poner en Renta</a>
-        </div>
+        </div> -->
+      </li>
+      <li class="nav-item dropdown" *ngIf="!user">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active" onclick="closenavbar()">
+          Iniciar Sesion
+        </a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="user">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active" onclick="closenavbar()">
+          Home
+        </a>
       </li>
     </ul>
   </div>

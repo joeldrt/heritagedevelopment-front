@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class StorageService {
 
+    static USER = 'user';
     static SAVED_PLACE = 'saved_place';
     static FILTER_RENTA_VENTA = 'filter_renta_venta';
     static FILTER_PRECIO_MENOR = 'filter_precio_menor';
@@ -53,5 +54,9 @@ export class StorageService {
                 localStorage.removeItem(key);
             }
         );
+    }
+
+    getUser(): any {
+        return JSON.parse(localStorage.getItem(StorageService.USER));
     }
 }

@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuardService implements CanActivate {
+export class ClientGuardService implements CanActivate {
 
-  private adminArray: Array<string> = ['root', 'superuser', 'administrator', 'hdadministrator'];
+  private clientArray: Array<string> = ['authenticated'];
 
   constructor(
+    private storageService: StorageService,
     private router: Router,
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const localUserString = localStorage.getItem('user');
-    const user = JSON.parse(localUserString);
+    const user = this.storageService.getUser();
     if (user && user.role && user.role.type) {
-      if (this.adminArray.includes(user.role.type)) {
+      if (this.clientArray.includes(user.role.type)) {
         return true;
       }
     }
-    console.error('Access denied - Admins only');
+    console.error('Access denied - Clients only');
     this.router.navigate(['/login']);
     return false;
   }
