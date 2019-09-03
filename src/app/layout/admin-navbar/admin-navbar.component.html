@@ -20,24 +20,26 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/admin/estate"
-          routerLinkActive="active"
-          onclick="closenavbar()"
-        >
+        <a class="nav-link mobile-padding" routerLink="/admin/estate" routerLinkActive="active" onclick="closenavbar()">
           Propiedades
         </a>
       </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/admin/amenities"
-          routerLinkActive="active"
-          onclick="closenavbar()"
-        >
-          Amenidades
+      <li class="nav-item dropdown" style="padding: 8px !important;">
+        <a class="nav-link dropdown-toggle dg-dropdown-wrapper" href="#" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Configuración
         </a>
+        <div class="dropdown-menu conf-background" aria-labelledby="navbarDropdown">
+          <a class="nav-link" routerLink="/admin/amenities" routerLinkActive="active" onclick="closenavbar()">
+            Amenidades
+          </a>
+          <a class="nav-link" routerLink="/admin/contact_config" routerLinkActive="active" onclick="closenavbar()">
+            Configuración de contacto
+          </a>
+        </div>
+      </li>
+      <li class="nav-item">
+        
       </li>
       <li class="nav-item">
         <button type="button" class="btn btn-link" style="color: white;" data-toggle="modal" data-target="#exampleModal">

@@ -2,7 +2,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <p class="modal-title" id="exampleModalLongTitle">Detalle de la propiedad</p>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="limpiarCampos()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -10,6 +10,49 @@
       <app-property-display
         [propiedad]="(propiedadAMostrar)">
       </app-property-display>
+      <div class="card-body loading-background" *ngIf="cargando">
+        <app-loading [mensaje]="'mandando correo...'">
+        </app-loading>
+      </div>
+      <div class="card" *ngIf="!cargando && mostrarFormulario">
+        <div class="card-header">
+          <h5>Contacta un agente</h5>
+          <p>Llena los siguientes campos y un agente se comunicará contigo</p>
+        </div>
+        <div class="card-body" *ngIf="propiedadAMostrar && propiedadAMostrar.nombre && !emailEnviado && !cargando">
+          <div class="form-group">
+            <label for="formularioContactoAgenteEmail">Email</label>
+            <input type="email" class="form-control" id="formularioContactoAgenteEmail" 
+              name="emailField" placeholder="Escribe tu email" [(ngModel)]="email">
+            <div class="error-label" *ngIf="emailError">
+              Escribe un correo válido
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="formularioContactoAgenteTelefono">Teléfono</label>
+            <input type="number" class="form-control" id="formularioContactoAgenteTelefono"
+              name="telefonoField" placeholder="Escribe tu teléfono" [(ngModel)]="telefono">
+            <div class="error-label" *ngIf="telefonoError">
+              Escribe un número de teléfono válido a 10 dígitos
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="formularioContactoAgenteMensaje">Mensaje</label>
+            <textarea class="form-control" id="formularioContactoAgenteMensaje" #formularioContactoAgenteMensaje rows="5" 
+              >Estoy interesado en la propiedad: {{this.propiedadAMostrar.nombre}}</textarea>
+            <div class="error-label" *ngIf="mensajeError">
+              El mensaje tiene que tener un cuerpo
+            </div>
+          </div>
+          <button type="submit" class="btn boton-heritage fa-pull-right" 
+          (click)="enviarMensaje(formularioContactoAgenteMensaje.value)">
+            Enviar
+          </button>
+        </div>
+        <div class="card-body" *ngIf="emailEnviado && !cargando">
+          <h5>Gracias por contactarnos, en breve nos comunicaremos contigo.</h5>
+        </div>
+      </div>
     </div>
   </div>
 </div>

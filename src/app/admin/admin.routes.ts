@@ -10,6 +10,7 @@ import { EstateComponent } from './estate/estate.component';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
 import { WizardAltaPropiedadComponent } from '../common/wizard-alta-propiedad/wizard-alta-propiedad.component';
 import { AmenitiesComponent } from './amenities/amenities.component';
+import { ContactConfigComponent } from './contact-config/contact-config.component';
 
 export const ADMIN_ROUTES: Routes = [
   { path: 'admin', redirectTo: '/admin/estate', pathMatch: 'full' },
@@ -21,5 +22,6 @@ export const ADMIN_ROUTES: Routes = [
   { path: 'admin/profile', component: ProfileComponent, data: { title: 'Perfil' }},
   { path: 'admin/agregar/propiedad', component: WizardAltaPropiedadComponent, data: { title: 'Alta de Propiedad'}},
   { path: 'admin/estate/:propertyId/edit', component: WizardAltaPropiedadComponent, data: { title: 'Edición de Propiedad'}},
-  { path: 'admin/amenities', component: AmenitiesComponent, data: { title: 'Administración de Amenidades'}}
+  { path: 'admin/amenities', component: AmenitiesComponent, data: { title: 'Administración de Amenidades'}},
+  { path: 'admin/contact_config', component: ContactConfigComponent, data: { title: 'Administración de Amenidades'}},
 ];

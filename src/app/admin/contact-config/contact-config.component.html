@@ -1,0 +1,23 @@
+<div class="contact-config-area">
+  <div class="card-holder">
+    <div class="card">
+      <div class="card-header">
+        <h2>Correo de contacto</h2>
+        <p>Este es el correo destino para el formulario de las propiedades</p>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="formularioContactoAgenteEmail">Email</label>
+          <input type="email" class="form-control" id="formularioContactoAgenteEmail" 
+            name="emailField" placeholder="Escribe un email de contacto" [(ngModel)]="email">
+          <div class="error-label" *ngIf="emailError">
+            Escribe un correo válido
+          </div>
+        </div>
+        <button type="submit" class="btn boton-heritage fa-pull-right" (click)="cambiarCorreo()">
+          Cambiar correo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
