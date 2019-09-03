@@ -62,7 +62,7 @@ import { DetalleInmuebleComponent } from './pages/inmuebles-resultado/detalle-in
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AmenitiesComponent } from './admin/amenities/amenities.component';
 import { ContactConfigComponent } from './admin/contact-config/contact-config.component';
-import { ClientComponent } from './pages/client/client/client.component';
+import { ClientComponent } from './pages/client/client.component';
 
 @NgModule({
   declarations: [

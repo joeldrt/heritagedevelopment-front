@@ -8,7 +8,7 @@ import { OfertarComponent } from './contacto/ofertar/ofertar.component';
 import { LoginComponent } from './login/login.component';
 import { InmueblesResultadoComponent } from './inmuebles-resultado/inmuebles-resultado.component';
 import { ClientGuardService } from '../services/guard/client-guard.service';
-import { ClientComponent } from './client/client/client.component';
+import { ClientComponent } from './client/client.component';
 
 export const PAGES_ROUTES: Routes = [
   { path: '', redirectTo: 'inmuebles', pathMatch: 'full' },
