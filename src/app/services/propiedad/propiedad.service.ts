@@ -21,6 +21,12 @@ export class PropiedadService {
     return this.http.get<Propiedad[]>(this.PROPIEDAD_URL, { observe: 'response' });
   }
 
+  obtenerMisPropiedadesStrapi(username: string): Observable<HttpResponse<Propiedad[]>> {
+    const params = new HttpParams()
+      .set('creador', username);
+    return this.http.get<Propiedad[]>(this.PROPIEDAD_URL, { params, observe: 'response' });
+  }
+
   agregarPropiedadStrapi(propiedad: Propiedad): Observable<HttpResponse<Propiedad>> {
     propiedad.geohash = this.generarGeohash(propiedad.coordinates._lat, propiedad.coordinates._long);
     return this.http.post<Propiedad>(this.PROPIEDAD_URL, propiedad, { observe: 'response' });
