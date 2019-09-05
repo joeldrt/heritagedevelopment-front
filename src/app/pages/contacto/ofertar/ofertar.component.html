@@ -6,13 +6,67 @@
     <!-- Adquirir título -->
     <div class="dg-ofertar-titulo">
       <div class="dg-title">
-        <h2>Quiero Vender o Poner en Renta</h2>
+        <h2>¿Quieres vender o poner a renta una propiedad?</h2>
       </div>
     </div>
+    <div class="dg-ofertar-subtitulo">
+      <p>Regístrate con nosotros</p>
+    </div>
     <!-- Fin adquirir título -->
+    
+    <!-- Tarjeta formulario registro -->
+    <div class="card-holder">
+      <div class="card">
+        <div class="card-header">
+          <h5 style="margin-bottom: 0 !important;">Registro</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="!informationSended  && !cargando">
+            <form>
+              <label for="registroCorreo">Email</label>
+              <div class="form-group">
+                <input type="email" class="form-control form-control-sm" id="registroCorreo" name="registroCorreo" 
+                  placeholder="Email" [(ngModel)]="email"/>
+                <div class="error-label" *ngIf="emailError">
+                  Escribe un correo válido
+                </div>
+              </div>
+              <label for="registroPassword">Contraseña</label>
+              <div class="form-group">
+                <input type="password" class="form-control form-control-sm" id="registroPassword" name="registroPassword" 
+                  placeholder="Contraseña" [(ngModel)]="password"/>
+                <div class="error-label" *ngIf="passwordError">
+                  Escribe una contraseña válida.
+                </div>
+                <div class="password-creation-hint">
+                  La contraseña debe contener mínimo 6 caracteres, máximo 9 caracteres, debe contener mínimo un número, mínimo una letra mayúscula y mínimo una letra minúscula.
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn boton-enviar mb-4 btn-block" (click)="hacerRegistro()"> 
+                  Registrarme
+                </button>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="informationSended && !cargando" style="text-align: center">
+            Se ha enviado un correo a la dirección que proporcionaste. Abre el correo y dirigete a la liga que indica para activar tu usuario.
+          </div>
+          <div class="loading-holder" *ngIf="cargando">
+            <app-loading
+              [mensaje]="'enviando formulario'"></app-loading>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="footer-text">
+              <p style="margin-bottom: 0 !important;">¿Ya estás registrado? <a href="/#/login">Inicia Sesión</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Adquirir formularios -->
-    <div class="dg-ofertar-formularios">
+    <!-- <div class="dg-ofertar-formularios">
       <div class="content">
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -93,7 +147,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Fin adquirir formularios -->
   
   </div>

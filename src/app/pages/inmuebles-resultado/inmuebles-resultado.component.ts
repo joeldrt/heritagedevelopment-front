@@ -122,7 +122,7 @@ export class InmueblesResultadoComponent implements OnInit, AfterViewInit {
         this.filtrarPropiedades();
       },
       (error: any) => {
-        this.buscando = false;;
+        this.buscando = false;
         console.error(error);
         this.toastrService.error('Error al comunicarse con el servidor');
       }
