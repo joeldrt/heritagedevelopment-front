@@ -25,6 +25,12 @@
         </div>
 
         <button class="btn btn-lg boton-ingresar btn-block" type="submit">Ingresar</button>
+        <div style="margin-top: 31px;">
+          <button type="button" class="btn btn-link" (click)="olvidePassword()">¿Olvidaste tu contraseña?</button>
+        </div>
+        <div style="margin-top: 31px;">
+          ¿No tienes cuenta?<button type="button" class="btn btn-link" [routerLink]="['/contacto']">regístrate</button>
+        </div>
         <p class="mt-5 mb-3 text-muted">© 2019</p>
 
       </form>

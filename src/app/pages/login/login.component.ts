@@ -6,6 +6,8 @@ import { ToastrService } from '../../services/toastr/toastr.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { ForgottenPasswordService } from 'src/app/services/forgotten-password/forgotten-password.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
+    private forgottenPasswordService: ForgottenPasswordService,
     private router: Router,
     private toastr: ToastrService,
   ) { }
@@ -67,6 +70,22 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         this.toastr.error(error.error.message, 'Error');
         this.loading = false;
+      }
+    );
+  }
+
+  olvidePassword() {
+    this.loading = true;
+    this.mensajeLoading = 'Enviando correo para restablecer la contraseña...';
+    this.forgottenPasswordService.enviarOlvidePassword('joe@digiall.mx').subscribe(
+      (result: HttpResponse<any>) => {
+        this.loading = false;
+        this.toastr.success('Se ha enviado un correo para restablecer la contraseña', 'Restablecer contraseña');
+      },
+      (error: any) => {
+        this.loading = false;
+        console.error(error);
+        this.toastr.error(error.error.message, 'Error');
       }
     );
   }

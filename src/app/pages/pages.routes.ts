@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { InmueblesResultadoComponent } from './inmuebles-resultado/inmuebles-resultado.component';
 import { ClientGuardService } from '../services/guard/client-guard.service';
 import { ClientComponent } from './client/client.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 export const PAGES_ROUTES: Routes = [
   { path: '', redirectTo: 'inmuebles', pathMatch: 'full' },
@@ -21,4 +22,5 @@ export const PAGES_ROUTES: Routes = [
   // { path: 'contacto/ofertar', component: OfertarComponent },
   { path: 'login', component: LoginComponent },
   { path: 'clients', canActivate: [ClientGuardService], component: ClientComponent },
+  { path: 'users/reset-password', component: ResetPasswordComponent },
 ];
