@@ -26,6 +26,10 @@ export class LoginComponent implements OnInit {
   public email: string;
   public password: string;
 
+  mailError = false;
+  restablecerSent = false;
+  public restablecerEmail: string;
+
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
@@ -75,12 +79,19 @@ export class LoginComponent implements OnInit {
   }
 
   olvidePassword() {
+    this.mailError = false;
+    const emailRegEx = RegExp('^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+');
+    if (!emailRegEx.test(this.restablecerEmail)) {
+      this.mailError = true;
+      return;
+    }
     this.loading = true;
     this.mensajeLoading = 'Enviando correo para restablecer la contraseña...';
-    this.forgottenPasswordService.enviarOlvidePassword('joe@digiall.mx').subscribe(
+    this.forgottenPasswordService.enviarOlvidePassword(this.restablecerEmail).subscribe(
       (result: HttpResponse<any>) => {
+        this.restablecerSent = true;
         this.loading = false;
-        this.toastr.success('Se ha enviado un correo para restablecer la contraseña', 'Restablecer contraseña');
+        // this.toastr.success('Se ha enviado un correo para restablecer la contraseña', 'Restablecer contraseña');
       },
       (error: any) => {
         this.loading = false;
