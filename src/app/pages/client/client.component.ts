@@ -16,6 +16,8 @@ export class ClientComponent implements OnInit {
 
   propiedades: Propiedad[];
 
+  propiedadAMostrar: Propiedad;
+
   constructor(
     private authService: AuthService,
     private propiedadService: PropiedadService,
@@ -33,6 +35,10 @@ export class ClientComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     );
+  }
+
+  elegirPropiedadAMostar(index: number) {
+    this.propiedadAMostrar = this.propiedades[index];
   }
 
 }

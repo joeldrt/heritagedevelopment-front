@@ -1,0 +1,9 @@
+.modal-dialog {
+    width: calc(100vw - 15px);
+    max-width: 768px;
+}
+
+.modal-body {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}

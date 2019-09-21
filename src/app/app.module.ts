@@ -64,6 +64,7 @@ import { AmenitiesComponent } from './admin/amenities/amenities.component';
 import { ContactConfigComponent } from './admin/contact-config/contact-config.component';
 import { ClientComponent } from './pages/client/client.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { MyPropertyDetailComponent } from './pages/client/my-property-detail/my-property-detail.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     AmenitiesComponent,
     ContactConfigComponent,
     ClientComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    MyPropertyDetailComponent
   ],
   imports: [
     BrowserModule,
