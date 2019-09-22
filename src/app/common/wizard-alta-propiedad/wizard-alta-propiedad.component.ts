@@ -399,7 +399,7 @@ export class WizardAltaPropiedadComponent implements OnInit {
     }
     if (!this.esEdicion) {
       this.mensajeLoading = 'guardando la propiedad';
-      this.nuevaPropiedad.userUid = this.user.username;
+      this.nuevaPropiedad.creador = this.user.username;
       const propiedadAGuardar = Object.assign({}, this.nuevaPropiedad);
       this.propiedadService.agregarPropiedadStrapi(propiedadAGuardar).subscribe(
         (response: HttpResponse<Propiedad>) => {
@@ -428,7 +428,11 @@ export class WizardAltaPropiedadComponent implements OnInit {
     this.propiedadService.borrarPropiedadStrapi(this.propertyId).subscribe(
       (response: HttpResponse<any>) => {
         // this.borrarImagenesDelStorage(urlsFotografiasBorrado);
-        this.router.navigate(['/admin/estate']);
+        if (this.user.role.type === 'root' || this.user.role.type === 'hdadministrator') {
+          this.router.navigate(['/admin/estate']);
+        } else {
+          this.router.navigate(['/clients']);
+        }
         this.toastr.success(`Propiedad borrada!`);
       },
       (reason: any) => {

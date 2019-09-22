@@ -38,6 +38,10 @@
               </div>
               <a href="#" class="btn btn-link" data-toggle="modal" data-target="#detalleMiPropiedadModal" 
                 (click)="elegirPropiedadAMostar(i)">Detalle</a>
+              <div class="propiedad-estatus-area">
+                <i class="fas fa-check-double" *ngIf="propiedad.estatus && propiedad.estatus === 'activo'" style="color: green;"></i>
+                <i class="fas fa-check" *ngIf="!propiedad.estatus || propiedad.estatus !== 'activo'"  style="color: blue;"></i>
+              </div>
             </div>
           </div>
           <!-- Fin tarjeta de inmueble -->
@@ -47,7 +51,7 @@
       <div style="margin-bottom: 102px;"></div>
     </div>
   </div>
-  <button type="button" class="btn btn-heritage btn-circle btn-circle-lg">
+  <button type="button" class="btn btn-heritage btn-circle btn-circle-lg" [routerLink]="['/clients/agregar/propiedad']" >
     <i class="fas fa-plus"></i>
   </button>
 </div>

@@ -61,7 +61,8 @@ export class PropiedadService {
       .set('latitud_gte', lowerLat.toString())
       .set('latitud_lte', greaterLat.toString())
       .set('longitud_gte', lowerLon.toString())
-      .set('longitud_lte', greaterLon.toString());
+      .set('longitud_lte', greaterLon.toString())
+      .set('estatus', 'activo');
     return this.http.get<Propiedad[]>(this.PROPIEDAD_URL, { params, observe: 'response'});
   }
 

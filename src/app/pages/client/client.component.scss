@@ -115,10 +115,18 @@
                 text-align: left;
             }
         }
+
     }
 
     .card-body {
         max-height: 180px;
         overflow-y: hidden;
+    }
+
+    .propiedad-estatus-area {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-size: 1.5rem;
     }
 }

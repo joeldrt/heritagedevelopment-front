@@ -10,6 +10,7 @@ import { InmueblesResultadoComponent } from './inmuebles-resultado/inmuebles-res
 import { ClientGuardService } from '../services/guard/client-guard.service';
 import { ClientComponent } from './client/client.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { WizardAltaPropiedadComponent } from '../common/wizard-alta-propiedad/wizard-alta-propiedad.component';
 
 export const PAGES_ROUTES: Routes = [
   { path: '', redirectTo: 'inmuebles', pathMatch: 'full' },
@@ -22,5 +23,7 @@ export const PAGES_ROUTES: Routes = [
   // { path: 'contacto/ofertar', component: OfertarComponent },
   { path: 'login', component: LoginComponent },
   { path: 'clients', canActivate: [ClientGuardService], component: ClientComponent },
+  { path: 'clients/agregar/propiedad', canActivate: [ClientGuardService], component: WizardAltaPropiedadComponent },
+  { path: 'clients/propiedad/:propertyId/edit', component: WizardAltaPropiedadComponent },
   { path: 'users/reset-password', component: ResetPasswordComponent },
 ];

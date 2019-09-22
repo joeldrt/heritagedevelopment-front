@@ -18,7 +18,7 @@ export class Propiedad {
     public id?: string;
     public latitud: number;
     public longitud: number;
-    public userUid: string;
+    public creador: string;
     public tipoPropiedad: string;
     public nombre: string;
     public m2Construccion: number;
@@ -46,7 +46,7 @@ export class Propiedad {
     }
 
     static verificarValoresIndefinidos(obj: Propiedad) {
-        if (obj.userUid === undefined) { obj.userUid = null; }
+        if (obj.creador === undefined) { obj.creador = null; }
         if (obj.tipoPropiedad === undefined) { obj.tipoPropiedad = null; }
         if (obj.nombre === undefined) { obj.nombre = null; }
         if (obj.m2Construccion === undefined) { obj.m2Construccion = null; }

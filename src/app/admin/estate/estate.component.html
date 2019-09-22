@@ -60,6 +60,10 @@
             <p class="card-text">{{propiedad.descripcion}}</p>
           </div>
           <a href="#" class="btn btn-link" [routerLink]="['.', propiedad.id]" >Detalle</a>
+          <div class="propiedad-estatus-area">
+            <i class="fas fa-check-double" *ngIf="propiedad.estatus && propiedad.estatus === 'activo'" style="color: green;"></i>
+            <i class="fas fa-check" *ngIf="!propiedad.estatus || propiedad.estatus !== 'activo'"  style="color: blue;"></i>
+          </div>
         </div>
       </div>
       <!-- Fin tarjeta de inmueble -->
