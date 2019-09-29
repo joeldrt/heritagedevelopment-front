@@ -269,6 +269,10 @@ export class WizardAltaPropiedadComponent implements OnInit {
     this.infowindow = undefined;
   }
 
+  cambiarEstatus(estatus: string) {
+    this.nuevaPropiedad.estatus = estatus;
+  }
+
   finalizarPaso2() {
     this.numeroPaso = 3;
     this.irIniciodePaginaDe();
