@@ -27,6 +27,7 @@ export class ContactConfigComponent implements OnInit {
       (response: HttpResponse<Configuration>) => {
         this.configuration = response.body;
         this.email = this.configuration.emailDeContacto;
+        this.emailNotificacion = this.configuration.emailDeNotificaciones;
       },
       (error: any) => {
         console.error(error);

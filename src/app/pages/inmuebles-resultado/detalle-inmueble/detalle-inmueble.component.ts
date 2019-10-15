@@ -85,14 +85,14 @@ export class DetalleInmuebleComponent implements OnInit {
     hdEmail.to = `${this.configurationFile.emailDeContacto}`;
     hdEmail.subject = `Contacto desde la página inmueble: ${this.propiedadAMostrar.nombre}`;
     hdEmail.html =
-      `<p>Hay una persona interesada en el inmueble ${this.propiedadAMostrar.nombre}</p>
+      `<html><body><p>Hay una persona interesada en el inmueble ${this.propiedadAMostrar.nombre}</p>
       <p>Datos de contacto:<p>
       <p>Email: <a href="mailto:${this.email}">${this.email}</a></p>
       <p>Teléfono: <a href="tel:${this.telefono}">${this.telefono}</a></p>
       <p>Mensaje: ${mensaje}
       <p>
       <p>Liga del inmueble: <a href="https://heritagedevelopment.co/#/admin/estate/${this.propiedadAMostrar.id}">
-      ${this.propiedadAMostrar.nombre}</a></p>`;
+      ${this.propiedadAMostrar.nombre}</a></p></body></html>`;
     this.emailService.mandarEmailStrapi(hdEmail).subscribe(
       (response: any) => {
         this.cargando = false;
