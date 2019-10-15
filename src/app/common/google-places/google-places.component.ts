@@ -26,18 +26,18 @@ export class GooglePlacesComponent implements OnInit, AfterViewInit {
 
   private getPlaceAutocomplete() {
     const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
-        {
-            bounds: new google.maps.LatLngBounds(
-              new google.maps.LatLng(18.842749,  -98.471144),
-              new google.maps.LatLng(19.133659,  -98.024678)
-            ),
-            componentRestrictions: this.strictBounds ? { country: 'MX' } : null, // restringir busqueda en México de ser true.
-            types: ['geocode'],  // 'establishment' / 'address' / 'geocode' -- muestra colonias y zonas
-            strictBounds: this.strictBounds, // de ser true en este momento solo muestra resultados en el área de puebla.
-        });
+      {
+          // bounds: new google.maps.LatLngBounds(
+          //   new google.maps.LatLng(18.842749,  -98.471144),
+          //   new google.maps.LatLng(19.133659,  -98.024678)
+          // ),
+          componentRestrictions: { country: 'MX' },
+          types: [],  // 'establishment' / 'address' / 'geocode' -- muestra colonias y zonas
+          strictBounds: false, // true limitado a puebla - false limitado a país méxico
+      });
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
-        const place = autocomplete.getPlace();
-        this.invokeEvent(place);
+      const place = autocomplete.getPlace();
+      this.invokeEvent(place);
     });
   }
 
