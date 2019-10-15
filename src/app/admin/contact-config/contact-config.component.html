@@ -7,7 +7,7 @@
       </div>
       <div class="card-body">
         <div class="form-group">
-          <label for="formularioContactoAgenteEmail">Email</label>
+          <label for="formularioContactoAgenteEmail">Email Ventas</label>
           <input type="email" class="form-control" id="formularioContactoAgenteEmail" 
             name="emailField" placeholder="Escribe un email de contacto" [(ngModel)]="email">
           <div class="error-label" *ngIf="emailError">
@@ -15,6 +15,27 @@
           </div>
         </div>
         <button type="submit" class="btn boton-heritage fa-pull-right" (click)="cambiarCorreo()">
+          Cambiar correo
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-holder">
+    <div class="card">
+      <div class="card-header">
+        <h2>Correo de notificaciones</h2>
+        <p>Este es el correo destino para recibir las notificaciones de alta y edición de propiedad</p>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="formularioEmailNotificaciones">Email Notificaciones</label>
+          <input type="email" class="form-control" id="formularioEmailNotificaciones" 
+            name="emailNotificationField" placeholder="Escribe un email para notificaciones" [(ngModel)]="emailNotificacion">
+          <div class="error-label" *ngIf="emailNotificacionError">
+            Escribe un correo válido
+          </div>
+        </div>
+        <button type="submit" class="btn boton-heritage fa-pull-right" (click)="cambiarCorreoNotificaciones()">
           Cambiar correo
         </button>
       </div>

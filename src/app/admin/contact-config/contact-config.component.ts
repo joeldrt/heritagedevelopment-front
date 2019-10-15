@@ -14,6 +14,8 @@ export class ContactConfigComponent implements OnInit {
   private configuration: Configuration;
   emailError = false;
   email: string;
+  emailNotificacion: string;
+  emailNotificacionError = false;
 
   constructor(
     private configurationService: ConfigurationService,
@@ -53,6 +55,30 @@ export class ContactConfigComponent implements OnInit {
       (error: any) => {
         console.error(error);
         this.toastrService.error('Error al cambiar el correo de contacto');
+      }
+    );
+  }
+
+  cambiarCorreoNotificaciones() {
+    if (!this.configuration && !this.configuration.emailDeContacto) {
+      console.error('Sin archivo de configuración');
+      this.toastrService.error('Error interno, reportarlo al administrador');
+    }
+    this.emailNotificacionError = false;
+    const emailRegEx = RegExp('^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+');
+    if (!emailRegEx.test(this.emailNotificacion)) {
+      this.emailNotificacionError = true;
+      return;
+    }
+    this.configuration.emailDeNotificaciones = this.emailNotificacion;
+    this.configurationService.actualizarArchivoDeconfiguracion(this.configuration).subscribe(
+      (response: HttpResponse<Configuration>) => {
+        this.configuration = response.body;
+        this.toastrService.success('Correo cambiado exitosamente');
+      },
+      (error: any) => {
+        console.error(error);
+        this.toastrService.error('Error al cambiar el correo de notificaciones');
       }
     );
   }

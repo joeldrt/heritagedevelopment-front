@@ -23,9 +23,9 @@
                     placeholder="Ingresa una ubicación" aria-label="Ingresa una ubicación" 
                     aria-describedby=""
                     [ngClass]="{ 'is-invalid': searchEmpty }">
-                  <div class="input-group-append">
+                  <!-- <div class="input-group-append">
                     <button class="btn btn-primary boton-buscar" type="button" id="button-addon2" (click)="buscarPropiedades()">Buscar</button>
-                  </div>
+                  </div> -->
                   <div *ngIf="searchEmpty" class="invalid-feedback">
                       Debes ingresar una ubicación
                   </div>

@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-2">
-          <button class="btn btn-link float-left" (click)="navigatePrevious()">
+          <button class="btn btn-link float-left" (click)="navigatePrevious()" *ngIf="!thisIsTheEnd">
             <i class="fas fa-chevron-left"></i>
           </button>
         </div>
@@ -709,6 +709,40 @@
               </div>
             </div>
             <!-- fin costoMantenimiento -->
+
+            <!-- Inicio estatus propiedad -->
+            <div class="form-group row" *ngIf="user.role && user.role.type && (user.role.type === 'root' || user.role.type === 'hdadministrator')">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="estatusPropiedad" class="col-sm-12 col-md-3 col-form-label">Estatus de la propiedad</label>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="activo"
+                [checked]="nuevaPropiedad.estatus === 'activo'"
+                (change)="cambiarEstatus('activo')">
+                <label class="form-check-label" for="inlineRadio1">activo</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="pendiente"
+                [checked]="nuevaPropiedad.estatus === 'pendiente'"
+                (change)="cambiarEstatus('pendiente')">
+                <label class="form-check-label" for="inlineRadio2">pendiente</label>
+              </div>
+              <!-- <div class="col-sm-12 col-md-6" *ngIf="user.role && user.role.type && (user.role.type === 'root' || user.role.type === 'hdadministrator')">
+                <select class="form-control " id="estatusPropiedad"
+                  name="estatusPropiedad" [(ngModel)]="nuevaPropiedad.estatus"
+                  #estatusPropiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && estatusPropiedad.invalid }" required>
+                  <option value="activo" [selected]="nuevaPropiedad.estatus === 'activo'">activo</option>
+                  <option value="inactivo" [selected]="nuevaPropiedad.estatus === 'inactivo'">inactivo</option>
+                  <option value="pendiente"[selected]="nuevaPropiedad.estatus === 'pendiente'" >pendiente</option>
+                </select>
+                <div *ngIf="fIB.submitted && estatusPropiedad.invalid" class="invalid-feedback">
+                    Debes seleccionar un estatus de propiedad.
+                </div>
+              </div> -->
+            </div>
+            <!-- Fin estatus propiedad -->
+
           </div>
 
           <div id="informacionAvanzadaDepartamento" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Departamento'">
@@ -783,6 +817,39 @@
               </div>
             </div>
             <!-- fin costoMantenimiento -->
+
+            <!-- Inicio estatus propiedad -->
+            <div class="form-group row" *ngIf="user.role && user.role.type && (user.role.type === 'root' || user.role.type === 'hdadministrator')">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="estatusPropiedad" class="col-sm-12 col-md-3 col-form-label">Estatus de la propiedad</label>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="activo"
+                [checked]="nuevaPropiedad.estatus === 'activo'"
+                (change)="cambiarEstatus('activo')">
+                <label class="form-check-label" for="inlineRadio1">activo</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="pendiente"
+                [checked]="nuevaPropiedad.estatus === 'pendiente'"
+                (change)="cambiarEstatus('pendiente')">
+                <label class="form-check-label" for="inlineRadio2">pendiente</label>
+              </div>
+              <!-- <div class="col-sm-12 col-md-6" *ngIf="user.role && user.role.type && (user.role.type === 'root' || user.role.type === 'hdadministrator')">
+                <select class="form-control " id="estatusPropiedad"
+                  name="estatusPropiedad" [(ngModel)]="nuevaPropiedad.estatus"
+                  #estatusPropiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && estatusPropiedad.invalid }" required>
+                  <option value="activo" [selected]="nuevaPropiedad.estatus === 'activo'">activo</option>
+                  <option value="inactivo" [selected]="nuevaPropiedad.estatus === 'inactivo'">inactivo</option>
+                  <option value="pendiente"[selected]="nuevaPropiedad.estatus === 'pendiente'" >pendiente</option>
+                </select>
+                <div *ngIf="fIB.submitted && estatusPropiedad.invalid" class="invalid-feedback">
+                    Debes seleccionar un estatus de propiedad.
+                </div>
+              </div> -->
+            </div>
+            <!-- Fin estatus propiedad -->
 
             
           </div>
@@ -885,6 +952,40 @@
               </div>
             </div>
             <!-- fin costoMantenimiento -->
+
+            <!-- Inicio estatus propiedad -->
+            <div class="form-group row" *ngIf="user.role && user.role.type && (user.role.type === 'root' || user.role.type === 'hdadministrator')">
+              <div class="col-sm-0 col-md-1">
+              </div>
+              <label for="estatusPropiedad" class="col-sm-12 col-md-3 col-form-label">Estatus de la propiedad</label>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="activo"
+                [checked]="nuevaPropiedad.estatus === 'activo'"
+                (change)="cambiarEstatus('activo')">
+                <label class="form-check-label" for="inlineRadio1">activo</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="pendiente"
+                [checked]="nuevaPropiedad.estatus === 'pendiente'"
+                (change)="cambiarEstatus('pendiente')">
+                <label class="form-check-label" for="inlineRadio2">pendiente</label>
+              </div>
+              <!-- <div class="col-sm-12 col-md-6" *ngIf="user.role && user.role.type && (user.role.type === 'root' || user.role.type === 'hdadministrator')">
+                <select class="form-control " id="estatusPropiedad"
+                  name="estatusPropiedad" [(ngModel)]="nuevaPropiedad.estatus"
+                  #estatusPropiedad="ngModel" [ngClass]="{ 'is-invalid': fIB.submitted && estatusPropiedad.invalid }" required>
+                  <option value="activo" [selected]="nuevaPropiedad.estatus === 'activo'">activo</option>
+                  <option value="inactivo" [selected]="nuevaPropiedad.estatus === 'inactivo'">inactivo</option>
+                  <option value="pendiente"[selected]="nuevaPropiedad.estatus === 'pendiente'" >pendiente</option>
+                </select>
+                <div *ngIf="fIB.submitted && estatusPropiedad.invalid" class="invalid-feedback">
+                    Debes seleccionar un estatus de propiedad.
+                </div>
+              </div> -->
+            </div>
+            <!-- Fin estatus propiedad -->
+
           </div>
 
           <div id="informacionAvanzadaTerreno" *ngIf="nuevaPropiedad.tipoPropiedad && nuevaPropiedad.tipoPropiedad === 'Terreno'">
