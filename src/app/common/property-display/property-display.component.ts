@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import { Propiedad } from 'src/app/models/propiedad';
 import {} from 'googlemaps';
 
@@ -14,6 +15,8 @@ export class PropertyDisplayComponent implements OnInit, OnChanges, AfterViewIni
   map: google.maps.Map;
   marker: google.maps.Marker;
   infoWindow: google.maps.InfoWindow;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
 
   constructor() { }
 
@@ -24,6 +27,37 @@ export class PropertyDisplayComponent implements OnInit, OnChanges, AfterViewIni
   ngOnChanges(changes: SimpleChanges) {
     if (this.propiedad) {
       this.initMap();
+    }
+    if (this.propiedad && this.propiedad.urlsFotografias) {
+      this.galleryImages = [];
+      this.galleryOptions = [
+          {
+              width: '100%',
+              height: '300px',
+              thumbnailsColumns: 4,
+              imageAnimation: NgxGalleryAnimation.Slide
+          },
+          // max-width 800
+          {
+              // breakpoint: 800,
+              width: '100%',
+              height: '600px',
+              imagePercent: 80,
+              thumbnailsPercent: 20,
+              thumbnailsMargin: 20,
+              thumbnailMargin: 20
+          },
+          // max-width 400
+          // {
+          //     breakpoint: 400,
+          //     preview: false
+          // }
+      ];
+      this.propiedad.urlsFotografias.forEach(
+        (currentUrl) => {
+          this.galleryImages.push({ small: currentUrl, medium: currentUrl, big: currentUrl });
+        }
+      );
     }
   }
 

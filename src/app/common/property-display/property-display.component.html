@@ -13,8 +13,8 @@
 
     <!-- Carousel de fotos y mapa -->
     <div class="row align-items-end">
-      <div class="col-md-8 col-sm-12 col-no-padding">
-        <div id="carouselComponent" class="carousel slide" data-ride="carousel">
+      <div class="col-md-12 col-sm-12 col-no-padding">
+        <!-- <div id="carouselComponent" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" *ngFor="let url of propiedad.urlsFotografias; let i=index;"
               [ngClass]="{ 'active': (i === 0 && !mapaDeImagenes) || (i === 0 && mapaDeImagenes.size === 0) }">
@@ -33,9 +33,10 @@
             <i class="fas fa-chevron-right"></i>
             <span class="sr-only">Next</span>
           </a>
-        </div>
+        </div> -->
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
       </div>
-      <div class="col-md-4 col-sm-12 col-no-padding">
+      <div class="col-md-12 col-sm-12 col-no-padding">
         <div id="map" #map class="ubicacion-propiedad">
         </div>
       </div>

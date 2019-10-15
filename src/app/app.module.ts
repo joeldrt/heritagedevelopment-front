@@ -19,6 +19,9 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+// NgxGallery
+import { NgxGalleryModule } from 'ngx-gallery';
+
 // core view
 import { AppComponent } from './app.component';
 
@@ -116,7 +119,8 @@ import { MyPropertyDetailComponent } from './pages/client/my-property-detail/my-
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    TagInputModule
+    TagInputModule,
+    NgxGalleryModule
   ],
   providers: [
     { provide: FirestoreSettingsToken, useValue: {} },
