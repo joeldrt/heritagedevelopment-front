@@ -9,6 +9,10 @@
     @media screen and (max-width: 767px) {
         padding-bottom: 51px;
     }
+    @media screen and (min-height: 767px) and (min-width: 412px) {
+        position: absolute !important;
+        bottom: 0 !important;
+    }
 
     .footer-section {
         padding-top: 7px;

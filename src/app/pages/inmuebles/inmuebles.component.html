@@ -1,4 +1,4 @@
-<div class="inmuebles-background">
+<div class="inmuebles-background" [style.backgroundImage]="'url('+backgroundImage+')'">
 
   <!-- Contenido de la página inmuebles -->
   <div class="page-area">
@@ -37,9 +37,7 @@
           </div>
       </div>
       <!-- Fin área del formulario -->
-
+      <app-footer></app-footer>
   </div>
   <!-- Fin contenido de la página inmuebles -->
-
-  <app-footer></app-footer>
 </div>

@@ -1,3 +1,9 @@
+.page-area {
+    @media screen and (min-height: 767px) and (min-width: 412px) {
+        padding-bottom: 94px;
+    }
+}
+
 .nosotros-background {
     background-color: #EBEBEB;
     min-height: 100vh;

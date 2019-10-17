@@ -12,6 +12,14 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 export class InmueblesComponent implements OnInit, AfterViewInit {
   @ViewChild('addressInput') addressInput: any;
 
+  backgroundIndex = 0;
+  posibleBackgrounds = [
+    'assets/images/backgrounds/francesca-tosolini-tHkJAMcO3QE-unsplash.jpg',
+    'assets/images/backgrounds/joshua-ness-Vo52cKzOxMY-unsplash.jpg',
+    'assets/images/backgrounds/chuttersnap-awL_YCtPGv4-unsplash.jpg',
+    'assets/images/backgrounds/douglas-sheppard-9rYfG8sWRVo-unsplash.jpg'];
+  backgroundImage = 'assets/images/backgrounds/douglas-sheppard-9rYfG8sWRVo-unsplash.jpg';
+
   place: google.maps.places.PlaceResult;
   searchEmpty = false;
 
@@ -23,10 +31,21 @@ export class InmueblesComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    this.starBackgroundAnimation();
   }
 
   ngAfterViewInit() {
     this.createAutocompleteInput();
+  }
+
+  starBackgroundAnimation() {
+    setInterval(() => {
+      this.backgroundImage = this.posibleBackgrounds[this.backgroundIndex];
+      this.backgroundIndex += 1;
+      if (this.backgroundIndex > this.posibleBackgrounds.length - 1) {
+        this.backgroundIndex = 0;
+      }
+    }, 12600);
   }
 
   createAutocompleteInput() {
