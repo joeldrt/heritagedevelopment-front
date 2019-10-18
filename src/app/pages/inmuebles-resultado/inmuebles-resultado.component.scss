@@ -194,3 +194,9 @@
         overflow-y: hidden;
     }
 }
+
+.margin-footer {
+    @media screen and (min-height: 522px) {
+        margin-bottom: 117px;
+    }
+}
