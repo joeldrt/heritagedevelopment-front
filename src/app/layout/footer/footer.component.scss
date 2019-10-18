@@ -6,10 +6,10 @@
     background-color: rgb(135, 178, 62);
     min-width: calc(100vw);
     max-width: calc(100vw);
-    @media screen and (max-width: 767px) and (max-height: 412px){
+    @media screen and (max-width: 767px) and (max-height: 412px) {
         padding-bottom: 51px;
     }
-    @media screen and (min-height: 767px) and (min-width: 412px) {
+    @media screen and (min-height: 522px) and (min-width: 575px) {
         position: fixed !important;
         bottom: 0 !important;
     }
