@@ -81,14 +81,20 @@
     // min-height: calc(100vh - (129px + 93px));
     // max-height: calc(100vh - (129px + 93px));
     top: calc(81px + 93px);
+    bottom: 0;
     min-height: calc(100vh - (81px + 93px));
     max-height: calc(100vh - (81px + 93px));
+    width: 100%;
     overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch !important;
 
     .container-fluid {
         // min-height: calc(100vh - (129px + 93px + 94px));
         min-height: calc(100vh - (81px + 93px + 94px));
+
+        @media screen and (min-height: 767px) and (min-width: 412px) {
+            padding-bottom: 94px !important;
+        }
     }
 }
 

@@ -14,11 +14,11 @@ export class InmueblesComponent implements OnInit, AfterViewInit {
 
   backgroundIndex = 0;
   posibleBackgrounds = [
-    'assets/images/backgrounds/francesca-tosolini-tHkJAMcO3QE-unsplash.jpg',
-    'assets/images/backgrounds/joshua-ness-Vo52cKzOxMY-unsplash.jpg',
-    'assets/images/backgrounds/chuttersnap-awL_YCtPGv4-unsplash.jpg',
-    'assets/images/backgrounds/douglas-sheppard-9rYfG8sWRVo-unsplash.jpg'];
-  backgroundImage = 'assets/images/backgrounds/douglas-sheppard-9rYfG8sWRVo-unsplash.jpg';
+    'assets/images/backgrounds/web_francesca-tosolini-tHkJAMcO3QE-unsplash.jpg',
+    'assets/images/backgrounds/web_joshua-ness-Vo52cKzOxMY-unsplash.jpg',
+    'assets/images/backgrounds/web_chuttersnap-awL_YCtPGv4-unsplash.jpg',
+    'assets/images/backgrounds/web_douglas-sheppard-9rYfG8sWRVo-unsplash.jpg'];
+  backgroundImage = 'assets/images/backgrounds/web_douglas-sheppard-9rYfG8sWRVo-unsplash.jpg';
 
   place: google.maps.places.PlaceResult;
   searchEmpty = false;

@@ -12,7 +12,7 @@
 
 .inmuebles-background {
     // background: url("../../../assets/images/fondo_inmuebles.jpg") no-repeat center center fixed; 
-    transition: background-image 2.1s linear 1.2s;
+    transition: background-image 2.1s ease 1.2s;
     background: no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
